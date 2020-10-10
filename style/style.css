@@ -1,0 +1,76 @@
+html {
+  background-color: #DDDDDD;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #DDDDDD;
+}
+
+ul {
+  list-style: none;
+}
+
+#img-principal {
+  max-height: 400px;
+}
+
+.navbar-wrapper {
+  background: #0F52BA;
+  width: 100%;
+  text-align: center;
+}
+
+.navbar-wrapper h2 {
+  color: #DDDDDD;
+}
+
+.my-auto {
+  margin: 0px auto;
+}
+
+.titulo-right {
+  margin-top: 20px;
+}
+
+.pad-r {
+  height: 20px;
+}
+
+.tc {
+  text-align: center;
+}
+
+.block {
+  display: block;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.bar {
+  background: crimson;
+  height: 30px;
+  overflow: hidden;
+}
+
+.front {
+  z-index: 100;
+}
+
+.footer {
+  background: #222222;
+  color: #CCCCCC;
+  height: 300px;
+  overflow: hidden;
+}
+
+.footer hr {
+  width: 90%;
+  height: 0.1px;
+  background: crimson;
+}
+/*# sourceMappingURL=style.css.map */
