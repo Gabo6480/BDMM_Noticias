@@ -11,8 +11,59 @@ ul {
   list-style: none;
 }
 
-#img-principal {
-  max-height: 400px;
+.post-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-box-shadow: 1px 1px 6px grey;
+          box-shadow: 1px 1px 6px grey;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: url("https://via.placeholder.com/1920x1080?text=Visit+Blogging.com+Now");
+}
+
+.post-container .post-title-card {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding: 1% 2%;
+  background-color: white;
+  width: 100%;
+  height: 15%;
+  -webkit-box-shadow: 1px 0px 6px grey;
+          box-shadow: 1px 0px 6px grey;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.post-container .post-title-card .post-tile {
+  white-space: nowrap;
+}
+
+.post-container .post-title-card .post-info {
+  font-size: 1.45em;
+  text-align: justify;
+}
+
+.post-container .post-title-card::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(80%, transparent), to(white));
+  background: linear-gradient(transparent 80%, white);
+}
+
+.post-container:hover .post-title-card {
+  height: 85%;
+}
+
+.test {
+  width: 400px;
+  height: 300px;
 }
 
 .navbar-wrapper {
