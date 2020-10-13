@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css">
+
+    <link rel="stylesheet" href="../thirdparty/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/article-page.css">
+    <script type="text/javascript" src="../thirdparty/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../thirdparty/bootstrap.min.js"></script>
+    <script src="../js/article-mock.module.js" type="module"></script>
+</head>
+<body>
+    
+    <!--NAVEGACION-->
+    <div class="navbar-wrapper">
+        <div class="row h-100">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <h2 id="top-title">NOTICERO BISONTES RELOADED</h2>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="pad-r sticky"></div>
+        <div class="row ">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-10">
+
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    <div class="sticky bar front">
+    </div>
+
+    <!--Seccion del Articulo-->
+    <div class="row">
+        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-2"></div>
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+            <!--Contenedor del articulo-->
+            <div id="article-container">
+                <h1 id="article-title"></h1>
+                <div id="article-img-container">
+                    <img id="article-img" src="" alt="imagen-articulo.jpg">
+                </div>
+                
+                <p id="article-content"></p>
+            </div>
+            <!--Seccion de comentarios-->
+            <div id="comm-section">
+                <div id="comments"></div>
+                <div id="comment-form">
+                    <h6>Comentar</h6>
+                    <textarea name="Text1" cols="40" rows="3"id="comment-text" placeholder="Escribe tu comentario aqui.."></textarea>
+
+                    <button id="comment">Enviar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-2"></div>
+    </div>
+
+    <!--FOOTER-->
+    <div class="row footer">
+        <hr>
+    </div>
+
+</body>
+</html>

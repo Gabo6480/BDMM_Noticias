@@ -1,0 +1,59 @@
+$img-container-color : #222222
+
+$comm-section-bg : #b0e2ff
+$comm-section-sd : #009ACD
+
+#article-container
+    margin: 60px 0px
+    
+#article-img-container
+    width: 100%
+    background: $img-container-color
+    text-align: center
+
+#article-img
+    max-height: 500px
+    max-width: 100%
+    margin: auto
+
+#comm-section
+    margin-bottom: 60px
+    box-shadow: 0px 0px 5px $comm-section-sd
+
+
+#comments
+    max-height: 300px
+    overflow-x: hidden
+    overflow-y: auto
+        
+    &::-webkit-scrollbar 
+        width: 13px
+        height: 13px
+
+    &::-webkit-scrollbar-track
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+        border-radius: 10px
+        &:hover
+            background: #cccccc
+
+    &::-webkit-scrollbar-thumb 
+        width: 50%
+        border-radius: 10px
+        -webkit-box-shadow: inset 0 0 16px $comm-section-bg
+
+.comment
+    width: 100%
+    background: $comm-section-bg
+    padding: 10px
+    margin: 15px 0
+    box-shadow: 0px 0px 10px $comm-section-sd
+
+#comment-form
+    padding: 20px
+    &>#comment-text
+        width: 100%
+    &>#comment
+        position: relative
+        left: 100%
+        transform: translate(-100%,0)
+        outline: none
