@@ -1,36 +1,16 @@
-$background : #DDDDDD
-$primary : #0F52BA
-$secondary : crimson
-$title-text-color: #DDDDDD
-$main-text-color : #222222
-$white-color: white
+@import ./_colors  
 
-$search-results-border-sd-color: #BBBBBB
-$search-result-bg : #b0e2ff
-    
 .users
     margin: 30px 0 
     padding-top: 10px
     background: $search-result-bg 
-    border-radius: 10px
-    &>.search-form
-        display: flex
-        &>aside
-            margin-right: 30px
-            padding: 10px 0 0 10px
-            width: 50%
-            &>*
-                outline: none
-            &>input
-                width: 85%
-                justify-items: bottom
-        &>section
-            &>div
-                display: block
-                justify-content: space-between
-    &>.search-results
-        height: 500px
+
+    .search-form > *
+        margin: 5px
+
+    & > #search-results
+        vertical-align: middle
+        max-height: 500px
         background: $white-color
-        border-radius: 0px 0px 10px 10px
         box-shadow: inset 0px 0px 5px $search-results-border-sd-color
         overflow: auto

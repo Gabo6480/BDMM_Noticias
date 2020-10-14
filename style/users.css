@@ -2,41 +2,16 @@
   margin: 30px 0;
   padding-top: 10px;
   background: #b0e2ff;
-  border-radius: 10px;
 }
 
-.users > .search-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.users .search-form > * {
+  margin: 5px;
 }
 
-.users > .search-form > aside {
-  margin-right: 30px;
-  padding: 10px 0 0 10px;
-  width: 50%;
-}
-
-.users > .search-form > aside > * {
-  outline: none;
-}
-
-.users > .search-form > aside > input {
-  width: 85%;
-  justify-items: bottom;
-}
-
-.users > .search-form > section > div {
-  display: block;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.users > .search-results {
-  height: 500px;
+.users > #search-results {
+  vertical-align: middle;
+  max-height: 500px;
   background: white;
-  border-radius: 0px 0px 10px 10px;
   -webkit-box-shadow: inset 0px 0px 5px #BBBBBB;
           box-shadow: inset 0px 0px 5px #BBBBBB;
   overflow: auto;
