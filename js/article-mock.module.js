@@ -1,19 +1,19 @@
 import {request} from './services/xmlhttp-promise.module.js';
 import * as comms from './article-comments.module.js'
-window.onload = function(){
+$(document).ready(function(){
 
     loadDataToWindow();
     
-}
+});
 
 function loadDataToWindow(){
     //traer articulo
     request({url:'/mock/articulos.json'})
     .then(data=>{
         let object = JSON.parse(data);
-        document.querySelector('#article-title').innerText = object[0].title;
-        document.querySelector('#article-img').src = object[0].img;
-        document.querySelector('#article-content').innerHTML = object[0].content;
+        $("#article-title").text(object[0].title);
+        $("#article-img").attr("src", object[0].img);
+        $("#article-content").html(object[0].content);
     })
     .catch(err=>{
         console.error("No se encontro el articulo");
@@ -31,3 +31,16 @@ function loadDataToWindow(){
         console.error("No se pudieron traer los comentarios "+err)
     });
 }
+
+//Autoexpandir el textarea
+$(document).one('focus.autoExpand', 'textarea.autoExpand', function(){
+        var savedValue = this.value;
+        this.value = '';
+        this.baseScrollHeight = this.scrollHeight;
+        this.value = savedValue;
+    }).on('input.autoExpand', 'textarea.autoExpand', function(){
+        var minRows = this.getAttribute('data-min-rows')|0, rows;
+        this.rows = minRows;
+        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 24   );
+        this.rows = minRows + rows;
+    });
