@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./thirdparty/bootstrap.min.css">
     <script type="text/javascript" src="./thirdparty/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="./thirdparty/jquery.fittext.js"></script>
+    <script type="text/javascript" src="./thirdparty/masonry.pkgd.min.js"></script>
     <script type="text/javascript" src="./thirdparty/bootstrap.min.js"></script>
 
     <script src="./js/scripts.js"></script>
@@ -20,25 +21,42 @@
 <body>
 
     <!--NAVEGACION-->
-    <div class="navbar-wrapper">
-        <div class="row h-100">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-              <h2>NOTICERO BISONTES RELOADED</h2>
-            </div>
-            <div class="col-sm-2"></div>
-        </div>
-        <div class="pad-r sticky"></div>
-        <div class="row ">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-10">
+    <header class="navbar navbar-wrapper navbar-expand-md navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            </div>
-            <div class="col-lg-2"></div>
+        <a class="navbar-brand" href="#">NOTICIERO BISONTES RELOADED</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-    </div>
+    </header>
     <div class="sticky bar front">
-        
+        <a href="http://">caca</a>
     </div>
     
     <!--BANNER-->
@@ -48,14 +66,59 @@
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
             <div class="row w-100 pad-r"></div>
-            <div class="test">
-            <div class="post-container rounded">
-                <div class="post-title-card">
-                <h3 class="block post-title"> NOTICIA PRINCIPAL TITULO CREIBLE WOW ES MUCHO TEXTO SANTO DIOS MIO CUANTO TEXTO WOW OMG WOWOWOWOWOWOWOW</h3>
-                <p class="text-muted post-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum soluta quidem numquam consequatur quo cum illum laudantium officiis quaerat officia est asperiores maxime quos dolores, ipsa nisi voluptates, blanditiis explicabo consectetur. Vero at necessitatibus voluptate dolor explicabo, natus deserunt sit nobis ipsam numquam quaerat quasi doloribus porro enim quod, excepturi quae, fuga accusamus dolorem cumque quo. Et sequi possimus distinctio porro eaque assumenda culpa nulla, vero quis, neque labore numquam! Voluptatem, voluptatum ex beatae labore dolorum laboriosam exercitationem, nostrum officia, fuga tempora perspiciatis accusamus temporibus. Nulla quasi placeat rerum et consequuntur explicabo sint deleniti maxime? Consequuntur sint error modi voluptas.</p>
+            <div class="container">
+                <div class="grid">
+                <div class="test1 grid-item">
+                    <div class="post-container rounded">
+                        <div class="post-title-card">
+                        <h3 class="block post-title"> NOTICIA PRINCIPAL TITULO CREIBLE WOW ES MUCHO TEXTO SANTO DIOS MIO CUANTO TEXTO WOW OMG WOWOWOWOWOWOWOW</h3>
+                        <p class="text-muted post-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum soluta quidem numquam consequatur quo cum illum laudantium officiis quaerat officia est asperiores maxime quos dolores, ipsa nisi voluptates, blanditiis explicabo consectetur. Vero at necessitatibus voluptate dolor explicabo, natus deserunt sit nobis ipsam numquam quaerat quasi doloribus porro enim quod, excepturi quae, fuga accusamus dolorem cumque quo. Et sequi possimus distinctio porro eaque assumenda culpa nulla, vero quis, neque labore numquam! Voluptatem, voluptatum ex beatae labore dolorum laboriosam exercitationem, nostrum officia, fuga tempora perspiciatis accusamus temporibus. Nulla quasi placeat rerum et consequuntur explicabo sint deleniti maxime? Consequuntur sint error modi voluptas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test2 grid-item">
+                    <div class="post-container rounded">
+                        <div class="post-title-card">
+                        <h3 class="block post-title"> NOTICIA PRINCIPAL TITULO CREIBLE WOW ES MUCHO TEXTO SANTO DIOS MIO CUANTO TEXTO WOW OMG WOWOWOWOWOWOWOW</h3>
+                        <p class="text-muted post-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum soluta quidem numquam consequatur quo cum illum laudantium officiis quaerat officia est asperiores maxime quos dolores, ipsa nisi voluptates, blanditiis explicabo consectetur. Vero at necessitatibus voluptate dolor explicabo, natus deserunt sit nobis ipsam numquam quaerat quasi doloribus porro enim quod, excepturi quae, fuga accusamus dolorem cumque quo. Et sequi possimus distinctio porro eaque assumenda culpa nulla, vero quis, neque labore numquam! Voluptatem, voluptatum ex beatae labore dolorum laboriosam exercitationem, nostrum officia, fuga tempora perspiciatis accusamus temporibus. Nulla quasi placeat rerum et consequuntur explicabo sint deleniti maxime? Consequuntur sint error modi voluptas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="test2 grid-item">
+                    <div class="post-container rounded">
+                        <div class="post-title-card">
+                        <h3 class="block post-title"> NOTICIA PRINCIPAL TITULO CREIBLE WOW ES MUCHO TEXTO SANTO DIOS MIO CUANTO TEXTO WOW OMG WOWOWOWOWOWOWOW</h3>
+                        <p class="text-muted post-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum soluta quidem numquam consequatur quo cum illum laudantium officiis quaerat officia est asperiores maxime quos dolores, ipsa nisi voluptates, blanditiis explicabo consectetur. Vero at necessitatibus voluptate dolor explicabo, natus deserunt sit nobis ipsam numquam quaerat quasi doloribus porro enim quod, excepturi quae, fuga accusamus dolorem cumque quo. Et sequi possimus distinctio porro eaque assumenda culpa nulla, vero quis, neque labore numquam! Voluptatem, voluptatum ex beatae labore dolorum laboriosam exercitationem, nostrum officia, fuga tempora perspiciatis accusamus temporibus. Nulla quasi placeat rerum et consequuntur explicabo sint deleniti maxime? Consequuntur sint error modi voluptas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="test2 grid-item">
+                    <div class="post-container rounded">
+                        <div class="post-title-card">
+                        <h3 class="block post-title"> NOTICIA PRINCIPAL TITULO CREIBLE WOW ES MUCHO TEXTO SANTO DIOS MIO CUANTO TEXTO WOW OMG WOWOWOWOWOWOWOW</h3>
+                        <p class="text-muted post-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum soluta quidem numquam consequatur quo cum illum laudantium officiis quaerat officia est asperiores maxime quos dolores, ipsa nisi voluptates, blanditiis explicabo consectetur. Vero at necessitatibus voluptate dolor explicabo, natus deserunt sit nobis ipsam numquam quaerat quasi doloribus porro enim quod, excepturi quae, fuga accusamus dolorem cumque quo. Et sequi possimus distinctio porro eaque assumenda culpa nulla, vero quis, neque labore numquam! Voluptatem, voluptatum ex beatae labore dolorum laboriosam exercitationem, nostrum officia, fuga tempora perspiciatis accusamus temporibus. Nulla quasi placeat rerum et consequuntur explicabo sint deleniti maxime? Consequuntur sint error modi voluptas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="test2 grid-item">
+                    <div class="post-container rounded">
+                        <div class="post-title-card">
+                        <h3 class="block post-title"> NOTICIA PRINCIPAL TITULO CREIBLE WOW ES MUCHO TEXTO SANTO DIOS MIO CUANTO TEXTO WOW OMG WOWOWOWOWOWOWOW</h3>
+                        <p class="text-muted post-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum soluta quidem numquam consequatur quo cum illum laudantium officiis quaerat officia est asperiores maxime quos dolores, ipsa nisi voluptates, blanditiis explicabo consectetur. Vero at necessitatibus voluptate dolor explicabo, natus deserunt sit nobis ipsam numquam quaerat quasi doloribus porro enim quod, excepturi quae, fuga accusamus dolorem cumque quo. Et sequi possimus distinctio porro eaque assumenda culpa nulla, vero quis, neque labore numquam! Voluptatem, voluptatum ex beatae labore dolorum laboriosam exercitationem, nostrum officia, fuga tempora perspiciatis accusamus temporibus. Nulla quasi placeat rerum et consequuntur explicabo sint deleniti maxime? Consequuntur sint error modi voluptas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="test2 grid-item">
+                    <div class="post-container rounded">
+                        <div class="post-title-card">
+                        <h3 class="block post-title"> NOTICIA PRINCIPAL TITULO CREIBLE WOW ES MUCHO TEXTO SANTO DIOS MIO CUANTO TEXTO WOW OMG WOWOWOWOWOWOWOW</h3>
+                        <p class="text-muted post-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum soluta quidem numquam consequatur quo cum illum laudantium officiis quaerat officia est asperiores maxime quos dolores, ipsa nisi voluptates, blanditiis explicabo consectetur. Vero at necessitatibus voluptate dolor explicabo, natus deserunt sit nobis ipsam numquam quaerat quasi doloribus porro enim quod, excepturi quae, fuga accusamus dolorem cumque quo. Et sequi possimus distinctio porro eaque assumenda culpa nulla, vero quis, neque labore numquam! Voluptatem, voluptatum ex beatae labore dolorum laboriosam exercitationem, nostrum officia, fuga tempora perspiciatis accusamus temporibus. Nulla quasi placeat rerum et consequuntur explicabo sint deleniti maxime? Consequuntur sint error modi voluptas.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+             </div>
             <div class="row pad-r"></div>
             <div class="row">
                 <div class="col-lg-8">

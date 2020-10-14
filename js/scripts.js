@@ -5,4 +5,9 @@ $(document).ready(function(){
     cont.children().each(function(){
         $(this).fitText(1.35);
     });
+
+    $(".grid").masonry({
+        itemSelector: '.grid-item',
+        columnWidth: 210
+      });
 });

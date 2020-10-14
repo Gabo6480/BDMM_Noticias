@@ -13,7 +13,7 @@ function loadDataToWindow(){
         let object = JSON.parse(data);
         document.querySelector('#article-title').innerText = object[0].title;
         document.querySelector('#article-img').src = object[0].img;
-        document.querySelector('#article-content').innerText = object[0].content;
+        document.querySelector('#article-content').innerHTML = object[0].content;
     })
     .catch(err=>{
         console.error("No se encontro el articulo");

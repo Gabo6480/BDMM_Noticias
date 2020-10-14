@@ -1,6 +1,6 @@
 $background : #DDDDDD
 $primary : #0F52BA
-$secondary : crimson
+$secondary : grey
 $title-text-color: #DDDDDD
 $main-text-color : #222222
 $white-color: white
@@ -30,10 +30,10 @@ ul
         padding: 1% 2%
         background-color: $white-color
         width: 100%
-        height: 15%
+        height: 27%
         box-shadow: 1px 0px 6px grey
-        transition: transform 0.3s ease     
-        overflow: auto           
+        transition: height 0.3s ease 0.5s   
+        overflow: hidden           
 
         .post-info
             margin: 0px 2%
@@ -42,21 +42,28 @@ ul
     
     &:hover .post-title-card
         height: 85%
+        overflow: auto
 
-    
+.test1
+    width: 620px
+    height: 410px
+    margin: 5px
 
-.test
+
+.test2
     width: 200px
-    height: 150px
+    height: 200px
+    margin: 5px
 
 
+.navbar-brand
+  transform: translateX(-50%)
+  top: 8px
+  left: 50%
+  position: absolute
 
 .navbar-wrapper
     background: $primary
-    width: 100%
-    text-align: center
-    & h2
-        color: $title-text-color
 
 .my-auto
     margin: 0px auto
@@ -77,9 +84,11 @@ ul
     position: sticky
     top: 0
 .bar
-    background: crimson
+    background: $secondary
     height: 30px
     overflow: hidden
+    a
+        color: white
 
 .front
     z-index: 100
@@ -92,4 +101,4 @@ ul
     & hr
         width: 90%
         height: 0.1px
-        background: crimson
+        background: $secondary
