@@ -1,20 +1,24 @@
 [
     {
+        "id": 1,
         "name":"Adam Garcia",
         "email":"ams.g@outlook.com",
         "type":"Usuario"
     },
     {
+        "id": 2,
         "name":"Arquitecto Benavides",
         "email":"hombrepajaro@gmail.com",
         "type":"Reportero"
     },
     {
+        "id": 3,
         "name":"Jean-Claude Van Damme",
         "email":"jcvd@uanl.edu.mx",
         "type":"Usuario"
     },
     {
+        "id": 4,
         "name":"Adam Garcia Otra Vez",
         "email":"ams.g.otra.vez@outlook.com",
         "type":"Editor"

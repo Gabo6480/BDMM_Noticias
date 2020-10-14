@@ -46,29 +46,38 @@
         <div class="col-xs-0 col-sm-1 col-md-2 col-lg-3"></div>
         <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
             <h1>Usuarios</h1>
-            <div class="users">
-                <div class="search-form">
-                    <aside>
-                        <input type="text" id="search-text" placeholder="Busqueda...">
-                        <button><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </aside>
-                    <section>
-                        <div>
-                            Name     <input type="checkbox" name="por" id="">
-                            Username <input type="checkbox" name="por" id="">
-                            Email    <input type="checkbox" name="por" id="">
-                            
-                        </div>
-                        <div>
-                            Usuarios    <input type="checkbox" name="" id="">
-                            Reporteros  <input type="checkbox" name="" id="">
-                            Editores    <input type="checkbox" name="" id="">
-                        </div>
-                    </section>
+            <div class="users rounded">
+                <div class="search-form d-flex justify-content-around">
                     
+                    <select class="browser-default custom-select col-3">
+                        <option selected="">Filtrar por rol</option>
+                        <option value="1">Usuario</option>
+                        <option value="2">Reportero</option>
+                        <option value="3">Editor</option>
+                    </select>
+                    
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Busqueda..." aria-label="Search">
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
                 </div>
-                <div class="search-results">
-                    
+
+                <div id="search-results" class="rounded">
+                    <table id="result-table" class="table table-striped">
+                        <thead>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Acciones</th>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
