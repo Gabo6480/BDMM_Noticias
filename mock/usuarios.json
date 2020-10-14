@@ -1,0 +1,22 @@
+[
+    {
+        "name":"Adam Garcia",
+        "email":"ams.g@outlook.com",
+        "type":"Usuario"
+    },
+    {
+        "name":"Arquitecto Benavides",
+        "email":"hombrepajaro@gmail.com",
+        "type":"Reportero"
+    },
+    {
+        "name":"Jean-Claude Van Damme",
+        "email":"jcvd@uanl.edu.mx",
+        "type":"Usuario"
+    },
+    {
+        "name":"Adam Garcia Otra Vez",
+        "email":"ams.g.otra.vez@outlook.com",
+        "type":"Editor"
+    }
+]
