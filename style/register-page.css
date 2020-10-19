@@ -1,0 +1,26 @@
+#register #register-box {
+  margin: 50px 0px;
+  border: 1px solid LightBlue;
+  background-color: GhostWhite;
+  -webkit-box-shadow: 2px 2px 4px grey;
+          box-shadow: 2px 2px 4px grey;
+}
+
+#register .register-section {
+  max-width: 600px;
+  min-width: 200px;
+}
+
+#register #register-form {
+  padding: 20px;
+}
+
+#register #submit {
+  width: 100%;
+  margin: 10px 0px;
+}
+
+#register #login-link {
+  padding: 10px;
+}
+/*# sourceMappingURL=register-page.css.map */
