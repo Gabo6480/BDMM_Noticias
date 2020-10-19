@@ -1,5 +1,5 @@
 import * as User from './../routes/user.routes.module.js'
-import request from './../services/xmlhttp-promise.module.js'
+import { request } from './xmlhttp-promise.module.js';
 
 function allUsers(callback,error){
     request({url: User.getAll})
