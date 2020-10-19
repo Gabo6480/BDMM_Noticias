@@ -24,24 +24,7 @@
   padding: 10px;
 }
 
-#register #pp {
-  max-width: 150px;
-  margin: 30px auto;
-  border-radius: 100%;
-}
-
-#register #pp-file {
+#register .file-upload {
   display: none;
-}
-
-#register .camera-icon {
-  position: relative;
-  left: -20%;
-  top: 80px;
-}
-
-#register .camera-icon:hover {
-  cursor: pointer;
-  color: #777777;
 }
 /*# sourceMappingURL=register-page.css.map */

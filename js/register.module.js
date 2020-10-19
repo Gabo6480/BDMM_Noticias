@@ -11,7 +11,7 @@ window.onload = ()=>{
         let username_text = document.querySelector('#username').value;
         let password_text = document.querySelector('#password').value;
         let password_confirm_text = document.querySelector('#confirm-password').value;
-        let pp_file = document.querySelector("#pp-file").files[0];
+        let pp_file = document.querySelector("#selectedFile").files[0];
 
         if(!validations.validate_empty(email_text))
         {
@@ -58,3 +58,23 @@ window.onload = ()=>{
         }
     });
 }
+
+$(document).ready(function () {
+
+    var readURL = function (input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.avatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".file-upload").on('change', function () {
+        readURL(this);
+    });
+
+});
