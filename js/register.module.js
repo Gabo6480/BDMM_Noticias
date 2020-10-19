@@ -11,7 +11,7 @@ window.onload = ()=>{
         let username_text = document.querySelector('#username').value;
         let password_text = document.querySelector('#password').value;
         let password_confirm_text = document.querySelector('#confirm-password').value;
-        let pp_file = document.querySelector("#pp-file").files[0];
+        let pp_file = document.querySelector("#selectedFile").files[0];
 
         if(!validations.validate_empty(email_text))
         {
