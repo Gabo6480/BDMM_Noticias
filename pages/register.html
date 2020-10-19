@@ -54,9 +54,11 @@
 
                                     <h3 class="text-center">Registar</h3>
                                     <div class="text-center">
-                                        <img src="../resources/profile-pic-placeholder.png" alt="imagen-perfil.jpg" id="pp"  accept="image/*">
-                                        <i class="fas fa-camera camera-icon"></i>
-                                        <input type="file" name="pp-file" id="pp-file">
+                                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                                            class="avatar img-circle img-thumbnail" alt="avatar">
+                                        <h6>Subir una foto diferente...</h6>
+                                        <input id="selectedFile" type="file" class="file-upload">
+                                        <input type="button" value="Examinar..." onclick="$('#selectedFile').click();" />
                                     </div>
                                     <div class="d-flex">
                                         
