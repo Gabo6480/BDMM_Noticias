@@ -81,10 +81,17 @@ ul
 .bar
     background: $secondary
     height: 30px
-    overflow: hidden
-    a
+    box-sizing: border-box
+    .section
+        display: inline-flex
+        margin: 0 5px
+        padding: 0px 10px
+        border-radius: 3px
+        transition: background ease 400ms
         color: white
-
+        &:hover
+            cursor: pointer
+    
 .front
     z-index: 100
 

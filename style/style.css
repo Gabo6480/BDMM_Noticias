@@ -102,11 +102,24 @@ ul {
 .bar {
   background: grey;
   height: 30px;
-  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-.bar a {
+.bar .section {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: 0 5px;
+  padding: 0px 10px;
+  border-radius: 3px;
+  -webkit-transition: background ease 400ms;
+  transition: background ease 400ms;
   color: white;
+}
+
+.bar .section:hover {
+  cursor: pointer;
 }
 
 .front {

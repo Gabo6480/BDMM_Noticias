@@ -1,5 +1,3 @@
-import {request} from './services/xmlhttp-promise.module.js';
-
 let createUserCard = function(user){
     return "<tr> <th scope='row'>img</th><td class='user-name'>" + user.name 
     + "</td><td class='user-email'>" + user.email 

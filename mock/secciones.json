@@ -1,0 +1,22 @@
+[
+    {
+        "nombre":"Deportes",
+        "descripcion":"Seccion de noticias deportivas, desde escandalos del deporte a resultados de partidos",
+        "color":"#FFFF00"
+    },
+    {
+        "nombre":"Gente",
+        "descripcion":"Seccion de noticias de chismes sobre la vida privada de las personas",
+        "color":"#00FF00"
+    },
+    {
+        "nombre":"COVID 19",
+        "descripcion":"Seccion de noticias de relacionadas al COVID 19",
+        "color":"#0000FF"
+    },
+    {
+        "nombre":"Relleno",
+        "descripcion":"Seccion de noticias no interesantes que sirven para la monetizacion por anuncios",
+        "color":"#333333"
+    }
+]
