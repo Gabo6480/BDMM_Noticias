@@ -91,4 +91,18 @@
           transform: translate(-100%, 0);
   outline: none;
 }
+
+.modo-reportero-editor {
+  position: fixed;
+  left: 30px;
+  top: 100px;
+  color: brown;
+  border-radius: 1000px;
+  background: white;
+  z-index: 1000;
+  border: solid brown 3px;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+}
 /*# sourceMappingURL=article-page.css.map */

@@ -18,6 +18,7 @@
 
     <script src="./js/scripts.js"></script>
     <script src="./js/navbar-sections-mock.module.js" type="module"></script>
+    <script src="./js/redirect-article.js"></script>
 </head>
 
 <body>
@@ -28,7 +29,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand" href="#">NOTICIERO BISONTES RELOADED</a>
+        <a class="navbar-brand" href="../index.html">NOTICIERO BISONTES RELOADED</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -42,8 +43,11 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="pages/login.html">Log In</a>
                         <a class="dropdown-item" href="pages/register.html">Sign Up</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="pages/posts.html">Articulos (Editor)</a>
+                        <a class="dropdown-item" href="pages/profile.html">Perfil</a>
+                        <a class="dropdown-item" href="pages/users.html">Usuarios (Editor)</a>
+                        <!--<div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>-->
                     </div>
                 </li>
                 <li class="nav-item">
@@ -100,6 +104,21 @@
     <div class="row footer">
         <hr>
     </div>
+
+    <script type="module">
+        import {request} from './js/services/xmlhttp-promise.module.js'
+        window.onload = ()=>{
+            request({url:"http://localhost/restapi/src/index.php?token=p"}).then(
+                value=>{
+                    let h2 = document.createElement('h2');
+                    h2.innerText = value;
+                    document.body.appendChild(h2);
+                }
+            )
+
+
+        }
+    </script>
 </body>
 
 </html>
