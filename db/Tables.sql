@@ -42,7 +42,7 @@ CREATE TABLE comentario(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
 	Contenido		TEXT			NOT NULL,
     Fecha			DATETIME		NOT NULL,
-    
+    Padre           INT             NULL,
     Noticia			INT				NOT NULL,
     CONSTRAINT FK_NOTICIA FOREIGN KEY (Noticia)
     REFERENCES noticia(ID),
@@ -52,7 +52,7 @@ CREATE TABLE comentario(
     REFERENCES usuario(ID)
 );
 
-/*CREATE TABLE me_gusta(	
+CREATE TABLE me_gusta(	
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
     
 	Noticia			INT				NOT NULL,
@@ -62,4 +62,4 @@ CREATE TABLE comentario(
     Usuario			INT				NOT NULL,
     CONSTRAINT FK_USUARIO FOREIGN KEY (Usuario)
     REFERENCES usuario(ID)
-);*/
+);
