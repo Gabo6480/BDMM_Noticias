@@ -17,8 +17,13 @@
     margin: auto
 
 #article-content
-    margin: 10px 20px
+    margin: 10px 0px
+    padding: 0px 20px
     font-size: 1.25em
+
+.editor-editable
+    &[contentEditable=true]
+        background-color: lightgrey
 
 #article-info > * 
             border-right: 2px solid grey
@@ -76,6 +81,8 @@
 
 .modo-reportero-editor
     position: fixed
+    width: 40px
+    height: 40px
     left: 30px
     top: 100px
     color: brown
@@ -86,3 +93,5 @@
     padding: 5px
     text-align: center
     cursor: pointer
+
+
