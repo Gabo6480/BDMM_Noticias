@@ -25,7 +25,7 @@
 }
 
 .editor-editable[contentEditable=true] {
-  background-color: lightgrey;
+  background-color: whitesmoke;
 }
 
 #article-info > * {
