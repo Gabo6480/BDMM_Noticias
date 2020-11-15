@@ -1,11 +1,7 @@
-
-
 let parseArticle = function(str){
-    let p = document.createElement("p");
-    let n = str.length;
+    var converter = Markdown.getSanitizingConverter();
 
-    
-    for( let i = 0; i < n;  ++i ){
-        
-    }
+    return converter.makeHtml(str);
 }
+
+export{parseArticle}

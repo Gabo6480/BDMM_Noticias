@@ -1,5 +1,6 @@
 import {request} from './services/xmlhttp-promise.module.js';
 import * as comms from './article-comments.module.js'
+import * as parser from './article-content-parser.module.js'
 $(document).ready(function(){
 
     loadDataToWindow();
@@ -13,7 +14,7 @@ function loadDataToWindow(){
         let object = JSON.parse(data);
         $("#article-title").text(object[0].title);
         $("#article-img").attr("src", object[0].img);
-        $("#article-content").html(object[0].content);
+        $("#article-content").html(parser.parseArticle(object[0].content));
     })
     .catch(err=>{
         console.error("No se encontro el articulo");
