@@ -1,6 +1,6 @@
 import {request} from './services/xmlhttp-promise.module.js';
-import * as comms from './article-comments.module.js'
-import * as parser from './article-content-parser.module.js'
+import * as comms from './imports/article-comments.module.js'
+import * as parser from './imports/article-content-parser.module.js'
 $(document).ready(function(){
 
     loadDataToWindow();

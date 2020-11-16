@@ -20,7 +20,7 @@
     <script src="./js/navbar-sections-mock.module.js" type="module"></script>
     <script src="./js/redirect-article.js"></script>
 
-    <script src="./js/imports/importer.js"></script>
+    <script src="./js/importer.js"></script>
 </head>
 <body>
 
@@ -67,21 +67,6 @@
     
     <!--FOOTER-->
     <import href="./pages/components/footer.html"></import>
-
-    <script type="module">
-        import {request} from './js/services/xmlhttp-promise.module.js'
-        window.onload = ()=>{
-            request({url:"http://localhost/restapi/src/index.php?token=p"}).then(
-                value=>{
-                    let h2 = document.createElement('h2');
-                    h2.innerText = value;
-                    document.body.appendChild(h2);
-                }
-            )
-
-
-        }
-    </script>
 </body>
 
 </html>
