@@ -67,21 +67,6 @@
     
     <!--FOOTER-->
     <import href="./pages/components/footer.html"></import>
-
-    <script type="module">
-        import {request} from './js/services/xmlhttp-promise.module.js'
-        window.onload = ()=>{
-            request({url:"http://localhost/restapi/src/index.php?token=p"}).then(
-                value=>{
-                    let h2 = document.createElement('h2');
-                    h2.innerText = value;
-                    document.body.appendChild(h2);
-                }
-            )
-
-
-        }
-    </script>
 </body>
 
 </html>
