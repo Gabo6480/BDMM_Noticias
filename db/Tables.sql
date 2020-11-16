@@ -1,7 +1,8 @@
-
+CREATE DATABASE BDMM_DB;
+USE BDMM_DB;
 CREATE TABLE usuario(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
-	Correo			TINYTEXT		NOT NULL UNIQUE,
+	Correo			VARCHAR(30)		NOT NULL UNIQUE,
     Foto			BLOB			NULL,
     Nombre			TINYTEXT		NOT NULL,
     Contraseña		TINYTEXT		NOT NULL,
@@ -38,6 +39,15 @@ CREATE TABLE noticia(
     
 );
 
+CREATE TABLE multimedia(
+	ID				INT 							AUTO_INCREMENT PRIMARY KEY,
+    Tipo			enum('Video','Imagen','Otro')	NOT NULL DEFAULT('Imagen'),
+    Contenido		BLOB							NOT NULL,
+    Noticia 		INT 							NOT NULL,
+    CONSTRAINT fk_multimedia_noticia
+    FOREIGN KEY (Noticia) REFERENCES noticia(ID)
+);
+
 CREATE TABLE comentario(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
 	Contenido		TEXT			NOT NULL,
@@ -56,10 +66,10 @@ CREATE TABLE me_gusta(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
     
 	Noticia			INT				NOT NULL,
-    CONSTRAINT FK_NOTICIA FOREIGN KEY (Noticia)
+    CONSTRAINT FK_NOTICIA_LIKE FOREIGN KEY (Noticia)
     REFERENCES noticia(ID),
     
     Usuario			INT				NOT NULL,
-    CONSTRAINT FK_USUARIO FOREIGN KEY (Usuario)
+    CONSTRAINT FK_USUARIO_LIKE FOREIGN KEY (Usuario)
     REFERENCES usuario(ID)
 );
