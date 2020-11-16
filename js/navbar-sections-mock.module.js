@@ -1,4 +1,4 @@
-import { createSection } from './navbar-sections.js';
+import { createSection } from './imports/navbar-sections.js';
 import { request } from './services/xmlhttp-promise.module.js';
 
 $(document).ready(()=>{

@@ -1,4 +1,4 @@
-import * as validations from './validation.module.js';
+import * as validations from './imports/validation.module.js';
 import { login } from './services/user.service.module.js';
 import { User } from './models/user.model.js';
 
