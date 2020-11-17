@@ -33,20 +33,5 @@
         if(!$sentence->execute()){
             echo "Fallo la ejecucion del query : ".$sentence->error;
         }
-
-        if($result = $sentence->get_result()){
-        
-            if($result->num_rows > 0) 
-            {
-                while($row = $result->fetch_assoc()) {
-                    echo $row['resultado'];
-                }
-            
-                mysqli_free_result($result);
-            }
-        }
-        else{
-            echo "Error, esto no jala";
-        }
     }
 ?>

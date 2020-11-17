@@ -1,15 +1,14 @@
 <?php
-
     require './../dbconnect.php';
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        $correo = $_POST['id_usuario'];
-        $pasword = $_POST['password'];
+        //Datos del articulo
+        $idusuario    = $_POST['id_usuario'];
 
-        $formato = "call sp_usuarios_eliminar('%s','%s');";
+        $formato = "call sp_usuarios_baja(%d);";
 
-        $query = sprintf($formato, $correo, $password);
+        $query = sprintf($formato, $idusuario);
         
         if(!($sentence = $conn->prepare($query))){
             echo "Fallo la preparacion del query";
