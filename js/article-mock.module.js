@@ -4,7 +4,6 @@ import * as parser from './imports/article-content-parser.module.js'
 $(document).ready(function(){
 
     loadDataToWindow();
-    
 });
 
 function loadDataToWindow(){
@@ -15,6 +14,8 @@ function loadDataToWindow(){
         $("#article-title").text(object[0].title);
         $("#article-img").attr("src", object[0].img);
         $("#article-content").html(parser.parseArticle(object[0].content));
+
+        $('[data-toggle="tooltip"]').tooltip()
     })
     .catch(err=>{
         console.error("No se encontro el articulo");
