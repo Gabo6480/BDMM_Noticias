@@ -4,36 +4,31 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand" href="../index.html">NOTICIERO BISONTES RELOADED</a>
+        <a class="navbar-brand" href="http://127.0.0.1:5500/index.html">NOTICIERO BISONTES RELOADED</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+            <form class="form-inline">
+                <button class="btn btn-outline-success my-1" type="submit">Search</button>
+                <input class="form-control ml-1" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-1 my-1">
+                    <a class="btn btn-info" href="http://127.0.0.1:5500/pages/login.html">Ingresar</a>
+                </li>
+                <li class="nav-item mx-1 my-1">
+                    <a class="btn btn-outline-light" href="http://127.0.0.1:5500/pages/register.html">Regístrate</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="pages/login.html">Log In</a>
-                        <a class="dropdown-item" href="pages/register.html">Sign Up</a>
-                        <a class="dropdown-item" href="pages/posts.html">Articulos (Editor)</a>
-                        <a class="dropdown-item" href="pages/profile.html">Perfil</a>
-                        <a class="dropdown-item" href="pages/users.html">Usuarios (Editor)</a>
-                        <!--<div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>-->
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="http://127.0.0.1:5500/pages/profile.html">Perfil</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:5500/pages/posts.html">Articulos (Editor)</a>
+                        <a class="dropdown-item" href="http://127.0.0.1:5500/pages/users.html">Usuarios (Editor)</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
             </ul>
-
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </header>
     <div class="sticky bar front" id="sections"></div>
