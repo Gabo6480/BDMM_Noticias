@@ -20,6 +20,8 @@ function loadDataToWindow(){
     .catch(err=>{
         console.error("No se encontro el articulo");
     });
+
+
     //traer comentarios
     request({url:'/mock/comentarios.json'})
     .then(commentsJson =>{
@@ -35,14 +37,19 @@ function loadDataToWindow(){
 }
 
 //Autoexpandir el textarea
-$(document).one('focus.autoExpand', 'textarea.autoExpand', function(){
-        var savedValue = this.value;
-        this.value = '';
-        this.baseScrollHeight = this.scrollHeight;
-        this.value = savedValue;
-    }).on('input.autoExpand', 'textarea.autoExpand', function(){
-        var minRows = this.getAttribute('data-min-rows')|0, rows;
-        this.rows = minRows;
-        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 24   );
-        this.rows = minRows + rows;
-    });
+//$(document).one('focus.autoExpand', 'textarea.autoExpand', function(){
+//    var savedValue = this.value;
+//    this.value = '';
+//    this.baseScrollHeight = this.scrollHeight;
+//    this.value = savedValue;
+//}).on('input.autoExpand', 'textarea.autoExpand', function(){
+//    var minRows = this.getAttribute('data-min-rows')|0, rows;
+//    this.rows = minRows;
+//    rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 24 - 1);
+//    this.rows = minRows + rows;
+//});
+
+$(document).on('keyup keypress', 'textarea.autoExpand', function() {
+    $(this).height(0);
+    $(this).height(this.scrollHeight);
+});

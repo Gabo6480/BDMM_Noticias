@@ -1,6 +1,6 @@
-let parseArticle = function(str){
-    var converter = Markdown.getSanitizingConverter();
+var converter = Markdown.getSanitizingConverter();
 
+let parseArticle = function(str){
     // /\$\[([\S\s]+?)\]\("([\S\s]+?)"\)/g
     converter.hooks.chain("postConversion", function(text){
         return text.replace(/\$\[([\S\s]+?)\]\("([\S\s]+?)"\)/g, function(whole, inner, comment){
@@ -11,7 +11,9 @@ let parseArticle = function(str){
         });
     });
 
-    return converter.makeHtml(str);
+    var result = $(converter.makeHtml(str)).filter("p").html()
+    return result;
 }
 
 export{parseArticle}
+export{converter}

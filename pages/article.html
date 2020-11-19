@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../style/style.css">
 
     <link rel="stylesheet" href="../thirdparty/bootstrap.min.css">
+    <link rel="stylesheet" href="../thirdparty/Markdown.css">
     <link rel="stylesheet" href="../style/article-page.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -22,7 +23,7 @@
     <script src="../js/article-mock.module.js" type="module"></script>
     <script src="../js/navbar-sections-mock.module.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-    <script src="../js/article-edit-mode.js"></script>
+    <script src="../js/article-edit-mode.module.js" type="module"></script>
 
     <script src="../js/importer.js"></script>
 </head>
@@ -53,7 +54,8 @@
                     <p>SECCION</p> <p>13/10/2020</p> <p>12:02</p>
                 </div>
                 
-                <p id="article-content" class="text-justify editor-editable"></p>
+                <div id="wmd-button-bar" style="display: none;"></div>
+                <p id="article-content" class="text-justify editor-editable wmd-input"></p>
             </div>
             <!--Seccion de comentarios-->
             <div id="comm-section">
