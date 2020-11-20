@@ -5,6 +5,7 @@
 
         private $conn;
 
+        private $getAllByArticleProcedure;
         private $getByArticleProcedure;
         private $getChildrenProcedure;
 
@@ -33,14 +34,14 @@
 
         //brute force solution
         function getByArticle($article_id){
-            $format = 'call %s(%d)';
+            $format = 'call %s(%d);';
 
             $query = sprintf($format,
                 $getByArticleProcedure,
                 $article_id
             );
 
-            if(!($sentence = $query->prepare($query))){
+            if(!($sentence = $this->$conn->prepare($query))){
                 die("PREPARATION FAILED");
             }
 
@@ -76,7 +77,7 @@
                 $comment_id
             );
 
-            if(!($sentence = $query->prepare($query))){
+            if(!($sentence = $this->conn->prepare($query))){
                 die("PREPARATION FAILED");
             }
 
@@ -101,5 +102,47 @@
                 return $replies;
             }
             return NULL;
+        }
+
+        //faster getByAArticle conn USA UN CHORRO DE MEMORIA
+        function getByArticleFast($article_id){
+            $format = 'call %s(%d);';
+
+            $query = sprintf($format
+                $getAllByArticleProcedure
+            );
+
+            if(!($sentence = $this->$conn->prepare($query))){
+                die("PREPARATION FAILED");
+            }
+
+            if(!$sentence->execute()){
+                die("EXECUTION FAILED");
+            }
+
+            if($result = $sentence->get_result()){
+
+                $id_object_map = array();
+                $rowArr = array();
+                $j = 0;
+                while($row = $result->fetch_assoc()){
+                    array_push($rowArr, $row);
+                    $id_object_map[$row["ID"]] = $j;
+                    $j++;
+                }
+
+                //usar associative array como hash map
+
+                $aux_map = array();
+                for($i = 0; $i < count($rowArr); $i++){
+                    if($id = $rowArr[$i]["Padre"]){
+                        if(!$aux_map[$id]){
+                            $aux_map[$id] = array();
+                        }
+                        array_push($aux_map[$id], $rowArr[$i]);
+                    }
+                }
+            }
+
         }
     }
