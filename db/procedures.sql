@@ -76,7 +76,7 @@ BEGIN
     IF EXISTS( SELECT ID FROM usuario u WHERE correo = u.Correo and contra = u.Contraseña)
     THEN
     BEGIN
-        SELECT('SUCCESS');
+        SELECT 'SUCCESS' as RESULT;
     END
 END //
 
@@ -90,5 +90,7 @@ BEGIN
 END //
 
 #Noticias
+
+
 
 DELIMITER ;

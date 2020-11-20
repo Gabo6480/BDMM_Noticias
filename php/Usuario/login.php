@@ -7,7 +7,7 @@
         $correo = $_POST['id_usuario'];
         $pasword = $_POST['password'];
 
-        $formato = "call sp_usuarios_eliminar('%s','%s');";
+        $formato = "call sp_login('%s','%s');";
 
         $query = sprintf($formato, $correo, $password);
         

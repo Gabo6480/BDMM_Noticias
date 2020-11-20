@@ -6,7 +6,7 @@
 
         //Datos del articulo
 
-        $id         = $_POST['id_noticia'];
+        $id         = $_POST['id_seccion'];
 
         $formato = "call sp_secciones_baja(%d);";
 

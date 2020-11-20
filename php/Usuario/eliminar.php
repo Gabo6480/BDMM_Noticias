@@ -7,7 +7,7 @@
         //Datos del articulo
         $idusuario    = $_POST['idusuario'];
 
-        $formato = "call sp_usuarios_eliminar(%d);";
+        $formato = "call sp_usuarios_baja(%d);";
 
         $query = sprintf($formato, $idusuario);
         
