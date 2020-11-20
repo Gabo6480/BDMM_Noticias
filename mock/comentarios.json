@@ -1,26 +1,63 @@
 [
     {
+        "id": 0,
+        "picture":"https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png",
         "user":"ElPerroAguayo123",
-        "content":"No quiero pelear contra una poblcion de 20 millones de cangrejos :'c"
+        "userId": 1,
+        "content":"No quiero pelear contra una poblcion de 20 millones de cangrejos :'c",
+        "answers": []
     },
     {
+        "id": 1,
+        "picture":"https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png",
         "user":"xXxel_trollia_noobsxXx",
-        "content":"Ya quemenlos mejor, aprovechamos para la comida"
+        "userId": 2,
+        "content":"Ya quemenlos mejor, aprovechamos para la comida",
+        "answers": []
     },
     {
+        "id": 2,
+        "picture":"https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png",
         "user":"ElHijoDelPerroAguayo",
-        "content":"Ya me mori"
+        "userId": 3,
+        "content":"Ya me mori",
+        "answers": [
+            {
+                "picture":"https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png",
+                "user":"ElPerroAguayo123",
+                "userId": 1,
+                "content":"Noo0o0o0oOOO0o0o0ooo0o0o0oooOOoo"
+            },
+            {
+                "picture":"https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png",
+                "user":"xXxel_trollia_noobsxXx",
+                "userId": 2,
+                "content":"F"
+            }
+
+        ]
     },
     {
+        "id": 3,
+        "picture":"https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png",
         "user":"CientificoSinTitulo",
-        "content":"La poblacion total de la Isla Navidad es de 1,402, eso significa que cada habitante debe de combatir a aproximadamente 14265 cangrejos para poder lidiar con ellos de la manera mas eficiente posible"
+        "userId": 4,
+        "content":"La poblacion total de la Isla Navidad es de 1,402, eso significa que cada habitante debe de combatir a aproximadamente 14265 cangrejos para poder lidiar con ellos de la manera mas eficiente posible",
+        "answers": []
     },
     {
+        "id": 4,
+        "picture":"https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png",
         "user":"Lorem_Crazy",
-        "content":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, placeat aliquam velit quisquam recusandae esse animi reprehenderit possimus, nostrum officia totam quam. Repudiandae enim debitis maiores illo voluptatum quam distinctio illum ratione error, dignissimos ipsum vitae doloribus! Ex quas animi suscipit autem voluptas explicabo eos, optio iure maiores, aspernatur veniam beatae cupiditate mollitia illum odio nostrum vel id hic dolor veritatis eius aut? Asperiores rem magni, nobis blanditiis perspiciatis recusandae odio eveniet, in ipsam aspernatur beatae voluptatum natus aperiam sed iure veniam sunt repudiandae quos repellendus, inventore praesentium laborum adipisci. Quae autem maxime, earum tempora non et repellendus aliquid vitae!"
-    },
-    {
-        "user":"YodaCholo",
-        "content":"Mucho Texto ^^^"
+        "userId": 5,
+        "content":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, placeat aliquam velit quisquam recusandae esse animi reprehenderit possimus, nostrum officia totam quam. Repudiandae enim debitis maiores illo voluptatum quam distinctio illum ratione error, dignissimos ipsum vitae doloribus! Ex quas animi suscipit autem voluptas explicabo eos, optio iure maiores, aspernatur veniam beatae cupiditate mollitia illum odio nostrum vel id hic dolor veritatis eius aut? Asperiores rem magni, nobis blanditiis perspiciatis recusandae odio eveniet, in ipsam aspernatur beatae voluptatum natus aperiam sed iure veniam sunt repudiandae quos repellendus, inventore praesentium laborum adipisci. Quae autem maxime, earum tempora non et repellendus aliquid vitae!",
+        "answers": [
+            {
+                "user":"YodaCholo",
+                "picture":"https://plantillasdememes.com/img/plantillas/mucho-texto-yoda-cholo11593560033.jpg",
+                "userId": 6,
+                "content":"Mucho Texto ^^^"
+            }
+        ]
     }
 ]

@@ -49,6 +49,7 @@ $(document).ready(()=>{
             });
 
             $("#wmd-button-bar").show();
+            $("#article-img-upload").show();
 
             var editor1 = new Markdown.Editor(parser.converter);
             editor1.run();

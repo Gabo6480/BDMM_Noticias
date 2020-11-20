@@ -44,26 +44,45 @@
             <!--Contenedor del articulo-->
             <div id="article-container">
                 <h1 id="article-title" class="text-justify editor-editable"></h1>
+                <h3 id="article-description" class="text-justify editor-editable"></h3>
                 <div id="article-img-container">
                     <img id="article-img" src="" alt="imagen-articulo.jpg">
                 </div>
+                <div id="article-img-upload" style="display: none;">
+                    <input id="selectedFile" type="file" style="display: none;" class="file-upload">
+                    <input type="button" value="Examinar..." onclick="$('#selectedFile').click();" />
+                </div>
 
-                <hr class="solid">
+                <hr class="solid" />
 
                 <div id="article-info" class="row">
-                    <p>SECCION</p> <p>13/10/2020</p> <p>12:02</p>
+                    
                 </div>
                 
                 <div id="wmd-button-bar" style="display: none;"></div>
                 <p id="article-content" class="text-justify editor-editable wmd-input"></p>
+
+                <hr class="solid" />
             </div>
+            <!--Contador de Likes-->
+            <div id="article-likes" class="row">
+                <button id="like-button">Me gusta</button>
+                <p id="like-number">Numero de likes</p>
+            </div>
+            
+            <hr class="solid" />
+            <!--Articulos relacionados-->
+            <div id="related-articles" class="item-carousel">
+
+            </div>
+            <hr class="solid" />
             <!--Seccion de comentarios-->
             <div id="comm-section">
-                <div id="comment-form">
+                <div class="comment-form">
                     <h6>Comentar</h6>
-                    <textarea id="comment-text" class="autoExpand" name="Text1" rows="1" data-min-rows="1" placeholder="Escribe tu comentario aqui..."></textarea>
+                    <textarea class="comment-text autoExpand" placeholder="Escribe tu comentario aqui..."></textarea>
 
-                    <button id="comment-button">Enviar</button>
+                    <button class="comment-button">Enviar</button>
                 </div>
                 <div id="comments"></div>
             </div>

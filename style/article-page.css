@@ -3,7 +3,7 @@
 }
 
 #article-container {
-  margin: 60px 0px;
+  margin-top: 60px;
 }
 
 #article-img-container {
@@ -75,11 +75,26 @@
           box-shadow: 0px 1px 4px LightBlue;
 }
 
-#comment-form {
+.comment .comment-answer {
+  padding-left: 10px;
+  color: #0F52BA;
+}
+
+.comment .comment-answer:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.comment .comment-comments {
+  padding-left: 20px;
+  display: none;
+}
+
+.comment-form {
   padding: 20px;
 }
 
-#comment-form > #comment-text {
+.comment-form > .comment-text {
   width: 100%;
   resize: none;
   overflow: hidden;
@@ -90,12 +105,21 @@
   border-bottom: 3px solid LightBlue;
 }
 
-#comment-form > #comment-button {
+.comment-form > .comment-button {
   position: relative;
   left: 100%;
   -webkit-transform: translate(-100%, 0);
           transform: translate(-100%, 0);
   outline: none;
+}
+
+#article-likes > p {
+  text-align: left;
+  margin: auto 8px;
+}
+
+#article-likes .liked {
+  background-color: #b0e2ff;
 }
 
 .modo-reportero-editor {

@@ -82,6 +82,8 @@ ul
     background: $secondary
     height: auto
     box-sizing: border-box
+    overflow-x: scroll
+    white-space: nowrap
     .section
         display: inline-flex
         margin: 0 5px
@@ -93,6 +95,14 @@ ul
             cursor: pointer
         > *
             margin: auto
+
+.item-carousel
+    height: auto
+    overflow-x: scroll
+    white-space: nowrap
+
+    > *
+        display: inline-flex
     
 .front
     z-index: 100
@@ -106,3 +116,10 @@ ul
         width: 90%
         height: 0.1px
         background: $secondary
+
+.user-picture
+    height: 50px
+    width: 50px
+    margin: 5px
+    overflow: hidden
+    object-fit: fill

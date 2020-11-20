@@ -4,7 +4,7 @@
     font-weight: bold
 
 #article-container
-    margin: 60px 0px
+    margin-top: 60px
     
 #article-img-container
     width: 100%
@@ -64,9 +64,20 @@
     margin-top: 10px
     box-shadow: 0px 1px 4px $comm-section-sd
 
-#comment-form
+    .comment-answer
+        padding-left: 10px
+        color: $primary
+        &:hover
+            text-decoration: underline
+            cursor: pointer
+
+    .comment-comments
+        padding-left: 20px
+        display: none
+
+.comment-form
     padding: 20px
-    & > #comment-text
+    & > .comment-text
         width: 100%
         resize: none
         overflow: hidden
@@ -74,11 +85,19 @@
         padding: 8px
         border: none
         border-bottom: 3px solid $comm-section-sd
-    & > #comment-button
+    & > .comment-button
         position: relative
         left: 100%
         transform: translate(-100%,0)
         outline: none
+
+#article-likes
+    > p
+        text-align: left
+        margin: auto 8px
+
+    .liked
+        background-color: $search-result-bg
 
 .modo-reportero-editor
     position: fixed

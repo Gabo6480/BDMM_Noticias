@@ -104,6 +104,8 @@ ul {
   height: auto;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  overflow-x: scroll;
+  white-space: nowrap;
 }
 
 .bar .section {
@@ -126,6 +128,18 @@ ul {
   margin: auto;
 }
 
+.item-carousel {
+  height: auto;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.item-carousel > * {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
 .front {
   z-index: 100;
 }
@@ -141,5 +155,14 @@ ul {
   width: 90%;
   height: 0.1px;
   background: grey;
+}
+
+.user-picture {
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  overflow: hidden;
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 /*# sourceMappingURL=style.css.map */
