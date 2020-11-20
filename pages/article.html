@@ -38,9 +38,7 @@
 
 
     <!--Seccion del Articulo-->
-    <div class="row">
-        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-2"></div>
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
             <!--Contenedor del articulo-->
             <div id="article-container">
                 <h1 id="article-title" class="text-justify editor-editable"></h1>
@@ -61,6 +59,15 @@
                 
                 <div id="wmd-button-bar" style="display: none;"></div>
                 <p id="article-content" class="text-justify editor-editable wmd-input"></p>
+
+                <!--Botón para la versión de editor-->
+                <div id="edit-buttons" class="form-group" style="display: none;">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-lg btn-success" type="submit"> Guardar </button>
+                        <button class="btn btn-lg" type="reset"> Restaurar </button>
+                    </div>
+                </div>
 
                 <hr class="solid" />
             </div>
@@ -87,8 +94,6 @@
                 <div id="comments"></div>
             </div>
         </div>
-        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-2"></div>
-    </div>
 
     <!--FOOTER-->
     <import href="./components/footer.html"></import>
