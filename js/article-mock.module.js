@@ -39,7 +39,7 @@ function loadDataToWindow(){
         $("#article-img").attr("src", object[0].img);
         $("#article-content").html(parser.parseArticle(object[0].content));
 
-        $("#article-info").append("<p>" + object[0].section + "</p>");
+        $("#article-info").append("<p id='article-section'>" + object[0].section + "</p>");
         $("#article-info").append("<p>" + object[0].date + "</p>");
         $("#article-info").append("<p>" + object[0].hour + "</p>");
         $("#article-info").append("<p id='article-author'>" + object[0].author + "</p>");

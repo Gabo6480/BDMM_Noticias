@@ -1,0 +1,32 @@
+.users {
+  margin: 30px 0;
+  padding-top: 10px;
+  background: #b0e2ff;
+}
+
+.users .search-form > * {
+  margin: 5px;
+}
+
+.users #search-results {
+  max-height: 500px;
+  background: white;
+  overflow: auto;
+}
+
+.users #search-results .user-picture {
+  margin: 0px !important;
+}
+
+.users #search-results th {
+  vertical-align: middle;
+}
+
+.users #search-results td {
+  vertical-align: middle;
+}
+
+.users #search-results td button {
+  margin: 0px 2px;
+}
+/*# sourceMappingURL=users-page.css.map */
