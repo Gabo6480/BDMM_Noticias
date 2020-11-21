@@ -48,6 +48,12 @@ $(document).ready(()=>{
                 console.error("No se encontro el articulo");
             });
 
+            $("#article-section").replaceWith("<select id='#article-section' class='browser-default custom-select col-2'>" +
+            "<option selected>Seccion</option>" +
+            "</select>");
+
+            //TODO: Traer las secciones y rellenar el select
+
             $("#wmd-button-bar").show();
             $("#edit-buttons").show();
             $("#article-img-upload").show();
