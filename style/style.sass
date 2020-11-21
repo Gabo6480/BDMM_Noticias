@@ -13,10 +13,20 @@ ul
     width: 100%
     height: 100%
     box-shadow: 1px 1px 6px grey
+    transition: 0.5s
     overflow: hidden
     background-size: cover
     background-position: center
     background-image: url('https://via.placeholder.com/1920x1080?text=Visit+Blogging.com+Now')
+
+    &:hover
+        cursor: pointer
+        box-shadow: 1px 1px 10px grey
+        .post-title-card
+            max-height: 100%
+            overflow-y: auto
+            &::after
+                background-image: linear-gradient(transparent)
 
     .post-title-card
         position: absolute
@@ -25,28 +35,31 @@ ul
         padding: 1% 2%
         background-color: $white-color
         width: 100%
-        height: 27%
+        height: auto
+        max-height: 25%
         box-shadow: 1px 0px 6px grey
-        transition: height 0.3s ease 0.5s   
-        overflow: hidden           
+        transition: 0.5s 
+        overflow: hidden  
+        text-overflow: ellipsis  
 
-        .post-info
-            margin: 0px 2%
-            font-size: 1.45em
-            text-align: justify
-    
-    &:hover .post-title-card
-        height: 85%
-        overflow: auto
+        &::after
+            position: absolute
+            bottom: 0
+            height: 100%
+            width: 100% 
+            content: ""
+            background-image: linear-gradient(transparent, transparent, transparent, $white-color)    
 
-.test1
-    width: 620px
+.big-card
+    width: 100%
+    max-width: 620px
     height: 410px
     margin: 5px
 
 
-.test2
-    width: 200px
+.small-card
+    width: 48.5%
+    max-width: 200px
     height: 200px
     margin: 5px
 
@@ -60,14 +73,8 @@ ul
 .navbar-wrapper
     background: $primary
 
-.my-auto
-    margin: 0px auto
+.carousel-title
 
-.titulo-right
-    margin-top: 20px
-
-.pad-r
-     height: 20px
 
 .tc
     text-align: center 
@@ -96,13 +103,20 @@ ul
         > *
             margin: auto
 
-.item-carousel
-    height: auto
-    overflow-x: scroll
-    white-space: nowrap
 
-    > *
-        display: inline-flex
+.carousel
+    box-shadow: 0px 2px 4px grey
+    padding: 10px
+    margin: 15px 0px
+    .carousel-title
+        
+    .item-carousel
+        height: auto
+        overflow-x: scroll
+        white-space: nowrap
+
+        > *
+            display: inline-flex
     
 .front
     z-index: 100
