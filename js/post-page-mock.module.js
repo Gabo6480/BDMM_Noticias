@@ -30,7 +30,7 @@ $(document).ready(function(){
 
     let sr = $("#result-table");
 
-    $("#user-filter").change(function(){
+    $("#post-filter").change(function(){
         let filter = $(this).children("option:selected").val()
         //0 = sin filtro
         //1 = Usuarios
@@ -40,10 +40,8 @@ $(document).ready(function(){
         //TODO: Logica de filtrado
     });
 
-    $("#user-search-button").click(function(){
-        let query = $(this).parent().find("#user-search-field").val();
-
-        alert(query)
+    $("#post-search-button").click(function(){
+        let query = $(this).parent().find("#post-search-field").val();
     });
 
     accionBotones(sr);
