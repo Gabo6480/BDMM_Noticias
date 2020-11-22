@@ -1,6 +1,7 @@
 import {request} from './services/xmlhttp-promise.module.js';
 import * as comms from './imports/article-comments.module.js'
 import * as parser from './imports/article-content-parser.module.js'
+import {createCarousel} from './imports/carousel-creator.module.js'
 $(document).ready(function(){
 
     loadDataToWindow();
@@ -26,7 +27,66 @@ $(document).ready(function(){
             $(this).removeClass("liked");
         else
             $(this).addClass("liked")
-    })
+    });
+
+    var carousel = {
+        "title":"Articulos relacionados",
+        "cards":[
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            },
+            {
+                "title": "Hola equisdedededede",
+                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+                "url": "http://127.0.0.1:5500/pages/article.html"
+            }
+        ]
+    };
+
+    $("#related-articles").append(createCarousel(carousel));
+   
+
+    //Escalamos el texto dentro de cada "noticia"
+    $(".post-title-card").children().each(function(){
+        $(this).fitText(1.25);
+    });
 });
 
 function loadDataToWindow(){
