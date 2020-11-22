@@ -7,7 +7,7 @@ let createPostCard = function(post){
     + "</td><td class='post-author'>" + post.email 
     +"</td><td class='post-section'>" + post.type 
     + "</td><td class='actions'>"
-    + "<button class='btn btn-outline-primary button-see'><i class='fas fa-sign-in-alt'></i></i></button>"
+    + "<button class='btn btn-outline-primary button-see'><i class='fas fa-sign-in-alt'></i></button>"
     + "<button class='btn btn-outline-success button-publish'><i class='fas fa-clipboard-check'></i></button>"
     + "</td></tr>";
 }
