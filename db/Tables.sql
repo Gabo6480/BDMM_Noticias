@@ -5,6 +5,7 @@ CREATE TABLE usuario(
 	Correo			VARCHAR(30)		NOT NULL UNIQUE,
     Foto			BLOB			NULL,
     Nombre			TINYTEXT		NOT NULL,
+	Telefono		VARCHAR(12)		NULL,
     Contraseña		TINYTEXT		NOT NULL,
     Rol				ENUM('usuario', 'reportero', 'editor') DEFAULT 'reportero',
     Activo			BOOL			DEFAULT true

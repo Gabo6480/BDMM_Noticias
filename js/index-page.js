@@ -75,7 +75,6 @@ $(document).ready(function(){
         ]
     };
 
-    //let carousel = document.createElement('div');
     for(var i = 0; i < 3; i++){
         $("#carousel-holder").append(createCarousel(carousel));
     }

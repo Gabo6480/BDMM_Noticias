@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAEA,AAAA,YAAY,CAAC;EACT,OAAO,EAAE,IAAI;CAAG",
+    "mappings": "AAEA,AAAA,YAAY,CAAC;EACT,OAAO,EAAE,IAAI;CAAG;;AAEpB,AAAA,YAAY,CAAC;EACT,gBAAgB,ECCN,KAAK;EDAf,MAAM,EAAE,GAAG,CAAC,KAAK,CCPR,OAAO;EDQhB,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,IAAI;EAEb,UAAU,EAAE,gBAAgB;CAAG",
     "sources": [
         "profile-page.sass",
         "_colors.sass"
