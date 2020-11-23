@@ -17,13 +17,18 @@ function loadData(sr){
 }
 
 function accionBotones(sr){
-    sr.on("click", ".button-down", function (){
-        //TODO: Reducir su prioridad
-    });
-
+    
     sr.on("click", ".button-up", function (){
         //TODO: Aumentar su prioridad
     });
+    
+    sr.on("click", ".button-down", function (){
+        //TODO: Reducir su prioridad
+    });;
+
+    sr.on("click", ".button-edit", function (){
+        //TODO: Editar
+    })
 
     sr.on("click", ".button-delete", function (){
         //TODO: Deshacerse de la seccion
