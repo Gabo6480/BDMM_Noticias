@@ -1,4 +1,4 @@
-import {createMyPostCard} from './imports/myposts-card.module.js'
+import {createSectionCard} from './imports/sections-card.module.js'
 import {request} from './services/xmlhttp-promise.module.js';
 
 function loadData(sr){
@@ -8,7 +8,7 @@ function loadData(sr){
         '/mock/usuarios.json',
         function(users){
             $.each(users, function(key, user){
-                body.append(createMyPostCard(user));
+                body.append(createSectionCard(user));
             });
         }
     ).fail(function(err){
@@ -17,16 +17,16 @@ function loadData(sr){
 }
 
 function accionBotones(sr){
-    sr.on("click", ".button-edit", function (){
-        //TODO: Editar la publicación
+    sr.on("click", ".button-down", function (){
+        //TODO: Reducir su prioridad
     });
 
-    sr.on("click", ".button-send", function (){
-        //TODO: Abrir enviar la publicación para revisión
+    sr.on("click", ".button-up", function (){
+        //TODO: Aumentar su prioridad
     });
 
     sr.on("click", ".button-delete", function (){
-        //TODO: Deshacerse de la publicación
+        //TODO: Deshacerse de la seccion
     });
 }
 
@@ -35,18 +35,9 @@ $(document).ready(function(){
     let sr = $("#result-table");
 
     $("#new-post").click(function(){
-        //Crear nueva publicación
+        //Crear nueva seccion
     });
 
-    $("#post-filter").change(function(){
-        let filter = $(this).children("option:selected").val()
-        //0 = sin filtro
-        //1 = Usuarios
-        //2 = Reporteros
-        //3 = Editores
-
-        //TODO: Logica de filtrado
-    });
 
     $("#post-search-button").click(function(){
         let query = $(this).parent().find("#post-search-field").val();

@@ -1,0 +1,14 @@
+let createSectionCard = function(post){
+
+    //TODO: cambiar las los nombres de las propiedades
+    return "<tr post-id='" + post.id + "'>"
+    + "<td class='section-title'>" + post.name 
+    + "</td><td class='section-color'>" + post.email 
+    + "</td><td class='actions'>"
+    + "<button class='btn btn-outline-success button-up'><i class='fas fa-arrow-up'></i></button>"
+    + "<button class='btn btn-outline-primary button-down'><i class='fas fa-arrow-down'></i></button>"
+    + "<button class='btn btn-outline-danger button-delete'><i class='far fa-trash-alt'></i></button>"
+    + "</td></tr>";
+}
+
+export{createSectionCard}
