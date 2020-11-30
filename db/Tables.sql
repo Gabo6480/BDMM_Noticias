@@ -32,6 +32,7 @@ CREATE TABLE noticia(
     Ubicacion		TINYTEXT		NOT NULL,
     Visitas			INT				DEFAULT 0,
     Palabras		TEXT			NULL,			-- Palabras Clave
+    Prioridad       INT             NOT NULL,
     
     Escritor		INT				NOT NULL,
     CONSTRAINT FK_ESCRITOR FOREIGN KEY (Escritor)

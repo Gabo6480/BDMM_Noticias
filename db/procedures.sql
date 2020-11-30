@@ -24,6 +24,27 @@ BEGIN
     WHERE U.ID = id;
 END //
 
+#Agregar a controlador
+CREATE PROCEDURE sp_get_usuarios_similares_activos
+(IN pNombre TINYTEXT)
+BEGIN 
+    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
+    FROM Usuario U
+    WHERE Activo = 1 AND Nombre LIKE CONCAT('%',pNombre,'%');
+END //
+
+#Agregar a controlador
+CREATE PROCEDURE sp_get_usuarios_similares_activos_rol
+(   
+    IN pNombre TINYTEXT,
+    IN pRol ENUM('usuario', 'reportero', 'editor')
+)
+BEGIN 
+    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
+    FROM Usuario U
+    WHERE Activo = 1 AND Nombre LIKE CONCAT('%',pNombre,'%') AND Rol = pRol;
+END //
+
 CREATE  PROCEDURE sp_get_usuarios_rol
 (IN rol ENUM('usuario', 'reportero', 'editor'))
 BEGIN
@@ -269,17 +290,19 @@ END //
 CREATE PROCEDURE sp_noticia_by_seccion
 (IN pID INT)
 BEGIN 
-    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion
+    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Prioridad
     FROM noticia
-    WHERE Seccion = pID;
+    WHERE Seccion = pID
+    ORDER BY Prioridad DESC;
 END //
 
 CREATE PROCEDURE sp_noticia_by_reportero
 (IN pID INT)
 BEGIN 
-    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion
+    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Prioridad
     FROM noticia
-    WHERE Escritor = pID;
+    WHERE Escritor = pID
+    ORDER BY Prioridad DESC;
 END //
 
 CREATE PROCEDURE sp_noticia_by_id
@@ -292,8 +315,9 @@ END //
 
 CREATE PROCEDURE sp_noticia_get()
 BEGIN 
-    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion
-    FROM noticia;
+    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Prioridad
+    FROM noticia
+    ORDER BY Prioridad DESC;
 END //
 
 CREATE PROCEDURE sp_noticia_get_estado
@@ -321,6 +345,33 @@ BEGIN
     FROM noticia
     WHERE Estado = pEstado and Seccion = pSeccion;
 END //
+
+#agregar a controller
+CREATE PROCEDURE sp_get_similar
+(IN pPalabras TEXT)
+BEGIN
+    DECLARE m_regex TEXT DEFAULT ('');
+    
+	SET m_regex = REGEX_FROM_CSV(pPalabras);
+		
+    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion
+    FROM noticia
+    WHERE Estado = 'publicada' AND  LOWER(Palabras) RLIKE LOWER(m_regex);
+END//
+
+#agregar a controller
+delimiter //
+CREATE PROCEDURE sp_get_similar_distintos_a
+(IN pID INT,IN pPalabras TEXT)
+BEGIN
+    DECLARE m_regex TEXT DEFAULT ('');
+    
+	SET m_regex = REGEX_FROM_CSV(pPalabras);
+		
+    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion
+    FROM noticia
+    WHERE Estado = 'publicada' AND  LOWER(Palabras) RLIKE LOWER(m_regex) AND pID <> ID;
+END//
 
 #####################
 #     multimedia    #

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script>
+        window.onload = ()=>{
+            function submit(e){
+                e.preventDefault();
+                let fd =  new FormData(e.target);
+                let str =fd.get('tags');
+                let arr = str.split(',');
+
+                let regexStr = "(";
+
+                let list = document.querySelector('.list');
+                for(var a in arr){
+                    regexStr+= arr[a]+"|";
+                    list.append(arr[a]+'\n');
+                }
+
+                regexStr = regexStr.substring(0, regexStr.length - 1);
+                regexStr+=')';
+
+                list.append(regexStr)
+
+
+            }
+
+            document.getElementById('form-test').onsubmit =  submit;
+        }
+    </script>
+</head>
+<body>
+
+    <p>Lista a probar:
+        
+    </p>
+
+    <form  method="get" id="form-test">
+        <input type="text" name="tags" id="tags">
+        <input type="submit" value="enviar">
+    </form>
+
+    <p class="list">
+
+    </p>
+</body>
+</html>

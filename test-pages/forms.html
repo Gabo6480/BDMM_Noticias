@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        window.onload = ()=>{
+            document.getElementById('form-submit').onsubmit = e=>{
+                
+
+                let fd = new FormData(e.target);
+
+                for(var value of fd.values()){
+                    console.log(value);
+                }
+
+                e.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+    <form  method="post" id="form-submit">
+        Nombre
+        <input type="text" name="nombre" id="in">
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

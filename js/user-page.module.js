@@ -1,8 +1,21 @@
-import {createUserCard} from './imports/user-card.module.js'
+import {createUserCard} from './imports/user-card.module.js';
+import {getAllActive} from './services/usuario.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
 
+    getAllActive()
+    .then(res=>res.json())
+    .then(usuarios=>{
+        $.each(usuarios, (key, user)=>{
+            body.append(createUserCard(user));
+        });
+    })
+    .catch(err=>{
+        console.error("Failed GetAllActive : " + err);
+    });
+
+    /*
     $.getJSON(
         '/mock/usuarios.json',
         function(users){
@@ -12,7 +25,7 @@ function loadData(sr){
         }
     ).fail(function(err){
         console.error("Fallo la request de usuarios " + err);
-    });
+    });*/
 }
 
 function accionBotones(sr){
@@ -22,7 +35,7 @@ function accionBotones(sr){
 
         if(confirm("¿Está seguro que desea eliminar al " + papa.find("td.user-type").text() + " " + papa.find("td.user-name").text() +"?")){
             //alert("ded.");
-            $.get(
+            /*$.get(
                 '...',
                 'data',
                 function(data){
@@ -30,7 +43,7 @@ function accionBotones(sr){
                 }
             ).error(function(err){
 
-            });
+            });*/
         }
     });
 

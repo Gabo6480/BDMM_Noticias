@@ -1,8 +1,20 @@
-import {createMyPostCard} from './imports/myposts-card.module.js'
-
+import {createMyPostCard} from './imports/myposts-card.module.js';
 function loadData(sr){
     let body = sr.find("tbody");
 
+
+    getAllActive()
+    .then(res=>res.json())
+    .then(usuarios=>{
+        $.each(usuarios, (key, user)=>{
+            body.append(createMyPostCard(user));
+        });
+    })
+    .catch(err=>{
+        console.error("Failed GetAllActive : " + err);
+    });
+
+    /*  //MOCK
     $.getJSON(
         '/mock/usuarios.json',
         function(users){
@@ -12,7 +24,7 @@ function loadData(sr){
         }
     ).fail(function(err){
         console.error("Fallo la request de usuarios " + err);
-    });
+    });*/
 }
 
 function accionBotones(sr){

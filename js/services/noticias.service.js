@@ -77,7 +77,6 @@ const login = body=>{
 }
 
 export{
-    noticiasURL as post,
     getOne,
     getBySeccion,
     getByReportero,

@@ -1,7 +1,7 @@
 import * as CommRoutes from './../routes/comentarios.routes.js';
 
 const getByArticle = id=>{
-    return fetch(getByArticle(id));
+    return fetch(CommRoutes.getByArticle(id));
 }
 
 const add = body=>{
@@ -16,7 +16,7 @@ const add = body=>{
     return fetch(CommRoutes.post, params);
 }
 
-const remove = body=>{
+const edit = body=>{
     const params = {
         method:"POST",
         body:{
@@ -41,7 +41,8 @@ const remove = body=>{
 }
 
 export{
-    count,
+    getByArticle,
     add,
+    edit,
     remove
 }
