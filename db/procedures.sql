@@ -5,13 +5,13 @@ USE BDMM_DB;
 DELIMITER //
 CREATE PROCEDURE sp_get_usuarios()
 BEGIN 
-    SELECT ID, Correo, Foto, Nombre, Telefono Contraseña, Rol, Activo
+    SELECT ID, Correo, Foto, Nombre, Telefono Contrasena, Rol, Activo
     FROM  Usuario;
 END //
 
 CREATE PROCEDURE sp_get_usuarios_activos()
 BEGIN
-    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
+    SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     FROM  Usuario
     WHERE Activo = 1;
 END //
@@ -19,7 +19,7 @@ END //
 CREATE PROCEDURE sp_get_one_usuarios
 (IN id INT)
 BEGIN
-    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
+    SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     FROM Usuario U
     WHERE U.ID = id;
 END //
@@ -27,7 +27,7 @@ END //
 CREATE  PROCEDURE sp_get_usuarios_rol
 (IN rol ENUM('usuario', 'reportero', 'editor'))
 BEGIN
-    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
+    SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     FROM Usuario U
     WHERE U.Rol = rol;
 END //
@@ -35,7 +35,7 @@ END //
 CREATE  PROCEDURE sp_get_usuarios_rol_activos
 (IN rol ENUM('usuario', 'reportero', 'editor'))
 BEGIN
-    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
+    SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     FROM Usuario U
     WHERE U.Rol = rol AND Activo = 1;
 END //
@@ -59,7 +59,7 @@ CREATE PROCEDURE sp_usuarios_crear
     IN pActivo BOOL
 )
 BEGIN
-    INSERT INTO Usuario(Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo)
+    INSERT INTO Usuario(Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo)
     VALUES(pCorreo, pFoto, pNombre, pTelefono, pContra, pRol, pActivo);
 END //
 
@@ -81,7 +81,7 @@ BEGIN
         Foto       =  pFoto       ,   
         Nombre     =  pNombre     ,   
         Telefono   =  pTelefono   ,
-        Contraseña =  pContra	  ,   
+        Contrasena =  pContra	  ,   
         Rol        =  pRol        ,   
         Activo     =  pActivo    
     WHERE pID = ID;
@@ -101,7 +101,7 @@ CREATE PROCEDURE sp_login
     IN pContra TINYTEXT
  )
 BEGIN
-    SELECT ID, Nombre, Correo, Contraseña FROM Usuario WHERE Correo = pCorreo AND Contraseña = pContra;
+    SELECT ID, Nombre, Correo, Contrasena FROM Usuario WHERE Correo = pCorreo AND Contrasena = pContra;
 END //
 
 CREATE PROCEDURE sp_usuarios_eliminar

@@ -11,7 +11,7 @@ CREATE TABLE usuario(
     Foto			MEDIUMBLOB			NULL,
     Nombre			TINYTEXT		NOT NULL,
 	Telefono		VARCHAR(12)		NULL,
-    Contraseña		TINYTEXT		NOT NULL,
+    Contrasena		TINYTEXT		NOT NULL,
     Rol				ENUM('usuario', 'reportero', 'editor') DEFAULT 'reportero',
     Activo			BOOL			DEFAULT true
 );
@@ -20,7 +20,7 @@ CREATE TABLE seccion(
     Nombre			TINYTEXT		NOT NULL,
     Color			VARCHAR(6)		NULL,
     Activa			BOOL			DEFAULT true,
-    Orden			INT				NULL
+    Orden			INT				DEFAULT 0
 );
 CREATE TABLE noticia(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
