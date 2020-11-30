@@ -160,17 +160,14 @@ ul {
   z-index: 100;
 }
 
-.footer {
+footer {
   background: #222222;
   color: #CCCCCC;
-  height: 300px;
   overflow: hidden;
 }
 
-.footer hr {
-  width: 90%;
-  height: 0.1px;
-  background: grey;
+footer .band {
+  background-color: #0F52BA;
 }
 
 .user-picture {
