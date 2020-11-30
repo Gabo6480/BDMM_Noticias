@@ -40,11 +40,15 @@ class NoticiaController{
         }
 
         if($result = $sentence->get_result()){
+            $arr = array();
             while($row = $result->fetch_assoc()){
-                header("Content-type:application/json");
-                echo json_encode($row);
-                $result->free();
+                array_push($arr,$row);
+
             }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
         }
         $conn->close();
     }
@@ -64,11 +68,15 @@ class NoticiaController{
         }
 
         if($result = $sentence->get_result()){
+            $arr = array();
             while($row = $result->fetch_assoc()){
-                header("Content-type:application/json");
-                echo json_encode($row);
-                $result->free();
+                array_push($arr,$row);
+
             }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
         }
         $conn->close();
     }
@@ -88,7 +96,7 @@ class NoticiaController{
         }
 
         if($result = $sentence->get_result()){
-            while($row = $result->fetch_assoc()){
+            if($row = $result->fetch_assoc()){
                 header("Content-type:application/json");
                 echo json_encode($row);
                 $result->free();
@@ -112,11 +120,15 @@ class NoticiaController{
         }
 
         if($result = $sentence->get_result()){
+            $arr = array();
             while($row = $result->fetch_assoc()){
-                header("Content-type:application/json");
-                echo json_encode($row);
-                $result->free();
+                array_push($arr,$row);
+
             }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
         }
         $conn->close();
     }
@@ -136,11 +148,15 @@ class NoticiaController{
         }
 
         if($result = $sentence->get_result()){
+            $arr = array();
             while($row = $result->fetch_assoc()){
-                header("Content-type:application/json");
-                echo json_encode($row);
-                $result->free();
+                array_push($arr,$row);
+
             }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
         }
         $conn->close();
     }
@@ -160,11 +176,15 @@ class NoticiaController{
         }
 
         if($result = $sentence->get_result()){
+            $arr = array();
             while($row = $result->fetch_assoc()){
-                header("Content-type:application/json");
-                echo json_encode($row);
-                $result->free();
+                array_push($arr,$row);
+
             }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
         }
         $conn->close();
     }
@@ -184,11 +204,15 @@ class NoticiaController{
         }
 
         if($result = $sentence->get_result()){
+            $arr = array();
             while($row = $result->fetch_assoc()){
-                header("Content-type:application/json");
-                echo json_encode($row);
-                $result->free();
+                array_push($arr,$row);
+
             }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
         }
         $conn->close();
     }

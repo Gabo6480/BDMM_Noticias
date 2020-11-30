@@ -97,10 +97,12 @@ VALUES(
     2,
     4
 );
-
+call sp_noticia_get();
 SELECT*FROM usuario;
 SELECT*FROM Seccion;
 SELECT*FROM Noticia;
 SELECT*FROM multimedia;
 
 call sp_get_similar('Chiapas,cHING');
+
+call sp_noticia_get_estado('publicada');

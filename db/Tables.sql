@@ -33,6 +33,9 @@ CREATE TABLE noticia(
     Visitas			INT				DEFAULT 0,
     Palabras		TEXT			NULL,			-- Palabras Clave
     Prioridad       INT             NOT NULL,
+    Foto            INT             NOT NULL,
+    CONSTRAINT FK_FOTO_NOTICIA FOREIGN KEY(Foto)
+    REFERENCES multimedia(ID),
     
     Escritor		INT				NOT NULL,
     CONSTRAINT FK_ESCRITOR FOREIGN KEY (Escritor)
@@ -41,6 +44,7 @@ CREATE TABLE noticia(
     Seccion			INT				NOT NULL,
     CONSTRAINT FK_SECCION FOREIGN KEY (Seccion)
     REFERENCES seccion(ID)
+
     
 );
 CREATE TABLE multimedia(
