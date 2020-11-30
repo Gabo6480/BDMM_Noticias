@@ -1,8 +1,20 @@
-import {createPostCard} from './imports/post-card.module.js'
+import {createPostCard} from './imports/post-card.module.js';
+import { getAll } from './services/noticias.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
 
+
+    getAll('en redaccion')
+    .then(res=>res.json())
+    .then(noticias=>{
+        $.each(noticias,(key,noticia)=>{
+            body.append(createPostCard(noticia));
+        });
+    })
+    .catch(err=>console.log(err));
+
+    /*
     $.getJSON(
         '/mock/usuarios.json',
         function(users){
@@ -12,7 +24,7 @@ function loadData(sr){
         }
     ).fail(function(err){
         console.error("Fallo la request de usuarios " + err);
-    });
+    });*/
 }
 
 function accionBotones(sr){

@@ -32,6 +32,7 @@ CREATE TABLE noticia(
     Ubicacion		TINYTEXT		NOT NULL,
     Visitas			INT				DEFAULT 0,
     Palabras		TEXT			NULL,			-- Palabras Clave
+    Prioridad       INT             NOT NULL,
     
     Escritor		INT				NOT NULL,
     CONSTRAINT FK_ESCRITOR FOREIGN KEY (Escritor)
@@ -40,6 +41,7 @@ CREATE TABLE noticia(
     Seccion			INT				NOT NULL,
     CONSTRAINT FK_SECCION FOREIGN KEY (Seccion)
     REFERENCES seccion(ID)
+
     
 );
 CREATE TABLE multimedia(
@@ -50,6 +52,11 @@ CREATE TABLE multimedia(
     CONSTRAINT fk_multimedia_noticia
     FOREIGN KEY (Noticia) REFERENCES noticia(ID)
 );
+
+ALTER TABLE Noticia 
+ADD COLUMN Foto INT NULL,
+ADD CONSTRAINT FK_FOTO_NOTICIA FOREIGN KEY(Foto) REFERENCES multimedia(ID);
+
 CREATE TABLE comentario(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
 	Contenido		TEXT			NOT NULL,

@@ -1,6 +1,6 @@
 import {url} from './server.routes.js'
 
-const multimediaURL =  `${url}/multimedia.routes.php`;
+const multimediaURL  =  `${url}/multimedia.routes.php`;
 
 const getById        = id => `${multimediaURL}?action=id&id=${id}`;
         

@@ -1,23 +1,30 @@
-//import { request } from './services/xmlhttp-promise.module.js';
+import {login} from './services/usuario.service.js';
 import { validate_email, validate_empty } from './imports/validation.module.js';
 
 window.onload = function(){
-    async function login(email, password){
-        if(validate_empty(password) && validate_email(email)){
-            let login = await request({url:"login_url", method:"POST"});
-            let data = JSON.parse(login);
 
-            if(data)
-                alert(data);
+    document.querySelector('#form-id').addEventListener("sumbit",e=>{
+
+        e.preventDefault();
+
+        let fd = new FormData(e.target);
+
+        let email    = fd.get('email');
+        let password = fd.get('password');
+
+        if(validate_email(email) && validate_empty(password)){
+            login(fd)
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.status === 200){
+                    alert("Todo piola mi pana, bienvenido");
+                    window.location.href = '/';
+                }
+            })
+            .catch(err=>console.error(err));
         }
         else{
-            console.error("Introduzca los datos correctamente");
+            //Enviar mensaje de corregir campos
         }
-
-    }
-
-    document.querySelector('#submit').addEventListener("click",e=>{
-        e.preventDefault();
-        login(document.querySelector("#username"),document.querySelector("#sumit"));
     });
 }

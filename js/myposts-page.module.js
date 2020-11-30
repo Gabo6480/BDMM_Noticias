@@ -1,8 +1,22 @@
-import {createMyPostCard} from './imports/myposts-card.module.js'
+import {createMyPostCard} from './imports/myposts-card.module.js';
 
+import {getByReportero} from './services/noticias.service.js';
 function loadData(sr){
     let body = sr.find("tbody");
 
+
+    getByReportero(2)
+    .then(res=>res.json())
+    .then(usuarios=>{
+        $.each(usuarios, (key, user)=>{
+            body.append(createMyPostCard(user));
+        });
+    })
+    .catch(err=>{
+        console.error("Failed getByReportero : " + err);
+    });
+
+    /*  //MOCK
     $.getJSON(
         '/mock/usuarios.json',
         function(users){
@@ -12,7 +26,7 @@ function loadData(sr){
         }
     ).fail(function(err){
         console.error("Fallo la request de usuarios " + err);
-    });
+    });*/
 }
 
 function accionBotones(sr){

@@ -1,6 +1,9 @@
 import * as comms from './imports/article-comments.module.js'
 import * as parser from './imports/article-content-parser.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
+import {getOne} from './services/noticias.service.js';
+import {getByArticle} from './services/comentarios.service.js';
+
 $(document).ready(function(){
 
     loadDataToWindow();
@@ -34,47 +37,47 @@ $(document).ready(function(){
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             },
             {
                 "title": "Hola equisdedededede",
                 "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "http://127.0.0.1:5500/pages/article.html"
+                "url": "./pages/article.html"
             }
         ]
     };
@@ -88,35 +91,36 @@ $(document).ready(function(){
     });
 });
 
-function loadDataToWindow(){
-    //traer articulo
-    fetch('/mock/articulos.json').then(res => res.json())
-    .then(data=>{
-        let object = data;
-        $("#article-title").text(object[0].title);
-        $("#article-description").text(object[0].desc);
-        $("#article-img").attr("src", object[0].img);
-        $("#article-content").html(parser.parseArticle(object[0].content));
+function loadDataToWindow(id){
 
-        $("#article-info").append("<p id='article-section'>" + object[0].section + "</p>");
-        $("#article-info").append("<p>" + object[0].date + "</p>");
-        $("#article-info").append("<p>" + object[0].hour + "</p>");
-        $("#article-info").append("<p id='article-author'>" + object[0].author + "</p>");
+    //traer articulo
+    getOne(id)
+    .then(res => res.json())
+    .then(data=>{
+        $("#article-title").text(data.title);
+        $("#article-description").text(data.desc);
+        $("#article-img").attr("src", data.img);
+        $("#article-content").html(parser.parseArticle(data.content));
+
+        $("#article-info").append("<p id='article-section'>" + data.section + "</p>");
+        $("#article-info").append("<p>" + data.date + "</p>");
+        $("#article-info").append("<p>" + data.hour + "</p>");
+        $("#article-info").append("<p id='article-author'>" + data.author + "</p>");
 
         $('[data-toggle="tooltip"]').tooltip()
     })
     .catch(err=>{
-        console.error("No se encontro el articulo");
+        console.log("No se encontro el articulo");
+        console.log(err);
     });
 
-
     //traer comentarios
-    fetch('/mock/comentarios.json').then(res => res.json())
-    .then(commentsJson =>{
-        let arr = commentsJson;
+    getByArticle(id)
+    .then(res => res.json())
+    .then(data =>{
         let comments = document.querySelector('#comments');
-        arr.forEach(data=>{
-            comments.append(comms.createMainComment(data));
+        data.forEach(element=>{
+            comments.append(comms.createMainComment(element));
         });
     })
     .catch(err=>{
