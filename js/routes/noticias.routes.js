@@ -6,7 +6,7 @@ const getOne  = id => `${noticiasURL}?action=getOne&id=${id}`;
 
 const getBySeccion = id => `${noticiasURL}?action=getBySeccion&id=${id}`;
 
-const getByReportero = id => `${noticiasURL}?action=getByReportero`;
+const getByReportero = id => `${noticiasURL}?action=getByReportero&id=${id}`;
 
 const getAll = ()=> `${noticiasURL}?action=getAll`;
 

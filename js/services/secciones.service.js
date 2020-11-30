@@ -5,7 +5,7 @@ const get = ()=>{
 }
 
 const getActive = ()=>{
-    return fetch(SeccionesRoutes.getActive);
+    return fetch(SeccionesRoutes.getActive());
 }
 
 const add = body=>{

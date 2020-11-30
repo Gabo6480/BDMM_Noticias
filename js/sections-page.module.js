@@ -1,9 +1,19 @@
-import {createSectionCard} from './imports/sections-card.module.js'
+import {createSectionCard} from './imports/sections-card.module.js';
+import {getActive} from './services/secciones.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
 
-    $.getJSON(
+    getActive()
+    .then(res=>res.json())
+    .then(data=>{
+        $.each(data,(index, seccion)=>{
+            body.append(createSectionCard(seccion));
+        })
+    })
+    .catch(err=>console.error(err))
+
+    /*$.getJSON(
         '/mock/usuarios.json',
         function(users){
             $.each(users, function(key, user){
@@ -12,7 +22,7 @@ function loadData(sr){
         }
     ).fail(function(err){
         console.error("Fallo la request de usuarios " + err);
-    });
+    });*/
 }
 
 function accionBotones(sr){

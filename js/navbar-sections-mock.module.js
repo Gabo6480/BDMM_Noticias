@@ -1,15 +1,15 @@
 import { createSection } from './imports/navbar-sections.js';
+import { getActive} from './services/secciones.service.js';
 
 $(document).ready(()=>{
 
-    fetch("./../mock/secciones.json").then(res => res.json())
-    .then(
-        data =>{
-            data.forEach(element=>{
-                let $section = $(createSection(element));
-                $('#sections').append($section);
-            });
-        }
-    );
+    getActive()
+    .then(res => res.json())
+    .then(data =>{
+        data.forEach(element=>{
+            let $section = $(createSection(element));
+            $('#sections').append($section);
+        });
+    });
 
 });

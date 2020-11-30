@@ -1,9 +1,11 @@
 import {createMyPostCard} from './imports/myposts-card.module.js';
+
+import {getByReportero} from './services/noticias.service.js';
 function loadData(sr){
     let body = sr.find("tbody");
 
 
-    getAllActive()
+    getByReportero(2)
     .then(res=>res.json())
     .then(usuarios=>{
         $.each(usuarios, (key, user)=>{
@@ -11,7 +13,7 @@ function loadData(sr){
         });
     })
     .catch(err=>{
-        console.error("Failed GetAllActive : " + err);
+        console.error("Failed getByReportero : " + err);
     });
 
     /*  //MOCK

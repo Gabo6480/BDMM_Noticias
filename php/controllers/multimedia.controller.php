@@ -72,7 +72,7 @@ class MultimediaController{
 
         if (!($sentence = $conn->prepare($query)))
         {
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia Agregar: Fallo la preparacion del query ".mysqli_error($conn));
         }
 
         if(!$sentence->execute()){

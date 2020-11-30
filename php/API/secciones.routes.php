@@ -4,7 +4,7 @@
     if($sc = new SeccionesController()){
         if($_SERVER["REQUEST_METHOD"] == "GET"){
 
-            $action = $_POST['action'];
+            $action = $_GET['action'];
             if($action === 'get'){
                 $sc->get();
             }

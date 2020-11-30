@@ -97,12 +97,24 @@ VALUES(
     2,
     4
 );
+
+#SELECT N.titulo, U.nombre FROM usuario U INNER JOIN noticia N ON U.ID = N.escritor
+
+/*
+UPDATE noticia N
+	inner join multimedia M
+    ON N.ID = M.Noticia
+SET N.Foto = M.ID;
+*/
+
 call sp_noticia_get();
 SELECT*FROM usuario;
 SELECT*FROM Seccion;
 SELECT*FROM Noticia;
 SELECT*FROM multimedia;
 
+call sp_noticia_get();
+
 call sp_get_similar('Chiapas,cHING');
 
-call sp_noticia_get_estado('publicada');
+call sp_noticia_get_estado('en redaccion');
