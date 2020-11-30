@@ -1,4 +1,4 @@
-import { request } from './services/xmlhttp-promise.module.js';
+//import { request } from './services/xmlhttp-promise.module.js';
 import { validate_email, validate_empty } from './imports/validation.module.js';
 
 window.onload = function(){

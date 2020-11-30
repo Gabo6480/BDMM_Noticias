@@ -1,4 +1,3 @@
-import {request} from './services/xmlhttp-promise.module.js';
 import * as comms from './imports/article-comments.module.js'
 import * as parser from './imports/article-content-parser.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
@@ -91,9 +90,9 @@ $(document).ready(function(){
 
 function loadDataToWindow(){
     //traer articulo
-    request({url:'/mock/articulos.json'})
+    fetch('/mock/articulos.json').then(res => res.json())
     .then(data=>{
-        let object = JSON.parse(data);
+        let object = data;
         $("#article-title").text(object[0].title);
         $("#article-description").text(object[0].desc);
         $("#article-img").attr("src", object[0].img);
@@ -112,9 +111,9 @@ function loadDataToWindow(){
 
 
     //traer comentarios
-    request({url:'/mock/comentarios.json'})
+    fetch('/mock/comentarios.json').then(res => res.json())
     .then(commentsJson =>{
-        let arr = JSON.parse(commentsJson);
+        let arr = commentsJson;
         let comments = document.querySelector('#comments');
         arr.forEach(data=>{
             comments.append(comms.createMainComment(data));

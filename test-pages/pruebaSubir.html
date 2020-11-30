@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Jala perfecto tanto con videos y fotos ;) la configuracion mysql tiene que tener un tamano maximo de 100M y su espera maxima que sea mayor, un 3600 (milisegundos) bastara-->
+    <form action="php/Multimedia/multimedia.routes.php" method="post" enctype="multipart/form-data">
+        <input type="number" name="id" id="noticia_id">
+        <input type="file" name="archivo" id="archivo" accept="image/*, video/*">
+        <input type="hidden" name="action" value="add">
+        <input type="submit">
+    </form>
+</body>
+</html>

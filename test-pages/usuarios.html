@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas User</title>
+    <style>
+        .container{
+            display: flex;
+            flex-flow: row wrap;
+        }
+        .container>*{
+            flex: 1 0 auto;
+            justify-self: left;
+        }
+        .container>*>img{
+            width: 200px;
+        }
+        body{
+            padding:30px
+        }
+        .fixed-side{
+            position: fixed;
+            right: 0;
+            z-index: 100;
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .fixed-side>img{
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 1em
+        }
+    </style>
+
+
+<script type="module">
+
+    import * as UserServices from './../js/services/usuario.service.js';
+
+    const cookieUsername = "BDMM_NOTICIAS_USUARIO";
+    const cookieUserID   = "BDMM_NOTICIAS_USUARIO_ID";
+
+    function cargarGetAll(){
+        let getAllContainer = document.getElementById('getall');
+        getAllContainer.innerHTML='';
+        UserServices.getAll()
+        .then(response=>response.json())
+        .then(data=>{
+            data.forEach(usuario=>{
+                let div = document.createElement('div');
+                let h3  = document.createElement('h3');
+                let img = document.createElement('img');
+
+                h3.innerText = usuario.Nombre;
+                img.src = usuario.Foto;
+
+                div.append(h3,img);
+
+                getAllContainer.append(div);
+            })
+        })
+        .catch(err=>console.log(err));
+    }
+
+    function cargarGetOne(){
+        let getAllContainer = document.getElementById('getone');
+        getAllContainer.innerHTML='';
+        UserServices.getOne(1)
+        .then(response=>response.json())
+        .then(data=>{
+            let div = document.createElement('div');
+            let h3  = document.createElement('h3');
+            let img = document.createElement('img');
+
+            h3.innerText = data.Nombre;
+            img.src = data.Foto;
+
+            div.append(h3,img);
+
+            getAllContainer.append(div);
+        })
+        .catch(err=>console.log(err));
+    }
+
+    function cargarGetRol(){
+        let getAllContainer = document.getElementById('getrol');
+        getAllContainer.innerHTML='';
+        UserServices.getRol('reportero')
+        .then(response=>response.json())
+        .then(data=>{
+            data.forEach(usuario=>{
+                let div = document.createElement('div');
+                let h3  = document.createElement('h3');
+                let img = document.createElement('img');
+
+                h3.innerText = usuario.Nombre;
+                img.src = usuario.Foto;
+
+                div.append(h3,img);
+
+                getAllContainer.append(div);
+            })
+        })
+        .catch(err=>console.log(err));
+    }
+
+    function cargarGetActivos(){
+        let getAllContainer = document.getElementById('getallactivos');
+        getAllContainer.innerHTML='';
+        UserServices.getAllActive()
+        .then(response=>response.json())
+        .then(data=>{
+            data.forEach(usuario=>{
+                let div = document.createElement('div');
+                let h3  = document.createElement('h3');
+                let img = document.createElement('img');
+
+                h3.innerText = usuario.Nombre;
+                img.src = usuario.Foto;
+
+                div.append(h3,img);
+
+                getAllContainer.append(div);
+            })
+        })
+        .catch(err=>console.log(err));
+    }
+
+    function cargarGetActivosRol(){
+        let getAllContainer = document.getElementById('getallactivosrol');
+        getAllContainer.innerHTML='';
+        UserServices.getRolActive('reportero')
+        .then(response=>response.json())
+        .then(data=>{
+            data.forEach(usuario=>{
+                let div = document.createElement('div');
+                let h3  = document.createElement('h3');
+                let img = document.createElement('img');
+
+                h3.innerText = usuario.Nombre;
+                img.src = usuario.Foto;
+
+                div.append(h3,img);
+
+                getAllContainer.append(div);
+            })
+        })
+        .catch(err=>console.log(err));
+    }
+    
+    function toBase64(file){
+        return new Promise((resolve, reject)=>{
+            let reader = new FileReader();
+
+            reader.readAsDataURL(file);
+
+            reader.onloadend = e=>{
+                resolve(reader.result);
+            }
+
+            reader.onerror = ()=>{
+                reject("No Cargo");
+            }
+        });
+    }
+
+    function cargarPostCrear(){
+        
+        let prev = document.getElementById('add-preview');
+        let upload = document.getElementById('add-upload');
+
+        document.forms[0].onsubmit = 
+        async e=>{
+            
+            e.preventDefault();
+            let fd = new FormData(document.forms[0]);
+
+            toBase64(fd.get('foto')).then(r =>{
+
+                fd.set('foto', r)
+
+                prev.src = r;
+
+                UserServices.add(fd)
+                .then(response=>{
+                    if(response.ok)
+                        return response.text();
+                })
+                .then(data=>{
+                    cargarGets();
+                    cargarPosts();
+                })
+                .catch(err=>console.log(err));
+            })
+            .catch(err=>{console.error(err)});
+        }
+    }
+
+    function cargarPostEditar(){
+
+        let prev = document.getElementById('edit-preview');
+        let upload = document.getElementById('edit-upload');
+        let id = 0;
+
+        document.forms[1].onsubmit = 
+        async e=>{
+            e.preventDefault();
+            let fd = new FormData(document.forms[1]);
+
+            toBase64(fd.get('foto')).then(r =>{
+
+                fd.set('foto', r)
+
+                prev.src = r;
+
+                UserServices.edit(fd)
+                .then(response=>{
+                    if(response.ok)
+                        return response.text();
+                })
+                .then(data=>{
+                    cargarGets();
+                    cargarPosts();
+                })
+                .catch(err=>console.log(err));
+            })
+            .catch(err=>{console.error(err)});
+        }
+        
+        let correo, fileinp, nombre, telefono, contra, tipoU,tipoR,tipoE,password,sumbitbtn;
+
+        correo    = document.getElementById('email-edit');
+        fileinp    = document.getElementById('file-edit');
+        nombre    = document.getElementById('nombre-edit');
+        telefono  = document.getElementById('tel-edit');
+        password  = document.getElementById('password-edit');
+        tipoU     = document.getElementById('radio-u-edit');
+        tipoR     = document.getElementById('radio-r-edit');
+        tipoE     = document.getElementById('radio-e-edit');
+        sumbitbtn = document.getElementById('submit-edit');
+
+        //Llenar El Select Con Los Usuarios Activos
+        let selectInput = document.getElementById('select-edit-id');
+        selectInput.innerHTML='';
+        UserServices.getAllActive()
+        .then(response=>response.json())
+        .then(data=>{
+            data.forEach(usuario=>{
+                let option = document.createElement('option');
+                option.innerText = `${usuario.ID} ${usuario.Nombre}`;
+
+                option.setAttribute('value', usuario.ID);
+                selectInput.append(option);
+            })
+
+            if(data.length > 0 )
+            {
+                id = 1;
+                setById();
+            }
+        })
+        .catch(err=>console.log(err));
+        
+        const setById = ()=>{
+            UserServices.getOne(id)
+            .then(response=>{
+                if(response.ok)
+                    return response.json();
+            })
+            .then(data=>{
+                correo.value = data.Correo;
+                nombre.value = data.Nombre;
+                telefono.value = data.Telefono;
+
+                if(data.Rol === "usuario"){
+                    tipoU.checked = true;
+                    tipoR.checked = false;
+                    tipoE.checked = false;
+                }else if(data.Rol === "reportero"){
+                    tipoU.checked = false;
+                    tipoR.checked = true;
+                    tipoE.checked = false;
+                }else if(data.Rol === "editor"){
+                    tipoU.checked = false;
+                    tipoR.checked = false;
+                    tipoE.checked = true;
+                }
+
+                correo   .disabled = false;
+                fileinp   .disabled = false;
+                nombre   .disabled = false;
+                telefono .disabled = false;
+                password .disabled = false;
+                tipoU    .disabled = false;
+                tipoR    .disabled = false;
+                tipoE    .disabled = false;
+                sumbitbtn.disabled = false;
+            })
+            .catch(err=>console.error(err))
+        }
+
+        selectInput.onchange = e =>{
+            id = selectInput.value;
+
+            setById();
+        };
+    }
+
+    function cargarPostEliminar(){
+
+        let prev = document.getElementById('edit-preview');
+        let upload = document.getElementById('edit-upload');
+        let id = 0;
+
+        document.forms[2].onsubmit = 
+        async e=>{
+            e.preventDefault();
+
+            let fd = new FormData(document.forms[2]);
+            let selectInput = document.getElementById('select-delete-id');
+            fd.set('id', id);
+            
+            UserServices.remove(fd)
+            .then(response=>{
+                if(response.ok)
+                    return response.text();
+            })
+            .then(data=>{
+                cargarGets();
+                cargarPosts();
+            })
+            .catch(err=>console.log(err));
+        }
+
+        //Llenar El Select Con Los Usuarios Activos
+        let selectInput = document.getElementById('select-delete-id');
+        selectInput.innerHTML='';
+        UserServices.getAllActive()
+        .then(response=>response.json())
+        .then(data=>{
+            data.forEach((usuario,i)=>{
+                let option = document.createElement('option');
+                option.innerText = `${usuario.ID} ${usuario.Nombre}`;
+
+                option.setAttribute('value', usuario.ID);
+                selectInput.appendChild(option);
+            })
+        })
+        .catch(err=>console.log(err));
+
+        selectInput.onchange = e =>{
+            id = selectInput.value;
+        };
+    }
+
+    function cargarPostLogin(){
+
+        document.forms[3].onsubmit = 
+        async e=>{
+            alert("UN LOGIN")
+            e.preventDefault();
+            let fd = new FormData(document.forms[3]);
+
+            UserServices.login(fd)
+            .then(response=>{
+                if(response.ok)
+                    return response.json();
+            })
+            .then(data=>{
+                localStorage.setItem(cookieUsername, data.Nombre);
+                localStorage.setItem(cookieUserID, data.ID);
+                cargarSession();
+            })
+            .catch(err=>console.log(err));
+        }
+    }
+
+    function cargarGets(){
+        cargarGetAll();
+        cargarGetOne();
+        cargarGetRol();
+        cargarGetActivos();
+        cargarGetActivosRol();
+    }
+
+    function cargarSession(){
+        let username = localStorage.getItem(cookieUsername);
+        let userID   = localStorage.getItem(cookieUserID);
+
+        let img = document.getElementById('session-image');
+        let saludo = document.getElementById('session-user');
+        if(username && userID && username !== "" && userID !== ""){
+            //Poner Datos del usuario En Sus apartados
+            UserServices.getAvatar(userID)
+            .then(data=>data.text())
+            .then(data=>img.src = data);
+            saludo.innerText = `Hola ${username}, Bienvenido a la pagina de prueba`;
+        }
+        else{
+            //Chale
+            img.src = '';
+            saludo.innerText = 'Pareces no estar conectado, ingresa a tu cuenta';
+        }
+    }
+
+    function cargarLiberarCookies(){
+        let btnDelete = document.getElementById('delete-tokens');
+
+        btnDelete.onclick = ()=>{
+            localStorage.removeItem(cookieUsername);
+            localStorage.removeItem(cookieUserID);
+
+            cargarSession();
+        }
+    } 
+
+    function cargarPosts(){
+        cargarPostCrear();
+        cargarPostEditar();
+        cargarPostEliminar();
+        cargarPostLogin();
+    }
+
+    window.onload=()=>{
+        cargarGets();
+        cargarPosts();
+        cargarSession();
+        cargarLiberarCookies();
+    }
+</script>
+</head>
+<body>
+    <div class="fixed-side">
+        <img src="" alt="" id="session-image">
+        <p id="session-user"></p>
+    </div>
+
+    <h1>PRUEBAS DE USUARIO</h1>
+
+    <h2>APARTADO DE GETS</h2>
+    <h3>GET ALL</h3>
+    <div class="container" id="getall"></div>
+    <h3>GET ONE</h3>
+    <div class="container" id="getone"></div>
+    <h3>GET ROL</h3>
+    <div class="container" id="getrol"></div>
+    <h3>GET ACTIVOS</h3>
+    <div class="container" id="getallactivos"></div>
+    <h3>GET ACTIVOS ROL</h3>
+    <div class="container" id="getallactivosrol"></div>
+
+    <h2>APARTADO DE FORMS</h2>
+    <h3>ADD</h3>
+    <img id='add-preview' height=200/>
+    <form  method="post" id="form-add" enctype="multipart/form-data">
+        Correo
+        <input type="email" name="correo">
+        Imagen de perfil
+        <input type="file" name="foto" id="add-upload" accept="image/jpeg">
+        Nombre
+        <input type="text" name="nombre">
+        Telefono
+        <input type="tel" name="telefono">
+        Contraseña
+        <input type="password" name="contra">
+        <br>
+        Tipo de Usuario
+        <br>
+        <input type="radio" checked name="rol" value="usuario">     usuario
+        <input type="radio" name="rol" value="reportero">   reportero
+        <input type="radio" name="rol" value="editor">      editor
+        <input type="hidden" name="activo" value=1>
+        <button type="submit">ADD</button>
+    </form>
+    <h3>EDIT</h3>
+    <img id='edit-preview' height=200/>
+    <form  method="post" id="form-edit" enctype="multipart/form-data">
+        <select name="id" id="select-edit-id">
+            <option value="0" selected disabled hidden>Choose here</option>
+        </select>
+        Correo
+        <input disabled id="email-edit" type="email" name="correo">
+        Imagen de perfil
+        <input disabled id="file-edit" type="file" name="foto" id="edit-upload" accept="image/jpeg">
+        Nombre
+        <input disabled id="nombre-edit" type="text" name="nombre">
+        Telefono
+        <input disabled id="tel-edit" type="tel" name="telefono">
+        Contraseña
+        <input disabled id="password-edit" type="password" name="contra">
+        <br>
+        Tipo de Usuario
+        <br>
+        <input disabled id="radio-u-edit" checked type="radio" name="rol" value="usuario">    usuario
+        <input disabled id="radio-r-edit" type="radio" name="rol" value="reportero">          reportero
+        <input disabled id="radio-e-edit" type="radio" name="rol" value="editor">             editor
+        <input type="hidden" name="activo" value=1>
+        <button disabled id="submit-edit" type="submit">EDIT</button>
+    </form>
+    <h3>REMOVE</h3>
+    <form  method="post" id="form-delete">
+        <select name="id-select" id="select-delete-id">
+            <option value="0" selected disabled hidden>Choose here</option>
+        </select>
+        <input type="hidden" name="id" value=3>
+        <button type="submit">REMOVE</button>
+    </form>
+    <h3>LOGIN</h3>
+    <form method="post">
+        Correo &nbsp;&nbsp;&nbsp;<input type="email" name="email" id="email">
+        Contraseña <input type="password" name="password" id="password">
+        <button type="submit">LOGIN</button>
+
+    </form>
+
+    <h3> ELIMINAR COOKIES</h3>
+    <button id="delete-tokens">Eliminar Cookies</button>
+</body>
+</html>

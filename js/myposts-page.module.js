@@ -1,5 +1,4 @@
 import {createMyPostCard} from './imports/myposts-card.module.js'
-import {request} from './services/xmlhttp-promise.module.js';
 
 function loadData(sr){
     let body = sr.find("tbody");

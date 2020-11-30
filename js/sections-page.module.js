@@ -1,5 +1,4 @@
 import {createSectionCard} from './imports/sections-card.module.js'
-import {request} from './services/xmlhttp-promise.module.js';
 
 function loadData(sr){
     let body = sr.find("tbody");

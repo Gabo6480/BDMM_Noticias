@@ -1,4 +1,3 @@
-import {request} from './services/xmlhttp-promise.module.js';
 import * as parser from './imports/article-content-parser.module.js'
 
 var editable = false;
@@ -35,9 +34,10 @@ $(document).ready(()=>{
             });
 
             //traer articulo
-            request({url:'/mock/articulos.json'})
+            fetch('/mock/articulos.json')
+            .then(res => res.json())
             .then(data=>{
-                let object = JSON.parse(data);
+                let object = data;
                 $("#article-title").text(object[0].title);
                 $("#article-img").attr("src", object[0].img);
                 $("#article-content").text(object[0].content);

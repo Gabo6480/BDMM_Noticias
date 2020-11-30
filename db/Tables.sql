@@ -1,16 +1,20 @@
+DROP DATABASE BDMM_DB;
 CREATE DATABASE BDMM_DB;
 USE BDMM_DB;
+
+# Las Fotos de perfil son codificadas en base64, asi que
+# las regresamos en un json para usarlos como url
+# con su contenido actual no son muy pesadas para la response
 CREATE TABLE usuario(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
 	Correo			VARCHAR(30)		NOT NULL UNIQUE,
-    Foto			BLOB			NULL,
+    Foto			MEDIUMBLOB			NULL,
     Nombre			TINYTEXT		NOT NULL,
 	Telefono		VARCHAR(12)		NULL,
     Contraseña		TINYTEXT		NOT NULL,
     Rol				ENUM('usuario', 'reportero', 'editor') DEFAULT 'reportero',
     Activo			BOOL			DEFAULT true
 );
-
 CREATE TABLE seccion(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
     Nombre			TINYTEXT		NOT NULL,
@@ -18,7 +22,6 @@ CREATE TABLE seccion(
     Activa			BOOL			DEFAULT true,
     Orden			INT				NULL
 );
-
 CREATE TABLE noticia(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
     Estado			ENUM('en redaccion', 'terminada', 'publicada') DEFAULT 'en redaccion',
@@ -39,20 +42,18 @@ CREATE TABLE noticia(
     REFERENCES seccion(ID)
     
 );
-
 CREATE TABLE multimedia(
 	ID				INT 							AUTO_INCREMENT PRIMARY KEY,
-    Tipo			enum('Video','Imagen','Otro')	NOT NULL DEFAULT('Imagen'),
-    Contenido		BLOB							NOT NULL,
+    Tipo			VARCHAR(30)                     NOT NULL,
+    Contenido		MEDIUMBLOB						NOT NULL,
     Noticia 		INT 							NOT NULL,
     CONSTRAINT fk_multimedia_noticia
     FOREIGN KEY (Noticia) REFERENCES noticia(ID)
 );
-
 CREATE TABLE comentario(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
 	Contenido		TEXT			NOT NULL,
-    Fecha			DATETIME		NOT NULL,
+    Fecha			DATETIME		NOT NULL  DEFAULT(current_date()),
     Padre           INT             NULL,
     Noticia			INT				NOT NULL,
     CONSTRAINT FK_NOTICIA FOREIGN KEY (Noticia)
@@ -62,7 +63,6 @@ CREATE TABLE comentario(
     CONSTRAINT FK_USUARIO FOREIGN KEY (Usuario)
     REFERENCES usuario(ID)
 );
-
 CREATE TABLE me_gusta(	
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
     
