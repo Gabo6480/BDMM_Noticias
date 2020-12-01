@@ -19,6 +19,10 @@ class NoticiaController{
         'sp_noticia_get_estado';
         'sp_noticia_get_estado_reportero';
         'sp_noticia_get_estado_seccion';
+
+        'sp_get_similar';
+        'sp_get_similar_distintos_a';
+        'sp_get_similar_distintos_a_sl';
     }
 
     /////////////////
@@ -31,12 +35,12 @@ class NoticiaController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia getBySectionId: Fallo la preparacion del query");
         }
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia getBySectionId: Fallo la ejecucion del query");
         }
 
         if($result = $sentence->get_result()){
@@ -59,12 +63,12 @@ class NoticiaController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia getByReporteroId: Fallo la preparacion del query");
         }
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia getByReporteroId: Fallo la ejecucion del query");
         }
 
         if($result = $sentence->get_result()){
@@ -87,12 +91,12 @@ class NoticiaController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia getById: Fallo la preparacion del query");
         }
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia getById: Fallo la ejecucion del query");
         }
 
         if($result = $sentence->get_result()){
@@ -111,12 +115,12 @@ class NoticiaController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia getByState: Fallo la preparacion del query");
         }
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia getByState: Fallo la ejecucion del query");
         }
 
         if($result = $sentence->get_result()){
@@ -139,12 +143,12 @@ class NoticiaController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia getByStateReportero: Fallo la preparacion del query");
         }
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia getByStateReportero: Fallo la ejecucion del query");
         }
 
         if($result = $sentence->get_result()){
@@ -167,12 +171,95 @@ class NoticiaController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia getByStateSeccion: Fallo la preparacion del query");
         }
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia getByStateSeccion: Fallo la ejecucion del query");
+        }
+
+        if($result = $sentence->get_result()){
+            $arr = array();
+            while($row = $result->fetch_assoc()){
+                array_push($arr,$row);
+
+            }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
+        }
+        $conn->close();
+    }
+    function getSimilar($palabras){
+        require './../dbconnect.php';
+        $query = "call sp_get_similar('$palabras');";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("Multimedia getSimilar: Fallo la preparacion del query");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("Multimedia getSimilar: Fallo la ejecucion del query");
+        }
+
+        if($result = $sentence->get_result()){
+            $arr = array();
+            while($row = $result->fetch_assoc()){
+                array_push($arr,$row);
+
+            }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
+        }
+        $conn->close();
+    }
+    function getSimilarD($id,$palabras){
+        require './../dbconnect.php';
+        $query = "call sp_get_similar_distintos_a($id,'$palabras');";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("Multimedia getSimilarD: Fallo la preparacion del query");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("Multimedia getSimilarD: Fallo la ejecucion del query");
+        }
+
+        if($result = $sentence->get_result()){
+            $arr = array();
+            while($row = $result->fetch_assoc()){
+                array_push($arr,$row);
+
+            }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
+        }
+        $conn->close();
+    }
+    function getSimilarDSL($id,$palabras){
+        require './../dbconnect.php';
+        $query = "call sp_get_similar_distintos_a_sl($id,'$palabras');";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("Multimedia getSimilarDSL: Fallo la preparacion del query");
+        }
+
+        if(!$sentence->execute()){
+            die("Multimedia getSimilarDSL: Fallo la ejecucion del query" .mysqli_error($conn));
         }
 
         if($result = $sentence->get_result()){
@@ -195,12 +282,12 @@ class NoticiaController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia get: Fallo la preparacion del query");
         }
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia get: Fallo la ejecucion del query");
         }
 
         if($result = $sentence->get_result()){

@@ -1,6 +1,6 @@
 <?php
 
-    require './../controllers/comentario/controller.php';
+    require './../controllers/comentario.controller.php';
 
 
     if($commsController = new ComentariosController()){
@@ -33,7 +33,7 @@
             }
         }
         else if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-            $action = $_POST['action'];
+            $action = $_GET['action'];
             switch($action){
                 case "getByArticle":
                         $id = $_GET['id'];

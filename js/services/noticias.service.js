@@ -28,6 +28,18 @@ const getByStateReportero = (id,state)=>{
     return fetch(NoticiasRoutes.getByStateReportero(id,state));
 };
 
+const getRelated = (palabras)=>{
+    return fetch(NoticiasRoutes.getRelated(palabras));
+}
+
+const getRelatedD = (palabras, id)=>{
+    return fetch(NoticiasRoutes.getRelatedD(palabras, id));
+}
+
+const getRelatedDSL = (palabras,id)=>{
+    return fetch(NoticiasRoutes.getRelatedDSL(palabras, id));
+}
+
 const add = body=>{
     const params = {
         method:"POST",
@@ -84,6 +96,9 @@ export{
     getByState,
     getByStateSeccion,
     getByStateReportero,
+    getRelated,
+    getRelatedD,
+    getRelatedDSL,
     add,
     edit,
     remove,

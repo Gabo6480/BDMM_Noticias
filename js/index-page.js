@@ -1,18 +1,59 @@
 import {createItemCard} from './imports/index-item-card.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
 
+import {getAll} from './services/noticias.service.js';
+
 $(document).ready(function(){
 
     var grid = $(".grid");
 
-    var card = {
+    getAll()
+    .then(res=>res.json())
+    .then(noticias=>{
+
+        let carrousselBuffer = [];
+        let organized = false;
+        let j = 0;
+        $.each(noticias, (index, noticia)=>{
+            if(index === 0){
+                grid.append(createItemCard(noticia, "big-card"));
+            }
+            else if(index < 9)
+            {
+                grid.append(createItemCard(noticia, "small-card"));
+            }
+            else{
+                if(!orgranized){
+                    grid.masonry({
+                        itemSelector: '.grid-item',
+                        columnWidth: 210
+                    });
+                    organized = true;
+                }
+
+                carrousselBuffer.push(noticia);
+                j++;
+
+                if(j === 10 || index === (noticias.length-1) ){
+                    $("#carousel-holder").append(createCarousel(carrousselBuffer));
+                    j = 0;
+                    carrousselBuffer = [];
+                }
+
+            }
+        });
+    })
+
+    
+
+   /* var card = {
         "title": "Hola equisdedededede",
         "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
         "url": "./pages/article.html"
     }
 
-    grid.append(createItemCard(card, "big-card"));
-
+    grid.append(createItemCard(card, "big-card"));*/
+/*
     //Primero agregamos el contenido
     for(var i = 0; i < 9; i++){
         grid.append(createItemCard(card, "small-card"));
@@ -83,4 +124,7 @@ $(document).ready(function(){
     $(".post-title-card").children().each(function(){
         $(this).fitText(1.25);
     });
+
+*/
+
 });

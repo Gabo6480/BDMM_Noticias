@@ -1,6 +1,8 @@
 import {login} from './services/usuario.service.js';
 import { validate_email, validate_empty } from './imports/validation.module.js';
 
+import {getStoredUser, clearStorage, storeUser} from './imports/cookie.module.js';
+
 window.onload = function(){
 
     document.querySelector('#form-id').addEventListener("sumbit",e=>{
@@ -16,8 +18,9 @@ window.onload = function(){
             login(fd)
             .then(res=>res.json())
             .then(data=>{
-                if(data.status === 200){
+                if(data){
                     alert("Todo piola mi pana, bienvenido");
+                    storeUser({userId:data.ID, userName:data.Correo});
                     window.location.href = '/';
                 }
             })

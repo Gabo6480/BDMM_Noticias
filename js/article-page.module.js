@@ -1,12 +1,18 @@
 import * as comms from './imports/article-comments.module.js'
 import * as parser from './imports/article-content-parser.module.js'
+
 import {createCarousel} from './imports/carousel-creator.module.js'
-import {getOne} from './services/noticias.service.js';
+
+import {getOne, getRelatedDSL} from './services/noticias.service.js';
 import {getByArticle} from './services/comentarios.service.js';
+import {getById} from './routes/multimedia.routes.js';
+import {count, add, remove} from './services/likes.service.js';
 
 $(document).ready(function(){
 
-    loadDataToWindow();
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get('id');
+    loadDataToWindow(id || 1);
 
     var readURL = function (input) {
         if (input.files && input.files[0]) {
@@ -31,6 +37,7 @@ $(document).ready(function(){
             $(this).addClass("liked")
     });
 
+     /*
     var carousel = {
         "title":"Articulos relacionados",
         "cards":[
@@ -81,14 +88,13 @@ $(document).ready(function(){
             }
         ]
     };
-
+    
+    
     $("#related-articles").append(createCarousel(carousel));
-   
-
     //Escalamos el texto dentro de cada "noticia"
     $(".post-title-card").children().each(function(){
         $(this).fitText(1.25);
-    });
+    });*/
 });
 
 function loadDataToWindow(id){
@@ -97,17 +103,29 @@ function loadDataToWindow(id){
     getOne(id)
     .then(res => res.json())
     .then(data=>{
-        $("#article-title").text(data.title);
-        $("#article-description").text(data.desc);
-        $("#article-img").attr("src", data.img);
-        $("#article-content").html(parser.parseArticle(data.content));
+        $("#article-title").text(data.Titulo);
+        $("#article-description").text(data.Resumen);
+        $("#article-img").attr("src", getById(data.Foto));
+        $("#article-content").html(parser.parseArticle(data.Contenido));
 
-        $("#article-info").append("<p id='article-section'>" + data.section + "</p>");
-        $("#article-info").append("<p>" + data.date + "</p>");
-        $("#article-info").append("<p>" + data.hour + "</p>");
-        $("#article-info").append("<p id='article-author'>" + data.author + "</p>");
+        $("#article-info").append("<p id='article-section'>" + data.Seccion + "</p>");
+        $("#article-info").append("<p>" + data.Fecha + "</p>");
+        $("#article-info").append("<p>" + data.Ubicacion + "</p>");
+        $("#article-info").append("<p id='article-author'>" + data.Escritor + "</p>");
 
         $('[data-toggle="tooltip"]').tooltip()
+
+        getRelatedDSL(data.Palabras,data.ID)
+        .then(res=>res.json())
+        .then(relatedArticles=>{
+            var carousel = {
+                title:"Articulos Relacionados",
+                cards:relatedArticles
+            }
+
+            $("#related-articles").append(createCarousel(carousel));
+        })
+        .catch(err=>console.log(err));
     })
     .catch(err=>{
         console.log("No se encontro el articulo");
@@ -126,6 +144,13 @@ function loadDataToWindow(id){
     .catch(err=>{
         console.error("No se pudieron traer los comentarios "+err)
     });
+
+    count(id)
+    .then(res=>res.json())
+    .then(data=>{
+        $('#like-number').text(data.RESULT);
+    })
+    .catch(err=>console.log(err))
 }
 
 $(document).on('keyup keypress', 'textarea.autoExpand', function() {

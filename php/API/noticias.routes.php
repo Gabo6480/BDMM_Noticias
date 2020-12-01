@@ -36,6 +36,20 @@
                         $state = $_GET['state'];
                         $nc->getByStateReportero($state, $id);
                     break;
+                case 'getRelated':
+                        $palabras = $_GET['palabras'];
+                        $nc->getSimilar($palabras);
+                    break;
+                case 'getRelatedD':
+                        $palabras = $_GET['palabras'];
+                        $id       = $_GET['id'];
+                        $nc->getSimilarD($id,$palabras);
+                    break;
+                case 'getRelatedDSL':
+                        $palabras = $_GET['palabras'];
+                        $id       = $_GET['id'];
+                        $nc->getSimilarDSL($id,$palabras);
+                    break;
                 default:
                     break;
             }

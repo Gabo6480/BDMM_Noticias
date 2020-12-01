@@ -74,17 +74,16 @@ class LikesController{
         if (!($sentence = $conn->prepare($query)))
         {
             $conn->close();
-            die("COUNT PREPARATION FAILED");
+            die("COUNT PREPARATION FAILED ");
         }
 
         if(!$sentence->execute()){
-            $conn->close();
-            die("QUERY EXECUTION FAILED");
+            die("QUERY EXECUTION FAILED ".mysqli_error($conn));
         }
 
-        header("Content-type:text/plain");
+        header("Content-type:application/json");
         if($result = $sentence->get_result()){
-            echo $result->num_rows;
+            echo json_encode($result->fetch_assoc());
             $result->free();
         }else{
             echo 0;

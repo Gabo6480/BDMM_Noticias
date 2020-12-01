@@ -33,21 +33,6 @@ $(document).ready(()=>{
                 });
             });
 
-            //traer articulo
-            fetch('/mock/articulos.json')
-            .then(res => res.json())
-            .then(data=>{
-                let object = data;
-                $("#article-title").text(object[0].title);
-                $("#article-img").attr("src", object[0].img);
-                $("#article-content").text(object[0].content);
-            
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-            .catch(err=>{
-                console.error("No se encontro el articulo");
-            });
-
             $("#article-section").replaceWith("<select id='#article-section' class='browser-default custom-select col-2'>" +
             "<option selected>Seccion</option>" +
             "</select>");

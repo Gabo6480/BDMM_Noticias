@@ -29,4 +29,8 @@ BEGIN
 	SET m_regex = concat(left(m_regex,length(m_regex)-1),')');
     
     RETURN m_regex;
-END
+END;
+
+CREATE FUNCTION LIKE_COUNT(pNoticia INT)
+RETURNS INT
+RETURN (SELECT COUNT(ID) from me_gusta WHERE Noticia = pNoticia );

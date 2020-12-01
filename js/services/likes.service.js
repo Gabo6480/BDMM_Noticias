@@ -1,7 +1,7 @@
 import * as LikesRoutes from './../routes/likes.routes.js';
 
-const count = ()=>{
-    return fetch(LikesRoutes.count);
+const count = id=>{
+    return fetch(LikesRoutes.count(id));
 }
 
 const add = body=>{

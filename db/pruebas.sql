@@ -67,7 +67,7 @@ VALUES(
     'LOS CANGREJOS ATACARON A UN HOMBRE POR LA CARRETERA',
     current_date(),
     'Chiapas',
-    'Chiapas, Cangrejo, Cangrejos, Ataque, Chiapaneco, Chiapanecos',
+    'Chiapas,Cangrejo,Cangrejos,Ataque,Chiapaneco,Chiapanecos',
     2,
     1
 );
@@ -80,7 +80,7 @@ VALUES(
     'Al chile ni idea, pero se ocupa hacer una noticia **bold**',
     current_date(),
     'Meijiko',
-    'Algo, algo2, Chiapas, Cangrejos',
+    'Algo,algo2,Chiapas,Cangrejos',
     2,
     2
 );
@@ -93,7 +93,7 @@ VALUES(
     'Pegale, pegale este merito fué',
     current_date(),
     'Ching chong, China',
-    'Ching, chong, Ping, Pong, Rasista, ya sé',
+    'Ching,chong,Ping,Pong,Rasista,ya sé',
     2,
     4
 );
@@ -112,9 +112,10 @@ SELECT*FROM usuario;
 SELECT*FROM Seccion;
 SELECT*FROM Noticia;
 SELECT*FROM multimedia;
+SELECT count(id) from me_gusta;
 
 call sp_noticia_get();
 
-call sp_get_similar('Chiapas,cHING');
+call sp_get_similar_distintos_a_sl(1,'Chiapas,cHING');
 
 call sp_noticia_get_estado('en redaccion');

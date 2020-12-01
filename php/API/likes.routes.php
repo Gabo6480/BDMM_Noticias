@@ -1,7 +1,7 @@
 <?php
     require './../controllers/likes.controller.php';
 
-    if($likesController = new LikesController($conn)){
+    if($likesController = new LikesController()){
         if($_SERVER["REQUEST_METHOD"] == "GET"){
             $id = $_GET['id'];
             $likesController->count($id);

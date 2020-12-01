@@ -16,6 +16,12 @@ const getByStateSeccion = (id,state)=>`${noticiasURL}?action=getByStateSeccion&i
 
 const getByStateReportero = (id,state)=>`${noticiasURL}?action=getByStateReportero&id=${id}&state=${state}`;
 
+const getRelated = palabras =>`${noticiasURL}?action=getRelated&palabras=${palabras}`;
+
+const getRelatedD = (palabras,id) =>`${noticiasURL}?action=getRelatedD&palabras=${palabras}&id=${id}`;
+
+const getRelatedDSL = (palabras,id) =>`${noticiasURL}?action=getRelatedDSL&palabras=${palabras}&id=${id}`;
+
 export{
     noticiasURL as post,
     getOne,
@@ -24,5 +30,8 @@ export{
     getAll,
     getByState,
     getByStateSeccion,
-    getByStateReportero
+    getByStateReportero,
+    getRelated,
+    getRelatedD,
+    getRelatedDSL
 }

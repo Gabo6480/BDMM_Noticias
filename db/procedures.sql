@@ -348,7 +348,6 @@ BEGIN
     WHERE Estado = pEstado and Seccion = pSeccion;
 END //
 
-#agregar a controller
 CREATE PROCEDURE sp_get_similar
 (IN pPalabras TEXT)
 BEGIN
@@ -361,7 +360,6 @@ BEGIN
     WHERE Estado = 'publicada' AND  LOWER(Palabras) RLIKE LOWER(m_regex);
 END//
 
-#agregar a controller
 CREATE PROCEDURE sp_get_similar_distintos_a
 (IN pID INT,IN pPalabras TEXT)
 BEGIN
@@ -372,6 +370,18 @@ BEGIN
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto
     FROM noticia
     WHERE Estado = 'publicada' AND  LOWER(Palabras) RLIKE LOWER(m_regex) AND pID <> ID;
+END//
+
+CREATE PROCEDURE sp_get_similar_distintos_a_sl
+(IN pID INT,IN pPalabras TEXT)
+BEGIN
+    DECLARE m_regex TEXT DEFAULT ('');
+    
+	SET m_regex = REGEX_FROM_CSV(pPalabras);
+		
+    SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto
+    FROM noticia
+    WHERE LOWER(Palabras) RLIKE LOWER(m_regex) AND pID <> ID;
 END//
 
 #agregar a controller
@@ -442,10 +452,12 @@ END //
 #    comentarios    #
 #####################
 
+delimiter //
 CREATE PROCEDURE sp_comentarios_by_article
 (IN pID INT)
 BEGIN
     SELECT ID, Contenido, Fecha, Padre, Noticia, Usuario
+    FROM comentario
     WHERE Noticia = pID AND Padre = NULL
     ORDER BY Fecha ASC;
 END //
@@ -454,6 +466,7 @@ CREATE PROCEDURE sp_comentarios_respuestas
 (IN pID INT)
 BEGIN
     SELECT ID, Contenido, Fecha, Padre, Noticia, Usuario
+	FROM comentario
     WHERE Padre = pID
     ORDER BY Fecha ASC;
 END //
@@ -485,21 +498,25 @@ END //
 #      me_gusta     #
 #####################
 
-CREATE PROCEDURE sp_addLike(IN pArticulo INT, IN pUsuario INT)
+use BDMM_DB;
+DROP PROCEDURE sp_addLike;
+DROP PROCEDURE sp_removeLike;
+DROP PROCEDURE sp_countLikes;
+DELIMITER //
+CREATE PROCEDURE sp_addLike(IN pNoticia INT, IN pUsuario INT)
 BEGIN
-    INSERT INTO me_gusta(Noticia, Usuario) VALUES(pArticulo, pUsuario); 
+    INSERT INTO me_gusta(Noticia, Usuario) VALUES(pNoticia, pUsuario); 
 END //
 
-CREATE PROCEDURE sp_removeLike(IN pArticulo INT, IN pUsuario INT)
+CREATE PROCEDURE sp_removeLike(IN pNoticia INT, IN pUsuario INT)
 BEGIN
     DELETE FROM me_gusta
-    WHERE Articulo = pArticulo AND Usuario = pUsuario;
+    WHERE Noticia = pNoticia AND Usuario = pUsuario;
 END //
 
-CREATE PROCEDURE sp_countLikes(IN pArticulo INT)
+CREATE PROCEDURE sp_countLikes(IN pNoticia INT)
 BEGIN
-    SELECT ID from me_gusta
-    WHERE Articulo = pArticulo;
+    SELECT LIKE_COUNT(pNoticia) `RESULT`;
 END //
 
 DELIMITER ;

@@ -15,18 +15,6 @@ function loadData(sr){
     .catch(err=>{
         console.error("Failed getByReportero : " + err);
     });
-
-    /*  //MOCK
-    $.getJSON(
-        '/mock/usuarios.json',
-        function(users){
-            $.each(users, function(key, user){
-                body.append(createMyPostCard(user));
-            });
-        }
-    ).fail(function(err){
-        console.error("Fallo la request de usuarios " + err);
-    });*/
 }
 
 function accionBotones(sr){

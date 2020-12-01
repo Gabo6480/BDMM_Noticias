@@ -27,8 +27,7 @@
             }
 
             if(!$sentence->execute()){
-                $conn->close();
-                die("Comentarios By Article: EXECUTION FAILED");
+                die("Comentarios By Article: EXECUTION FAILED".mysqli_error($conn));
             }
 
             if($result = $sentence->get_result()){
