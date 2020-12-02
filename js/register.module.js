@@ -1,65 +1,10 @@
-import * as validations from './imports/validation.module.js';
-import { login } from './services/user.service.module.js';
-import { User } from './models/user.model.js';
-
-window.onload = ()=>{
-    document.querySelector("#submit").addEventListener("click", e=>{
-        e.preventDefault();
-
-        let err = 0;
-        let email_text = document.querySelector('#email').value;
-        let username_text = document.querySelector('#username').value;
-        let password_text = document.querySelector('#password').value;
-        let password_confirm_text = document.querySelector('#confirm-password').value;
-        let pp_file = document.querySelector("#selectedFile").files[0];
-
-        if(!validations.validate_empty(email_text))
-        {
-            alert("Email es obligatorio");
-            err++;
-        }
-        if(!validations.validate_email(email_text))
-        {
-            alert("Email invalido");
-            err++;
-        }
-
-        if(!validations.validate_empty(username_text))
-        {
-            alert("Nombre de usuario obligatorio");
-            err++;
-        }
-        if(!validations.validate_username(username_text))
-        {
-            alert("Nombre de usuario invalido");
-            err++;
-        }
-
-        if(!validations.validate_empty(password_text))
-        {
-            alert("Constrasena obligatoria");
-            err++;
-        }
-        if(!validations.validate_empty(password_confirm_text))
-        {
-            alert("Confirmacion de constrasena obligatoria");
-            err++;
-        }
-        if(password_text != password_confirm_text){
-            alert("Contrasena y confirmacion de contrasena tienen que ser identicas");
-            err++;
-        }
-
-        if(err > 0)
-            alert("Favor de resolver errores");
-        else{
-            let u = new User(username_text, email_text, password_text, pp_file? pp_file : null);
-            login(u);
-        }
-    });
-}
+import * as vals from './imports/validation.module.js';
+import {add} from './services/usuario.service.js';
+import {storeUser} from './imports/cookie.module.js';
 
 $(document).ready(function () {
+
+    var uploaded = null;
 
     var readURL = function (input) {
         if (input.files && input.files[0]) {
@@ -67,6 +12,7 @@ $(document).ready(function () {
 
             reader.onload = function (e) {
                 $('.avatar').attr('src', e.target.result);
+                uploaded = e.target.result;
             }
 
             reader.readAsDataURL(input.files[0]);
@@ -76,5 +22,80 @@ $(document).ready(function () {
     $(".file-upload").on('change', function () {
         readURL(this);
     });
+
+    $("#examinar-btn").on('click', e=>{
+        $(".file-upload").click();
+    });
+
+    $('#register-form').on('submit',e=>{
+        e.preventDefault();
+
+        let fd = new FormData(e.target);
+
+        let nombre  = fd.get('nombre');
+        let correo  = fd.get('correo');
+        let contra  = fd.get('contra');
+        let contrac = fd.get('contra-c');
+
+        let err = 0;
+        //VALIDACIONES
+        if(!vals.validate_empty(correo))
+        {
+            alert("Email es obligatorio");
+            err++;
+        }
+        if(!vals.validate_email(correo))
+        {
+            alert("Email invalido");
+            err++;
+        }
+
+        if(!vals.validate_empty(nombre))
+        {
+            alert("Nombre obligatorio");
+            err++;
+        }
+        if(!vals.validate_username(nombre))
+        {
+            alert("Nombre invalido");
+            err++;
+        }
+
+        if(!vals.validate_empty(contra))
+        {
+            alert("Constrasena obligatoria");
+            err++;
+        }
+        if(!vals.validate_empty(contrac))
+        {
+            alert("Confirmacion de constrasena obligatoria");
+            err++;
+        }
+        if(contra != contrac){
+            alert("Contrasena y confirmacion de contrasena tienen que ser identicas");
+            err++;
+        }
+
+        if(err > 0)
+            return;
+
+        fd.set('foto', uploaded);
+        fd.append('rol', 'usuario');
+        fd.append('activo', 1);
+
+        add(fd)
+        .then(res=>res.text())
+        .then(data=>{
+            console.log(data);
+            alert(`Un placer tenerte aqui ${fd.get('nombre')}!!!`);
+            window.location.href = './login.html';
+
+        })
+        .catch(err=>{
+            console.log(err);
+            alert( `Falla en alta de usuario`);
+        });
+
+    })
 
 });

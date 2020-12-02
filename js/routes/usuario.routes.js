@@ -8,11 +8,12 @@ const getRol        = id => `${usuarioURL}?action=getRol&id=${id}`;
       
 const getAll        = () => `${usuarioURL}?action=getAll`;
 
-const getFoto     = id => `${usuarioURL}?action=getAvatar&id=${id}`;
+const getFoto       = id => `${usuarioURL}?action=getAvatar&id=${id}`;
 
 const getRolActivos = id =>`${usuarioURL}?action=getRolActivos&id=${id}`;
 
 const getAllActive  = () => `${usuarioURL}?action=getActivos`;
+
 export{
     usuarioURL as post,
     getFoto,

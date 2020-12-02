@@ -8,7 +8,7 @@ const validate_empty = function(input){
 }
 
 const validate_username = function(username){
-    return /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/.test(username);
+    return /^[\w]+([-_\s]{1}[a-z0-9]+)*$/i.test(username);
 }
 
 export{validate_email, validate_empty, validate_username}
