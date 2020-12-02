@@ -109,11 +109,11 @@ BEGIN
 END //
 
 CREATE PROCEDURE sp_usuarios_baja
-(IN id INT)
+(IN pID INT)
 BEGIN
     UPDATE Usuario
     SET Activo = 0
-    WHERE id = usuario.ID;
+    WHERE ID = pID;
 END //
 
 CREATE PROCEDURE sp_login

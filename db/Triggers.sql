@@ -8,7 +8,7 @@ ON seccion
 FOR EACH ROW
 BEGIN
     IF new.Activa = 0 THEN
-        DELETE FROM Noticia 
+        DELETE FROM Noticia
         WHERE Seccion = new.ID AND Estado <> 'publicada';
     END IF;
 END //
@@ -20,7 +20,7 @@ ON usuario
 FOR EACH ROW
 BEGIN
     IF new.Activo = 0 THEN
-        DELETE FROM Noticia 
+        DELETE FROM Noticia
         WHERE Escritor = new.ID AND Estado <> 'publicada';
     END IF;
 END //

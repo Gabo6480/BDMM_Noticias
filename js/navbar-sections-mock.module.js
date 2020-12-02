@@ -7,18 +7,7 @@ import { getActive} from './services/secciones.service.js';
 
 $(document).ready(()=>{
 
-    const userInfo = getStoredUser();
-
-    if(userInfo.userId !== null && userInfo.userName !== null){
-        $loginbtn = $('#login-button');
-        $loginbtn.click(e=>{
-
-            const $img = $('<img class="miniature"/>'); 
-            $img.attr('src',getAvatar(userInfo.userId));
-
-            $loginbtn.remove();
-        });
-    }
+    
 
     getActive()
     .then(res => res.json())
@@ -27,6 +16,25 @@ $(document).ready(()=>{
             let $section = $(createSection(element));
             $('#sections').append($section);
         });
+
+        const userInfo = getStoredUser();
+
+        if(userInfo.userId !== null && userInfo.userName !== null){
+
+            let $loginbtn = $("#login-button")
+            const $img = $('<img src="" alt="pp" style="max-height:50px">');
+
+            getAvatar(userInfo.userId)
+            .then(res=>res.text())
+            .then(src=>{
+
+                $img.attr('src',src);
+
+                $loginbtn.replaceWith($img)
+
+                $('#regiser-btn').remove();
+            });
+        }
     })
     .catch(err=>console.log(err));
 

@@ -1,6 +1,7 @@
 //Esta es para hacer el logout
 let clearStorage = function(){
-    window.localStorage.clear();
+    window.localStorage.removeItem("storedUser.userId");
+    window.localStorage.removeItem("storedUser.userName");
 }
 
 let storeUser = function(user){
