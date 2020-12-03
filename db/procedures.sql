@@ -24,25 +24,15 @@ BEGIN
     WHERE U.ID = id;
 END //
 
-#Agregar a controlador
 CREATE PROCEDURE sp_get_usuarios_similares_activos
-(IN pNombre TINYTEXT)
-BEGIN 
-    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
-    FROM Usuario U
-    WHERE Activo = 1 AND Nombre LIKE CONCAT('%',pNombre,'%');
-END //
-
-#Agregar a controlador
-CREATE PROCEDURE sp_get_usuarios_similares_activos_rol
 (   
     IN pNombre TINYTEXT,
     IN pRol ENUM('usuario', 'reportero', 'editor')
 )
 BEGIN 
-    SELECT ID, Correo, Foto, Nombre, Telefono, Contraseña, Rol, Activo
+    SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     FROM Usuario U
-    WHERE Activo = 1 AND Nombre LIKE CONCAT('%',pNombre,'%') AND Rol = pRol;
+    WHERE Activo = 1 AND Nombre LIKE CONCAT('%',pNombre,'%') AND Rol = COALESCE(pRol, Rol);
 END //
 
 CREATE  PROCEDURE sp_get_usuarios_rol
@@ -204,6 +194,15 @@ BEGIN
     SELECT ID,Nombre,Color,Activa,Orden
     FROM seccion
     WHERE Activa = 1
+    ORDER BY Orden DESC;
+END //
+
+CREATE PROCEDURE sp_search_secciones
+(IN pNombre TINYTEXT)
+BEGIN
+	SELECT ID,Nombre,Color,Activa,Orden
+    FROM seccion
+    WHERE Activa = 1 AND Nombre LIKE CONCAT('%', pNombre, '%')
     ORDER BY Orden DESC;
 END //
 
@@ -384,20 +383,11 @@ BEGIN
     WHERE LOWER(Palabras) RLIKE LOWER(m_regex) AND pID <> ID;
 END//
 
-#agregar a controller
-CREATE PROCEDURE sp_get_nombre_similar(IN pTitulo TINYTEXT)
+CREATE PROCEDURE sp_get_nombre_similar(IN pTitulo TINYTEXT, IN pSeccion INT, IN pEstado ENUM('en redaccion', 'terminada', 'publicada'))
 BEGIN
 	SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto
     FROM Noticia 
-    WHERE Titulo LIKE CONCAT('%', pTitulo ,'%');
-END//
-
-#agregar a controller
-CREATE PROCEDURE sp_get_nombre_similar_seccion(IN pTitulo TINYTEXT, IN pSeccion INT)
-BEGIN
-SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto
-    FROM Noticia 
-    WHERE Seccion = pSeccion and Titulo LIKE CONCAT('%', pTitulo ,'%');
+    WHERE Titulo LIKE CONCAT('%', pTitulo ,'%') AND Seccion = COALESCE(pSeccion, Seccion) AND Estado = COALESCE(pEstado,Estado);
 END//
 
 #####################
@@ -452,7 +442,6 @@ END //
 #    comentarios    #
 #####################
 
-delimiter //
 CREATE PROCEDURE sp_comentarios_by_article
 (IN pID INT)
 BEGIN

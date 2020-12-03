@@ -28,6 +28,10 @@ const getAvatar = id=>{
     return fetch(path);
 }
 
+const search = (nombre, rol)=>{
+    return fetch(UserRoutes.search(nombre,rol));
+}
+
 const add= body=>{
     body.set('action','add');
     const params = {
@@ -80,5 +84,6 @@ export{
     add,
     edit,
     remove,
-    login
+    login,
+    search
 }

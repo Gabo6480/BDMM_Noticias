@@ -23,6 +23,9 @@ class NoticiaController{
         'sp_get_similar';
         'sp_get_similar_distintos_a';
         'sp_get_similar_distintos_a_sl';
+
+        //busqueda
+        'sp_get_nombre_similar';
     }
 
     /////////////////
@@ -287,7 +290,7 @@ class NoticiaController{
 
         if(!$sentence->execute()){
             $conn->close();
-            die("Multimedia get: Fallo la ejecucion del query");
+            die("Multimedia get: Fallo la ejecucion del query".mysqli_stmt_error($sentence));
         }
 
         if($result = $sentence->get_result()){
@@ -295,6 +298,37 @@ class NoticiaController{
             while($row = $result->fetch_assoc()){
                 array_push($arr,$row);
 
+            }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
+        }
+        $conn->close();
+    }
+    function search($titulo, $seccion,$estado){
+        require './../dbconnect.php';
+        if($estado == "NULL"){
+            $query = "call sp_get_nombre_similar('$titulo', $seccion,$estado);";
+        }
+        else{
+            $query = "call sp_get_nombre_similar('$titulo', $seccion,'$estado');";
+        }
+        if (!($sentence = $conn->prepare($query)))
+        {
+            //$conn->close();
+            die("Multimedia get: Fallo la preparacion del query".mysqli_error($conn));
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("Multimedia get: Fallo la ejecucion del query".mysqli_stmt_error($sentence));
+        }
+
+        if($result = $sentence->get_result()){
+            $arr = array();
+            while($row = $result->fetch_assoc()){
+                array_push($arr,$row);
             }
 
             header("Content-type:application/json");

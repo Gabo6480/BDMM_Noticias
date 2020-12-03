@@ -1,13 +1,12 @@
 import {createPostCard} from './imports/post-card.module.js';
-import { getAll, getBySeccion, edit } from './services/noticias.service.js';
+import { getAll, getBySeccion, getByState, edit, search } from './services/noticias.service.js';
 
 
 import { getActive} from './services/secciones.service.js';
 
 function loadData(sr){
-    let body = sr.find("tbody");
+    let $body = sr.find("tbody");
 
-    
     getActive()
     .then(res => res.json())
     .then(data =>{
@@ -18,12 +17,11 @@ function loadData(sr){
     })
     .catch(err=>console.log(err));
 
-
-    getAll('terminada')
+    getByState('terminada')
     .then(res=>res.json())
     .then(noticias=>{
         $.each(noticias,(key,noticia)=>{
-            body.append(createPostCard(noticia));
+            $body.append(createPostCard(noticia));
         });
     })
     .catch(err=>console.log(err));
@@ -52,35 +50,33 @@ function accionBotones(sr){
 $(document).ready(function(){
 
     let sr = $("#result-table");
-    let body = sr.find("tbody");
 
-    $("#post-filter").change(function(){
-        let filter = $(this).children("option:selected").val()
-        body.empty();
-        if(filter == 0){
-            getAll('en redaccion')
-            .then(res=>res.json())
-            .then(noticias=>{
-                $.each(noticias,(key,noticia)=>{
-                    body.append(createPostCard(noticia));
-                });
-            })
-            .catch(err=>console.log(err));
-        }
-        else{
-            getBySeccion(filter)
-            .then(res=>res.json())
-            .then(noticias=>{
-                $.each(noticias,(key,noticia)=>{
-                    body.append(createPostCard(noticia));
-                });
-            })
-            .catch(err=>console.log(err));
-        }
-    });
+    //Buscar cuando cambie el form de busqueda o sea enviado "submit", le agregue un ID -Parga
+    let $search = $('#search-noticia-form');
+    let $filter = $('#post-filter');
+    let $searchContent = $("#post-search-field");
 
-    $("#post-search-button").click(function(){
-        let query = $(this).parent().find("#post-search-field").val();
+    const makeSearch = ()=>{
+        console.log("SEARCHING")
+        search($searchContent.val(),$filter.val())
+        .then(res=>res.text())
+        .then(res=>{
+            let $body = sr.find("tbody");
+            $body.empty();
+            $.each(res,(key,noticia)=>{
+                $body.append(createPostCard(noticia));
+            });
+        })
+        .catch(err=>console.log(err))
+    }
+
+    //Buscar cuando cambie el filtro, contenido del input text o de al boton de buscar explicitamente
+    $filter.change(makeSearch);
+    $searchContent.on('keypress',makeSearch);
+    //evitar default para no refrescar pagina
+    $search.submit(e=>{
+        e.preventDefault();
+        makeSearch();
     });
 
     accionBotones(sr);

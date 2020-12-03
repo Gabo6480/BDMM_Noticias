@@ -10,6 +10,7 @@ class SeccionesController{
         
         'sp_getSecciones' ;
         'sp_getSeccionesActivas';
+        'sp_search_secciones';
     }
 
     //////////////////
@@ -123,6 +124,35 @@ class SeccionesController{
     function getActivas(){
         require './../dbconnect.php';
         $query = "call sp_getSeccionesActivas();";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("COUNT PREPARATION FAILED");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("QUERY EXECUTION FAILED");
+        }
+
+        
+        if($result = $sentence->get_result()){
+            $arr = array();
+            while($row = $result->fetch_assoc()){
+                array_push($arr, $row);
+            }
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
+        }else{
+            echo 0;
+        }
+        $conn->close();
+    }
+    function search($nombre){
+        require './../dbconnect.php';
+        $query = "call sp_search_secciones('$nombre')";
 
         if (!($sentence = $conn->prepare($query)))
         {

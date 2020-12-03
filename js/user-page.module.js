@@ -1,5 +1,5 @@
 import {createUserCard} from './imports/user-card.module.js';
-import {getAllActive, getRolActive} from './services/usuario.service.js';
+import {getAllActive, getRolActive, search} from './services/usuario.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
@@ -79,18 +79,18 @@ function accionBotones(sr){
 $(document).ready(function(){
 
     let sr = $("#result-table");
-
+    /*
     $("#user-filter").change(function(){
         let filter = $(this).children("option:selected").val()
-        let body = sr.find("tbody");
+        let $body = sr.find("tbody");
 
-        body.empty();
+        $body.empty();
         if(filter == 0){
             getAllActive()
             .then(res=>res.json())
             .then(usuarios=>{
                 $.each(usuarios,(key,usuario)=>{
-                    body.append(createUserCard(usuario));
+                    $body.append(createUserCard(usuario));
                 });
             })
             .catch(err=>console.log(err));
@@ -100,13 +100,11 @@ $(document).ready(function(){
             .then(res=>res.json())
             .then(usuarios=>{
                 $.each(usuarios,(key,usuario)=>{
-                    body.append(createUserCard(usuario));
+                    $body.append(createUserCard(usuario));
                 });
             })
             .catch(err=>console.log(err));
-        }
-
-        
+        }        
     });
 
     $("#user-search-button").click(function(){
@@ -114,7 +112,32 @@ $(document).ready(function(){
 
         alert(query)
     });
+    */
+    let $search = $('#search-usuario-form');
+    let $filter = $('#user-filter');
+    let $searchContent = $("#user-search-field");
+    
+    const makeSearch = ()=>{
+        search($searchContent.val(),$filter.val())
+        .then(res=>res.json())
+        .then(res=>{
+            let $body = sr.find("tbody");
+            $body.empty();
+            $.each(res,(key,noticia)=>{
+                $body.append(createUserCard(noticia));
+            });
+        })
+        .catch(err=>console.log(err))
+    }
 
+    //Buscar cuando cambie el filtro, contenido del input text o de al boton de buscar explicitamente
+    $filter.change(makeSearch);
+    $searchContent.on('keypress',makeSearch);
+    //evitar default para no refrescar pagina
+    $search.submit(e=>{
+        e.preventDefault();
+        makeSearch();
+    });
     accionBotones(sr);
 
     loadData(sr);
