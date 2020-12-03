@@ -5,8 +5,8 @@ let createMyPostCard = function(post){
     return "<tr post-id='" + post.ID
     + "'> <th scope='row'><img class='user-picture' src='" + getById(post.Foto)
     + "' /></th><td class='article-title'>" + post.Titulo
-    + "</td><td class='article-section'>" +  post.Escritor
-    + "</td><td class='article-state'>" + post.Seccion
+    + "</td><td class='article-section'>" +  post.Seccion
+    + "</td><td class='article-state'>" + post.Estado
     + "</td><td class='actions'>"
     + "<button class='btn btn-outline-primary button-edit'><i class='fas fa-edit'></i></button>"
     + "<button class='btn btn-outline-success button-send' disabled><i class='fas fa-arrow-up'></i></button>"

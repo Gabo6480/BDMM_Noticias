@@ -1,15 +1,27 @@
 import {createMyPostCard} from './imports/myposts-card.module.js';
 
+import { getActive} from './services/secciones.service.js';
+
 import {getByReportero} from './services/noticias.service.js';
 function loadData(sr){
     let body = sr.find("tbody");
 
+    getActive()
+    .then(res => res.json())
+    .then(data =>{
+        let dropMenu = $("#post-filter");
+        data.forEach(element=>{
+            dropMenu.append("<option value='" + element.ID + "'>" + element.Nombre + "</option>");
+        });
+    })
+    .catch(err=>console.log(err));
 
     getByReportero(2)
     .then(res=>res.json())
     .then(usuarios=>{
         $.each(usuarios, (key, user)=>{
             body.append(createMyPostCard(user));
+            alert(JSON.stringify(user));
         });
     })
     .catch(err=>{
@@ -19,7 +31,8 @@ function loadData(sr){
 
 function accionBotones(sr){
     sr.on("click", ".button-edit", function (){
-        //TODO: Editar la publicación
+        let ID = $(this).parents("tr").attr("post-id");
+        window.location = ID?`article.html?id=${ID}`:'/';
     });
 
     sr.on("click", ".button-send", function (){
