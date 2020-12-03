@@ -59,7 +59,7 @@ $(document).ready(function(){
     const makeSearch = ()=>{
         console.log("SEARCHING")
         search($searchContent.val(),$filter.val())
-        .then(res=>res.text())
+        .then(res=>res.json())
         .then(res=>{
             let $body = sr.find("tbody");
             $body.empty();
@@ -78,7 +78,7 @@ $(document).ready(function(){
         e.preventDefault();
         makeSearch();
     });
-
+    
     accionBotones(sr);
 
     loadData(sr);

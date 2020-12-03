@@ -50,10 +50,10 @@ function loadDataToWindow(id){
         $("#article-content").html(parser.parseArticle(data.Contenido));
         $("#article-keywords").text(data.Palabras);
 
-        $("#article-info").append("<p id='article-section'>" + data.Seccion + "</p>");
+        $("#article-info").append("<p id='article-section'>" + data.NombreSeccion + "</p>");
         $("#article-info").append("<p>" + data.Fecha + "</p>");
         $("#article-info").append("<p class='editor-editable'>" + data.Ubicacion + "</p>");
-        $("#article-info").append("<p id='article-author'>" + data.Escritor + "</p>");
+        $("#article-info").append("<p id='article-author'>" + data.NombreReportero + "</p>");
 
         $('[data-toggle="tooltip"]').tooltip();
 

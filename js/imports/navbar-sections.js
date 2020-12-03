@@ -17,6 +17,10 @@ const createSection = function(seccion){
     div.onmouseover = () =>div.style.backgroundColor = "#"+seccion.Color;
     div.onmouseleave = () =>div.style.backgroundColor = "rgba(0,0,0,0)";
 
+    div.onclick = e=>{
+        location.href = `http://localhost:8081/BDMM_Noticias/index.html?id=${seccion.ID}`;
+    }
+
     return div;
 }
 
