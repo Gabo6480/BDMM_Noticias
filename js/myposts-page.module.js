@@ -17,7 +17,7 @@ function loadData(sr){
     })
     .catch(err=>console.log(err));
 
-    getByReportero(userInfo.userId !== null ? userInfo.userId : 2)
+    getByReportero(userInfo.userId)
     .then(res=>res.json())
     .then(usuarios=>{
         $.each(usuarios, (key, user)=>{
