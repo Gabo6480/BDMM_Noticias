@@ -9,6 +9,7 @@ class LikesController{
         'sp_addLike'   ;
         'sp_removeLike';
         'sp_countLikes';
+        'sp_comprobarLike';
     }
 
     //////////////////
@@ -70,6 +71,30 @@ class LikesController{
     function count($id_articulo){
         require './../dbconnect.php';
         $query = "call sp_countLikes($id_articulo);";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("COUNT PREPARATION FAILED ");
+        }
+
+        if(!$sentence->execute()){
+            die("QUERY EXECUTION FAILED ".mysqli_error($conn));
+        }
+
+        header("Content-type:application/json");
+        if($result = $sentence->get_result()){
+            echo json_encode($result->fetch_assoc());
+            $result->free();
+        }else{
+            echo 0;
+        }
+        $conn->close();
+    }
+
+    function comprobar($noticia, $usuario){
+        require './../dbconnect.php';
+        $query = "call sp_comprobarLike($noticia, $usuario);";
 
         if (!($sentence = $conn->prepare($query)))
         {

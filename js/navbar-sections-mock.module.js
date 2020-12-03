@@ -62,7 +62,7 @@ $(document).ready(()=>{
     $(document).on('submit','#search-form-nav', e=>{
         console.log('SUBMIT');
         e.preventDefault();
-        location.href = "http://localhost:8081/BDMM_Noticias/pages/search.html";
+        location.href = `http://localhost:8081/BDMM_Noticias/pages/search.html?busqueda=${$("#search").val()}`;
     });
 
 });

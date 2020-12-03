@@ -1,5 +1,9 @@
 import * as LikesRoutes from './../routes/likes.routes.js';
 
+const comprobar = (noticia, usuario)=>{
+    return fetch(LikesRoutes.comprobar(noticia,usuario));
+}
+
 const count = id=>{
     return fetch(LikesRoutes.count(id));
 }
@@ -31,5 +35,6 @@ const remove = body=>{
 export{
     count,
     add,
-    remove
+    remove,
+    comprobar
 }

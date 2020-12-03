@@ -408,14 +408,15 @@ END//
 #####################
 #     multimedia    #
 #####################
+
 CREATE PROCEDURE sp_add_multimedia
 (IN pTipo VARCHAR(30), IN pContenido MEDIUMBLOB, IN pNoticia INT)
 BEGIN
     DECLARE `_rollback` BOOL DEFAULT 0;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
         START TRANSACTION;
-            INSERT INTO multimedia(Tipo, Contenido, Noticia)
-            VALUES(pTipo, pContenido, pNoticia);
+            INSERT INTO multimedia(Tipo, Contenido)
+            VALUES(pTipo, pContenido);
             
             
     IF `_rollback` THEN
@@ -452,7 +453,7 @@ END //
 CREATE PROCEDURE sp_multimedia_by_article
 (IN pNoticia INT)
 BEGIN
-    SELECT ID, Tipo, Contenido FROM multimedia WHERE Noticia = pNoticia;
+    SELECT "NO SOPORTADO EN ESTA VERSION";
 END //
 
 #####################
@@ -523,6 +524,15 @@ END //
 CREATE PROCEDURE sp_countLikes(IN pNoticia INT)
 BEGIN
     SELECT LIKE_COUNT(pNoticia) `RESULT`;
+END //
+
+CREATE PROCEDURE sp_comprobarLike( IN pNoticia INT, IN pUsuario INT)
+BEGIN 
+	IF EXISTS(SELECT ID FROM me_gusta WHERE Noticia = pNoticia AND Usuario = pUsuario) THEN
+		SELECT "EXISTS" `RESULT`;
+	ELSE
+		SELECT "NOT" `RESULT`;
+	END IF;
 END //
 
 DELIMITER ;
