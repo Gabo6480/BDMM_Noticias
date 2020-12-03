@@ -1,5 +1,5 @@
 import {createUserCard} from './imports/user-card.module.js';
-import {getAllActive} from './services/usuario.service.js';
+import {getAllActive, getRolActive} from './services/usuario.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
@@ -14,18 +14,6 @@ function loadData(sr){
     .catch(err=>{
         console.error("Failed GetAllActive : " + err);
     });
-
-    /*
-    $.getJSON(
-        '/mock/usuarios.json',
-        function(users){
-            $.each(users, function(key, user){
-                body.append(createUserCard(user));
-            });
-        }
-    ).fail(function(err){
-        console.error("Fallo la request de usuarios " + err);
-    });*/
 }
 
 function accionBotones(sr){
@@ -99,12 +87,31 @@ $(document).ready(function(){
 
     $("#user-filter").change(function(){
         let filter = $(this).children("option:selected").val()
-        //0 = sin filtro
-        //1 = Usuarios
-        //2 = Reporteros
-        //3 = Editores
+        let body = sr.find("tbody");
 
-        //TODO: Logica de filtrado
+        body.empty();
+        if(filter == 0){
+            getAllActive()
+            .then(res=>res.json())
+            .then(usuarios=>{
+                $.each(usuarios,(key,usuario)=>{
+                    body.append(createUserCard(usuario));
+                });
+            })
+            .catch(err=>console.log(err));
+        }
+        else{
+            getRolActive(filter)
+            .then(res=>res.json())
+            .then(usuarios=>{
+                $.each(usuarios,(key,usuario)=>{
+                    body.append(createUserCard(usuario));
+                });
+            })
+            .catch(err=>console.log(err));
+        }
+
+        
     });
 
     $("#user-search-button").click(function(){
