@@ -411,11 +411,13 @@ BEGIN
         START TRANSACTION;
             INSERT INTO multimedia(Tipo, Contenido, Noticia)
             VALUES(pTipo, pContenido, pNoticia);
+            
+            
     IF `_rollback` THEN
         SELECT 'FAILURE' `STATUS`;
         ROLLBACK;
     ELSE
-        SELECT 'SUCCESS' `STATUS`;
+        SELECT MAX(ID) FROM Multimedia;
         COMMIT;
     END IF;
 END //
