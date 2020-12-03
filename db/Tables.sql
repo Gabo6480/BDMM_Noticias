@@ -33,7 +33,7 @@ CREATE TABLE multimedia(
 CREATE TABLE noticia(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
     Estado			ENUM('en redaccion', 'terminada', 'publicada') DEFAULT 'en redaccion',
-    Titulo			TINYTEXT		NOT NULL,
+    Titulo			TINYTEXT		NOT NULL DEFAULT('TITULO DEL ARTICULO'),
     Resumen			TINYTEXT		NULL,
     Contenido		LONGTEXT		NOT NULL,
     Fecha			DATETIME		NOT NULL,

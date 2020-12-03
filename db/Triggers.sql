@@ -25,4 +25,16 @@ BEGIN
     END IF;
 END //
 
+CREATE TRIGGER tr_BorrarComentariosAlPublicar
+AFTER UPDATE
+ON noticia 
+FOR EACH ROW
+BEGIN 
+	IF new.Estado = 'publicada' AND (new.Estado <> old.Estado) THEN
+		UPDATE noticia 
+        SET Contenido = REEMPLAZAR_COMENTARIOS(Contenido)
+        WHERE ID = new.ID;
+    END IF;
+END //
+
 DELIMITER ;
