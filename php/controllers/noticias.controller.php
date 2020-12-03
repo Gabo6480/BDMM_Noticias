@@ -306,13 +306,13 @@ class NoticiaController{
         }
         $conn->close();
     }
-    function search($titulo, $seccion,$estado){
+    function search($titulo, $escritor, $seccion,$estado){
         require './../dbconnect.php';
         if($estado == "NULL"){
-            $query = "call sp_get_nombre_similar('$titulo', $seccion,$estado);";
+            $query = "call sp_get_nombre_similar('$titulo',$escritor, $seccion,$estado);";
         }
         else{
-            $query = "call sp_get_nombre_similar('$titulo', $seccion,'$estado');";
+            $query = "call sp_get_nombre_similar('$titulo',$escritor, $seccion,'$estado');";
         }
         if (!($sentence = $conn->prepare($query)))
         {
@@ -424,6 +424,30 @@ class NoticiaController{
         if(!$sentence->execute()){
             $conn->close();
             die("Multimedia Agregar: Fallo la ejecucion del query");
+        }
+
+        if($result = $sentence->get_result()){
+            $row = $result->fetch_assoc();
+
+            header("Content-type:application/json");
+            echo json_encode($row);
+            $result->free();
+        }
+        $conn->close();
+    }
+    function estado($id, $estado){
+        require './../dbconnect.php';
+        $query = "call sp_cambiar_estado($id, '$estado');";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("Multimedia Estado: Fallo la preparacion del query");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("Multimedia Estado: Fallo la ejecucion del query");
         }
 
         if($result = $sentence->get_result()){

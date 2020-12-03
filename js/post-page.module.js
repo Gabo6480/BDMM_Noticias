@@ -1,5 +1,5 @@
 import {createPostCard} from './imports/post-card.module.js';
-import { getAll, getBySeccion, getByState, edit, search } from './services/noticias.service.js';
+import { getAll, getBySeccion, getByState, edit, search , cambiarEstado} from './services/noticias.service.js';
 
 
 import { getActive} from './services/secciones.service.js';
@@ -34,9 +34,14 @@ function accionBotones(sr){
         var formdata = new FormData();
         formdata.append("id" , ID);
         formdata.append("estado" , "publicada");
-        edit(formdata)
-        .then(() =>{
-            location.reload();
+
+        cambiarEstado(formdata)
+        .then(res=>res.json())
+        .then(res=>{
+            if(res.RESULT == 'SUCCESS')
+                alert("Noticia Publicada Exitosamente");
+            if(res.RESULT == 'FAILURE')
+                alert("Fallo la publicacion de Noticia");
         })
         .catch(err=>console.log(err));
     });
@@ -57,9 +62,8 @@ $(document).ready(function(){
     let $searchContent = $("#post-search-field");
 
     const makeSearch = ()=>{
-        console.log("SEARCHING")
-        search($searchContent.val(),$filter.val())
-        .then(res=>res.text())
+        search($searchContent.val(),$filter.val(),'terminada')
+        .then(res=>res.json())
         .then(res=>{
             let $body = sr.find("tbody");
             $body.empty();
@@ -78,7 +82,7 @@ $(document).ready(function(){
         e.preventDefault();
         makeSearch();
     });
-
+    
     accionBotones(sr);
 
     loadData(sr);

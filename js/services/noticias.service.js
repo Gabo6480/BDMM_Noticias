@@ -40,53 +40,47 @@ const getRelatedDSL = (palabras,id)=>{
     return fetch(NoticiasRoutes.getRelatedDSL(palabras, id));
 }
 
-const search = (busqueda, seccion, estado)=>{
-    return fetch(NoticiasRoutes.search(busqueda,seccion,estado));
+const search = (busqueda, seccion, estado, reportero)=>{
+    return fetch(NoticiasRoutes.search(busqueda,seccion,estado,reportero));
 }
 
+
+
 const add = body=>{
+    body.set('action','add');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"add"
-        }
+        body:body
     }
 
     return fetch(NoticiasRoutes.post, params);
 }
 
 const edit = body=>{
+    body.set('action','edit');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"edit"
-        }
+        body:body
     }
 
     return fetch(NoticiasRoutes.post, params);
 }
 
 const remove = body=>{
+    body.set('action','remove');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"remove"
-        }
+        body:body
     }
 
     return fetch(NoticiasRoutes.post, params);
 }
 
-const login = body=>{
+const cambiarEstado = body=>{
+    body.set('action','estado');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"login"
-        }
+        body:body
     }
 
     return fetch(NoticiasRoutes.post, params);
@@ -106,6 +100,6 @@ export{
     add,
     edit,
     remove,
-    login,
-    search
+    search,
+    cambiarEstado
 }
