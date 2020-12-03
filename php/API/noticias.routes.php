@@ -92,6 +92,7 @@
                         $id        = $_POST['id']        ;
                         $estado    = $_POST['estado']    ;
                         $titulo    = $_POST['titulo']    ;
+                        $foto      = $_POST['foto']      ;
                         $resumen   = $_POST['resumen']   ;
                         $contenido = $_POST['contenido'] ;
                         $fecha     = $_POST['fecha']     ;
@@ -103,6 +104,7 @@
                             $id        ,
                             $estado    ,
                             $titulo    ,
+                            $foto      ,
                             $resumen   ,
                             $contenido ,
                             $fecha     ,

@@ -4,7 +4,12 @@ $(document).ready(function(){
 
     const url = new URL(window.location);
 
-    
+    let busqueda = url.searchParams.get('busqueda');
+
+    if(!busqueda)
+    {
+        location.href = '/';
+    }
 
     var $grid = $(".grid");
 
