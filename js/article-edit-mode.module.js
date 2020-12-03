@@ -17,10 +17,44 @@ $(document).ready(()=>{
         getOne(userInfo.userId)
         .then(res=>res.json())
         .then(usuario => {
-            if(usuario.Rol != "usuario")
-            $("body").prepend( `<div class="modo-reportero-editor">
-                <i class="fas fa-edit"></i>
-            </div>`);
+            //Agregamos los controles de edición
+            if(usuario.Rol != "usuario"){
+                $("body").prepend( `<div class="modo-reportero-editor">
+                    <i class="fas fa-edit"></i>
+                </div>`);
+
+                $("#article-container").append(
+                    `<div id="edit-buttons" class="form-group" style="display: none;">
+                        <div class="col-xs-12">
+                            <br>
+                            <button id="storeChanges" class="btn btn-lg btn-success"> Guardar </button>
+                            <button id="restoreChanges" class="btn btn-lg" type="reset"> Restaurar </button>
+                        </div>
+                    </div>`);
+
+                $("#restoreChanges").click(() =>{
+                    location.reload();
+                });
+
+                $("#storeChanges").click(() =>{
+                    //TODO: Guardar cambios
+                    //NOTA: El guardar los cambios al archivo tiene que cambiar el estado de la noticia a "en redacción"
+                    //Esto es para que cuando el editor o reportero le hagan cambios, entonces va a regresar a "en redacción"
+                    //La manera para que cambie a "terminada" es que el reportero le de al botón de enviar en "Mis Articulos"
+                    //Y para que cambie a "publicada", el editor tiene que picarle al botón publicar
+
+                    //Falta el obtener la imagen
+                    let titulo = $("#atricle-title").text();
+                    let descripcion = $("#atricle-description").text();
+                    let seccionTexto = $("#atricle-section").text();
+                    let seccionValor = $("#atricle-section").val();
+                    let lugar = $("#article-location").text();
+                    let contenido = $("#article-content").text();
+                    let palabras = $("#article-keywords").text();
+
+                    location.reload();
+                });
+            }
         })
         .catch(err=>console.log(err));
     }

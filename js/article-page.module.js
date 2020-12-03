@@ -52,7 +52,7 @@ function loadDataToWindow(id){
 
         $("#article-info").append("<p id='article-section'>" + data.Seccion + "</p>");
         $("#article-info").append("<p>" + data.Fecha + "</p>");
-        $("#article-info").append("<p class='editor-editable'>" + data.Ubicacion + "</p>");
+        $("#article-info").append("<p id='article-location' class='editor-editable'>" + data.Ubicacion + "</p>");
         $("#article-info").append("<p id='article-author'>" + data.Escritor + "</p>");
 
         $('[data-toggle="tooltip"]').tooltip();
