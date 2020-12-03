@@ -22,7 +22,7 @@ $(document).ready(()=>{
         if(userInfo.userId !== null && userInfo.userName !== null){
 
             let $loginbtn = $("#login-button")
-            const $img = $('<img src="" alt="pp" style="max-height:50px">');
+            const $img = $('<img id="profilePic" src="" alt="pp" class="profile-picture" style="max-height:40px">');
 
             getAvatar(userInfo.userId)
             .then(res=>res.text())
@@ -31,6 +31,10 @@ $(document).ready(()=>{
                 $img.attr('src',src);
 
                 $loginbtn.replaceWith($img)
+
+                $("#profilePic").click(() =>{
+                    location.href = "http://localhost:8081/BDMM_Noticias/pages/profile.html";
+                });
 
                 $('#regiser-btn').remove();
             });

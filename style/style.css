@@ -178,4 +178,16 @@ footer .band {
   -o-object-fit: fill;
      object-fit: fill;
 }
+
+.profile-picture {
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.profile-picture:hover {
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */
