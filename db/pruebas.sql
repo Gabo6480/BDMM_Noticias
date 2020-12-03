@@ -114,6 +114,8 @@ SELECT*FROM Noticia;
 SELECT*FROM multimedia;
 SELECT count(id) from me_gusta;
 
+SELECT regexp_replace(Contenido, '\$\[([\S\s]+?)\]\("([\S\s]+?)"\)/g',"$1") FROM Noticia WHERE id = 1;
+
 call sp_noticia_get();
 
 call sp_get_similar_distintos_a_sl(1,'Chiapas,cHING');

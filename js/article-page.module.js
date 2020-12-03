@@ -36,65 +36,6 @@ $(document).ready(function(){
         else
             $(this).addClass("liked")
     });
-
-     /*
-    var carousel = {
-        "title":"Articulos relacionados",
-        "cards":[
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            },
-            {
-                "title": "Hola equisdedededede",
-                "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-                "url": "./pages/article.html"
-            }
-        ]
-    };
-    
-    
-    $("#related-articles").append(createCarousel(carousel));
-    //Escalamos el texto dentro de cada "noticia"
-    $(".post-title-card").children().each(function(){
-        $(this).fitText(1.25);
-    });*/
 });
 
 function loadDataToWindow(id){
@@ -113,7 +54,7 @@ function loadDataToWindow(id){
         $("#article-info").append("<p>" + data.Ubicacion + "</p>");
         $("#article-info").append("<p id='article-author'>" + data.Escritor + "</p>");
 
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip();
 
         getRelatedDSL(data.Palabras,data.ID)
         .then(res=>res.json())

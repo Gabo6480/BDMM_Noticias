@@ -19,7 +19,7 @@ function loadData(sr){
     .catch(err=>console.log(err));
 
 
-    getAll('en redaccion')
+    getAll('terminada')
     .then(res=>res.json())
     .then(noticias=>{
         $.each(noticias,(key,noticia)=>{

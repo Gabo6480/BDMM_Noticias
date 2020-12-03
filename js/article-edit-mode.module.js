@@ -35,7 +35,7 @@ $(document).ready(()=>{
             .then(res=>res.json())
             .then(secciones=>{
                 $.each(secciones, (i, seccion)=>{
-                    $select.append($(`<option value="${seccion.ID}">${seccion.Nombre}</option>`))
+                    $select.append($(`<option value='"${seccion.ID}"'>${seccion.Nombre}</option>`))
                 });
             })
             .catch(err=>console.log(err));
@@ -46,8 +46,6 @@ $(document).ready(()=>{
 
 
             $("#article-section").replaceWith($select);
-
-            //TODO: Traer las secciones y rellenar el select
 
             $("#wmd-button-bar").show();
             $("#edit-buttons").show();
