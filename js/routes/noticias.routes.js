@@ -8,7 +8,7 @@ const getBySeccion = id => `${noticiasURL}?action=getBySeccion&id=${id}`;
 
 const getByReportero = id => `${noticiasURL}?action=getByReportero&id=${id}`;
 
-const getAll = ()=> `${noticiasURL}?action=getAll`;
+const getAll = (val)=> `${noticiasURL}?action=getAll`;
 
 const getByState = state=> `${noticiasURL}?action=getByState&state=${state}`;
 

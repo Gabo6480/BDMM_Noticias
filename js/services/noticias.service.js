@@ -12,8 +12,8 @@ const getByReportero = id =>{
     return fetch(NoticiasRoutes.getByReportero(id));
 };
 
-const getAll = ()=>{
-    return fetch(NoticiasRoutes.getAll());
+const getAll = (val) => {
+    return fetch(NoticiasRoutes.getAll(val));
 };
 
 const getByState = state=>{

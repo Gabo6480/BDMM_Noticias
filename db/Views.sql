@@ -1,3 +1,5 @@
+use BDMM_DB;
+
 CREATE VIEW v_Articulo_Pagina AS 
 SELECT 
         N.ID, N.Estado, N.Titulo, N.Resumen, N.Contenido, N.Fecha, 

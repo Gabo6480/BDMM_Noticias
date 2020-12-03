@@ -22,12 +22,20 @@ CREATE TABLE seccion(
     Activa			BOOL			DEFAULT true,
     Orden			INT				DEFAULT 0
 );
+
+CREATE TABLE multimedia(
+	ID				INT 							AUTO_INCREMENT PRIMARY KEY,
+    Tipo			VARCHAR(30)                     NOT NULL,
+    Contenido		BLOB						    NOT NULL,
+    Noticia 		INT 							NULL
+);
+
 CREATE TABLE noticia(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
     Estado			ENUM('en redaccion', 'terminada', 'publicada') DEFAULT 'en redaccion',
     Titulo			TINYTEXT		NOT NULL,
     Resumen			TINYTEXT		NULL,
-    Contenido		TEXT			NOT NULL,
+    Contenido		LONGTEXT		NOT NULL,
     Fecha			DATETIME		NOT NULL,
     Ubicacion		TINYTEXT		NOT NULL,
     Visitas			INT				DEFAULT 0,
@@ -40,22 +48,12 @@ CREATE TABLE noticia(
     
     Seccion			INT				NOT NULL,
     CONSTRAINT FK_SECCION FOREIGN KEY (Seccion)
-    REFERENCES seccion(ID)
-
+    REFERENCES seccion(ID),
+    Foto            INT             default 1,
+    CONSTRAINT FK_FOTO_NOTICIA FOREIGN KEY(Foto) 
+    REFERENCES multimedia(ID) ON DELETE CASCADE
     
 );
-CREATE TABLE multimedia(
-	ID				INT 							AUTO_INCREMENT PRIMARY KEY,
-    Tipo			VARCHAR(30)                     NOT NULL,
-    Contenido		MEDIUMBLOB						NOT NULL,
-    Noticia 		INT 							NOT NULL,
-    CONSTRAINT fk_multimedia_noticia
-    FOREIGN KEY (Noticia) REFERENCES noticia(ID)
-);
-
-ALTER TABLE Noticia 
-ADD COLUMN Foto INT NULL,
-ADD CONSTRAINT FK_FOTO_NOTICIA FOREIGN KEY(Foto) REFERENCES multimedia(ID) ON DELETE CASCADE;
 
 CREATE TABLE comentario(
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,
