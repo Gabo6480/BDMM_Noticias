@@ -319,6 +319,11 @@ END //
 CREATE PROCEDURE sp_noticia_by_id
 (IN pID INT)
 BEGIN 
+	
+    UPDATE v_Articulo_Pagina
+    SET Visitas = Visitas + 1
+    WHERE ID = pID;
+
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
     FROM v_Articulo_Pagina
     WHERE ID = pID;

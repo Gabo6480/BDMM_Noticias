@@ -2,7 +2,11 @@ import {createItemCard} from './imports/index-item-card.module.js'
 
 $(document).ready(function(){
 
-    var grid = $(".grid");
+    const url = new URL(window.location);
+
+    
+
+    var $grid = $(".grid");
 
     var card = {
         "title": "Hola equisdedededede",
@@ -12,11 +16,13 @@ $(document).ready(function(){
 
     //Primero agregamos el contenido
     for(var i = 0; i < 40; i++){
-        grid.append(createItemCard(card, "small-card"));
+        $grid.append(createItemCard(card, "small-card"));
     }
 
+    
+
     //Lo organizamos
-    grid.masonry({
+    $grid.masonry({
         itemSelector: '.grid-item',
         columnWidth: 210
     });
