@@ -69,7 +69,7 @@ $(document).ready(function(){
                     j++;
     
                     if(j === 10 || index === (noticias.length-1) ){
-                        $("#carousel-holder").append(createCarousel(carrousselBuffer));
+                        $("#carousel-holder").append(createCarousel({tile:"Mas Noticias",cards:[...carrousselBuffer]}));
                         j = 0;
                         carrousselBuffer = [];
                     }
