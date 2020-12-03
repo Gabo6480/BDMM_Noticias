@@ -385,19 +385,11 @@ BEGIN
 END//
 
 #agregar a controller
-CREATE PROCEDURE sp_get_nombre_similar(IN pTitulo TINYTEXT)
+CREATE PROCEDURE sp_get_nombre_similar(IN pTitulo TINYTEXT, IN pSeccion INT, IN pEstado ENUM('en redaccion', 'terminada', 'publicada'))
 BEGIN
 	SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto
     FROM Noticia 
-    WHERE Titulo LIKE CONCAT('%', pTitulo ,'%');
-END//
-
-#agregar a controller
-CREATE PROCEDURE sp_get_nombre_similar_seccion(IN pTitulo TINYTEXT, IN pSeccion INT)
-BEGIN
-SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto
-    FROM Noticia 
-    WHERE Seccion = pSeccion and Titulo LIKE CONCAT('%', pTitulo ,'%');
+    WHERE Titulo LIKE CONCAT('%', pTitulo ,'%') AND Seccion = COALESCE(pSeccion, Seccion) AND Estado = COALESCE(pEstado,Estado);
 END//
 
 #####################
@@ -452,7 +444,6 @@ END //
 #    comentarios    #
 #####################
 
-delimiter //
 CREATE PROCEDURE sp_comentarios_by_article
 (IN pID INT)
 BEGIN

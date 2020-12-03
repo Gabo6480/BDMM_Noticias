@@ -50,6 +50,12 @@
                         $id       = $_GET['id'];
                         $nc->getSimilarDSL($id,$palabras);
                     break;
+                case 'search':
+                        $search = $_GET['busqueda'];
+                        $seccion = isset($_GET['seccion']) ? $_GET['seccion'] : "NULL";
+                        $estado = isset($_GET['estado']) ? $_GET['estado'] : "NULL";
+                        $nc->search($search,$seccion,$estado);
+                        break;
                 default:
                     break;
             }

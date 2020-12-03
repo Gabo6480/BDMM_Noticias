@@ -130,3 +130,5 @@ call sp_noticia_get();
 call sp_get_similar_distintos_a_sl(1,'Chiapas,cHING');
 
 call sp_noticia_get_estado('en redaccion');
+
+call sp_get_nombre_similar('ex',NULL);

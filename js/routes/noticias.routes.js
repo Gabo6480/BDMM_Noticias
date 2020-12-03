@@ -22,6 +22,19 @@ const getRelatedD = (palabras,id) =>`${noticiasURL}?action=getRelatedD&palabras=
 
 const getRelatedDSL = (palabras,id) =>`${noticiasURL}?action=getRelatedDSL&palabras=${palabras}&id=${id}`;
 
+
+const search = (titulo, seccion, estado)=>{
+    let b = `${noticiasURL}?action=search&busqueda=${titulo}`
+    
+    if(seccion){
+        b+=`&seccion=${seccion}`;
+    }
+    if(estado){
+        b+=`&estado=${estado}`;
+    }
+    return b;
+};
+
 export{
     noticiasURL as post,
     getOne,
@@ -33,5 +46,6 @@ export{
     getByStateReportero,
     getRelated,
     getRelatedD,
-    getRelatedDSL
+    getRelatedDSL,
+    search
 }

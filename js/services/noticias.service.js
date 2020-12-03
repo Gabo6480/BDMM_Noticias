@@ -40,6 +40,10 @@ const getRelatedDSL = (palabras,id)=>{
     return fetch(NoticiasRoutes.getRelatedDSL(palabras, id));
 }
 
+const search = (busqueda, seccion, estado)=>{
+    return fetch(NoticiasRoutes.search(busqueda,seccion,estado));
+}
+
 const add = body=>{
     const params = {
         method:"POST",
@@ -102,5 +106,6 @@ export{
     add,
     edit,
     remove,
-    login
+    login,
+    search
 }
