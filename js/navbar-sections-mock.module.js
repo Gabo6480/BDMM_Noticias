@@ -6,6 +6,7 @@ import { createSection } from './imports/navbar-sections.js';
 import { getActive} from './services/secciones.service.js';
 
 $(document).ready(()=>{
+
     getActive()
     .then(res => res.json())
     .then(data =>{
@@ -56,8 +57,12 @@ $(document).ready(()=>{
             });
         })
         .catch(err=>console.log(err));
-
-        
     }
+
+    $(document).on('submit','#search-form-nav', e=>{
+        console.log('SUBMIT');
+        e.preventDefault();
+        location.href = "http://localhost:8081/BDMM_Noticias/pages/search.html";
+    });
 
 });
