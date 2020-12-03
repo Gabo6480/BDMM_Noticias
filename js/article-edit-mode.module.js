@@ -1,10 +1,31 @@
 import * as parser from './imports/article-content-parser.module.js'
 import {getActive} from './services/secciones.service.js';
 
+import {getStoredUser, clearStorage} from './imports/cookie.module.js';
+import {getOne} from './services/usuario.service.js';
+
 var editable = false;
 
 $(document).ready(()=>{
-    $('.modo-reportero-editor').click(()=>{
+
+
+   
+
+    const userInfo = getStoredUser();
+
+    if(userInfo.userId !== null && userInfo.userName !== null){
+        getOne(userInfo.userId)
+        .then(res=>res.json())
+        .then(usuario => {
+            if(usuario.Rol != "usuario")
+            $("body").prepend( `<div class="modo-reportero-editor">
+                <i class="fas fa-edit"></i>
+            </div>`);
+        })
+        .catch(err=>console.log(err));
+    }
+
+    $('body').on('click','.modo-reportero-editor' , ()=>{
         $('.editor-editable').each(function(index){
             let self = $(this);
             if(self.attr('contentEditable') == "true"){
