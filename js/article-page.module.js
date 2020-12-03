@@ -3,7 +3,7 @@ import * as parser from './imports/article-content-parser.module.js'
 
 import {createCarousel} from './imports/carousel-creator.module.js'
 
-import {getOne, getRelatedDSL} from './services/noticias.service.js';
+import {getOne, getRelatedD} from './services/noticias.service.js';
 import {getByArticle} from './services/comentarios.service.js';
 import {getById} from './routes/multimedia.routes.js';
 import {count, add, remove} from './services/likes.service.js';
@@ -57,7 +57,7 @@ function loadDataToWindow(id){
 
         $('[data-toggle="tooltip"]').tooltip();
 
-        getRelatedDSL(data.Palabras,data.ID)
+        getRelatedD(data.Palabras,data.ID)
         .then(res=>res.json())
         .then(relatedArticles=>{
             var carousel = {
