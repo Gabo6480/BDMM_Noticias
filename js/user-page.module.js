@@ -63,11 +63,6 @@ function accionBotones(sr){
     sr.on("click", ".button-save", function (){
         let papa = $(this).closest("tr");
 
-        let actions = $(this).parent();
-
-        $(this).replaceWith("<button class='btn btn-outline-secondary button-edit'><i class='fas fa-edit'></i></button>");
-        actions.find(".button-delete").attr("disabled", false);
-
         let userType = papa.find("td.user-type");
 
         let select = userType.find("select").children("option:selected");
@@ -75,9 +70,9 @@ function accionBotones(sr){
         let val = select.val();
         let text = select.text();
 
-        userType.html(text);
-
         //TODO: Logica de enviar el cambio a la base de datos
+
+        location.reload();
     });
 }
 

@@ -29,4 +29,9 @@
 .posts #search-results td button {
   margin: 0px 2px;
 }
+
+[contentEditable=true] {
+  background-color: Gainsboro;
+  border: 1px solid DarkGray;
+}
 /*# sourceMappingURL=posts-page.css.map */
