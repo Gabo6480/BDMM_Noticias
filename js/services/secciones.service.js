@@ -8,6 +8,10 @@ const getActive = ()=>{
     return fetch(SeccionesRoutes.getActive());
 }
 
+const search = search=>{
+    return fetch(SeccionesRoutes.search(search));
+}
+
 const add = body=>{
     const params = {
         method:"POST",
@@ -47,6 +51,7 @@ const remove = body=>{
 export{
     get,
     getActive,
+    search,
     add,
     edit,
     remove

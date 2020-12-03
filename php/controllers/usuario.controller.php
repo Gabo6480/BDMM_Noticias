@@ -17,6 +17,7 @@
             "sp_get_usuarios_rol_activos";
             "sp_get_usuarios_activos";      
             "sp_get_avatar";
+            "sp_get_usuarios_similares_activos";
         }
 
         /////////////////
@@ -276,6 +277,33 @@
             }
             $conn->close();
         }
+        function search($nombre, $rol){
+            require './../dbconnect.php';
 
+            if($rol == "NULL")
+                $query = "call sp_get_usuarios_similares_activos('$nombre', $rol);";
+            else
+                $query = "call sp_get_usuarios_similares_activos('$nombre', '$rol');";
+            if(!($sentence = $conn->prepare($query))){
+                die('GET AVATAR: PREPARATION FAILED'.mysqli_error($conn));
+            }
+
+            if(!$sentence->execute()){
+                $conn->close();
+                die('GET AVATAR: EXECUTION FAILED'.mysqli_stmt_error($sentence));
+            }
+
+            if($result = $sentence->get_result()){
+
+                $arr = array();
+                while($usuario = $result->fetch_object("Usuario")){
+                    array_push($arr, $usuario);
+                }
+                header("Content-type:application/json");
+                echo json_encode($arr);
+                $result->free();
+            }
+            $conn->close();
+        }
     }
 ?>

@@ -50,36 +50,6 @@ function accionBotones(sr){
 $(document).ready(function(){
 
     let sr = $("#result-table");
-    let body = sr.find("tbody");
-
-    /*$("#post-filter").change(function(){
-        let filter = $(this).children("option:selected").val()
-        body.empty();
-        if(filter == 0){
-            getAll('en redaccion')
-            .then(res=>res.json())
-            .then(noticias=>{
-                $.each(noticias,(key,noticia)=>{
-                    body.append(createPostCard(noticia));
-                });
-            })
-            .catch(err=>console.log(err));
-        } 
-        else{
-            getBySeccion(filter)
-            .then(res=>res.json())
-            .then(noticias=>{
-                $.each(noticias,(key,noticia)=>{
-                    body.append(createPostCard(noticia));
-                });
-            })
-            .catch(err=>console.log(err));
-        }
-    });*/
-
-    /*$("#post-search-button").click(function(){
-        let query = $(this).parent().find("#post-search-field").val();
-    });*/
 
     //Buscar cuando cambie el form de busqueda o sea enviado "submit", le agregue un ID -Parga
     let $search = $('#search-noticia-form');
@@ -89,7 +59,7 @@ $(document).ready(function(){
     const makeSearch = ()=>{
         console.log("SEARCHING")
         search($searchContent.val(),$filter.val())
-        .then(res=>res.json())
+        .then(res=>res.text())
         .then(res=>{
             let $body = sr.find("tbody");
             $body.empty();

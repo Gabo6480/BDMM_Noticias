@@ -11,6 +11,10 @@
             else if($action === 'getActive'){
                 $sc->getActivas();
             }
+            else if($action === 'search'){
+                $search = $_GET['search'];
+                $sc->search($search);
+            }
            
         }
         else if($_SERVER["REQUEST_METHOD"] == "POST"){

@@ -14,6 +14,14 @@ const getRolActivos = id =>`${usuarioURL}?action=getRolActivos&id=${id}`;
 
 const getAllActive  = () => `${usuarioURL}?action=getActivos`;
 
+const search = (nombre, rol) =>{
+    let s = `${usuarioURL}?action=search&busqueda=${nombre}`;
+    if(rol){
+        s+=`&rol=${rol}`;
+    }
+    return s;
+}
+
 export{
     usuarioURL as post,
     getFoto,
@@ -21,5 +29,6 @@ export{
     getRol,
     getAll,
     getRolActivos,
-    getAllActive
+    getAllActive,
+    search
 }

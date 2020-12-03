@@ -26,8 +26,13 @@
                         $uController->getAllActivos();
                     break;
                 case 'getAvatar':
-                    $id = $_GET['id'];
+                        $id = $_GET['id'];
                         $uController->getAvatar($id);
+                    break;
+                case 'search':
+                        $busqueda = isset($_GET['busqueda'])? $_GET['busqueda'] : "";
+                        $rol = isset($_GET['rol'])? $_GET['rol'] : "NULL";
+                        $uController->search($busqueda,$rol);
                     break;
                 default:
                     break;
