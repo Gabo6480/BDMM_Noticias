@@ -1,10 +1,11 @@
 import {createMyPostCard} from './imports/myposts-card.module.js';
-
+import {getStoredUser, clearStorage, storeUser} from './imports/cookie.module.js';
 import { getActive} from './services/secciones.service.js';
 
 import {getByReportero} from './services/noticias.service.js';
 function loadData(sr){
     let body = sr.find("tbody");
+    const userInfo = getStoredUser();
 
     getActive()
     .then(res => res.json())
@@ -16,7 +17,7 @@ function loadData(sr){
     })
     .catch(err=>console.log(err));
 
-    getByReportero(2)
+    getByReportero(userInfo.userId !== null ? userInfo.userId : 2)
     .then(res=>res.json())
     .then(usuarios=>{
         $.each(usuarios, (key, user)=>{

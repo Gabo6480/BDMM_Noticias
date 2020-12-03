@@ -62,7 +62,7 @@ $(document).ready(function () {
         .then(res=>res.text())
         .then(data=>{
             alert("Usuario Modificado Exitosamente");
-            window.location = './profile.html';
+            location.reload();
         })
         .catch(err=>{
             debugger
@@ -109,7 +109,7 @@ $(document).ready(function () {
         .then(res=>res.text())
         .then(data=>{
             alert("Usuario Modificado Exitosamente");
-            window.location = './profile.html';
+            location.reload();
         })
         .catch(err=>{
             console.log(err)
