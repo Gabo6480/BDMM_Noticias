@@ -23,14 +23,7 @@ $(document).ready(function(){
                 grid.append(createItemCard(noticia, "small-card"));
             }
             else{
-                if(!orgranized){
-                    grid.masonry({
-                        itemSelector: '.grid-item',
-                        columnWidth: 210
-                    });
-                    organized = true;
-                }
-
+                
                 carrousselBuffer.push(noticia);
                 j++;
 
@@ -42,6 +35,13 @@ $(document).ready(function(){
 
             }
         });
+
+        
+        grid.masonry({
+            itemSelector: '.grid-item',
+            columnWidth: 210
+        });
+        
     })
 
     
