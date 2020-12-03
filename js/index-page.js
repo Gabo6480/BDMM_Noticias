@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     var grid = $(".grid");
 
-    getAll()
+    getAll("publicada")
     .then(res=>res.json())
     .then(noticias=>{
 

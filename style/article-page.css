@@ -6,6 +6,10 @@
   margin-top: 60px;
 }
 
+#article-keywords {
+  color: #0F52BA;
+}
+
 #article-img-container {
   width: 100%;
   background: #222222;

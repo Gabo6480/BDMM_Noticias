@@ -48,10 +48,11 @@ function loadDataToWindow(id){
         $("#article-description").text(data.Resumen);
         $("#article-img").attr("src", getById(data.Foto));
         $("#article-content").html(parser.parseArticle(data.Contenido));
+        $("#article-keywords").text(data.Palabras);
 
         $("#article-info").append("<p id='article-section'>" + data.Seccion + "</p>");
         $("#article-info").append("<p>" + data.Fecha + "</p>");
-        $("#article-info").append("<p>" + data.Ubicacion + "</p>");
+        $("#article-info").append("<p class='editor-editable'>" + data.Ubicacion + "</p>");
         $("#article-info").append("<p id='article-author'>" + data.Escritor + "</p>");
 
         $('[data-toggle="tooltip"]').tooltip();
