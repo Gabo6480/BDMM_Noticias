@@ -1,3 +1,3 @@
-const url = "http://localhost/BDMM_Noticias/php/API";
+const url = "http://localhost:8081/BDMM_Noticias/php/API";
 
 export{url};

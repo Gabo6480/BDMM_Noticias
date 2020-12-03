@@ -22,7 +22,7 @@
         window.onload = ()=>{
 
             let container = document.querySelector('.container');
-            fetch(`http://localhost/BDMM_Noticias/php/Usuario/usuario.routes.php?action=getAll`)
+            fetch(`http://localhost:8081/BDMM_Noticias/php/Usuario/usuario.routes.php?action=getAll`)
             .then(response=>{
                 if(response.ok)
                     return response.json();

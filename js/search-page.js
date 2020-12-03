@@ -7,7 +7,7 @@ $(document).ready(function(){
     var card = {
         "title": "Hola equisdedededede",
         "image": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
-        "url": "http://127.0.0.1:5500/pages/article.html"
+        "url": "http://127.0.0.1:8081/pages/article.html"
     }
 
     //Primero agregamos el contenido
