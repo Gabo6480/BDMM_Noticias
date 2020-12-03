@@ -261,6 +261,23 @@ BEGIN
     END IF;
 END //
 
+CREATE PROCEDURE sp_cambiar_estado(IN pID INT, IN pEstado ENUM('en redaccion','terminada','publicada'))
+BEGIN
+    DECLARE `_rollback` BOOL DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
+        START TRANSACTION;
+            UPDATE noticia
+            SET Estado = pEstado
+            WHERE ID = pID;
+    IF `_rollback` THEN
+        SELECT 'FAILURE' `STATUS`;
+        ROLLBACK;
+    ELSE
+        SELECT 'SUCCESS' `STATUS`;
+        COMMIT;
+    END IF;
+END //
+
 CREATE PROCEDURE sp_eliminar_noticia
 (
  IN pID INT
@@ -376,11 +393,11 @@ BEGIN
     WHERE LOWER(Palabras) RLIKE LOWER(m_regex) AND pID <> ID;
 END//
 
-CREATE PROCEDURE sp_get_nombre_similar(IN pTitulo TINYTEXT, IN pSeccion INT, IN pEstado ENUM('en redaccion', 'terminada', 'publicada'))
+CREATE PROCEDURE sp_get_nombre_similar(IN pTitulo TINYTEXT, IN pReportero INT, IN pSeccion INT, IN pEstado ENUM('en redaccion', 'terminada', 'publicada'))
 BEGIN
 	SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
     FROM v_Articulo_Pagina 
-    WHERE Titulo LIKE CONCAT('%', pTitulo ,'%') AND Seccion = COALESCE(pSeccion, Seccion) AND Estado = COALESCE(pEstado,Estado);
+    WHERE Titulo LIKE CONCAT('%', pTitulo ,'%') AND Seccion = COALESCE(pSeccion, Seccion) AND Estado = COALESCE(pEstado,Estado) AND Escritor = COALESCE(pReportero, Escritor);
 END//
 
 #####################

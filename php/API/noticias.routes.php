@@ -52,9 +52,10 @@
                     break;
                 case 'search':
                         $search = $_GET['busqueda'];
+                        $reportero = isset($_GET['reportero']) ? $_GET['reportero'] : "NULL";
                         $seccion = isset($_GET['seccion']) ? $_GET['seccion'] : "NULL";
                         $estado = isset($_GET['estado']) ? $_GET['estado'] : "NULL";
-                        $nc->search($search,$seccion,$estado);
+                        $nc->search($search,$reportero,$seccion,$estado);
                         break;
                 default:
                     break;
@@ -75,7 +76,7 @@
                         $palabras  = $_POST['palabras']  ;
                         $escritor  = $_POST['escritor']  ;
                         $seccion   = $_POST['seccion']   ;
-                        $uController->add(
+                        $nc->add(
                             $estado   ,
                             $titulo   ,
                             $resumen  ,
@@ -98,7 +99,7 @@
                         $visitas   = $_POST['visitas']   ;
                         $palabras  = $_POST['palabras']  ;
                         $seccion   = $_POST['seccion']   ;
-                        $uController->edit(
+                        $nc->edit(
                             $id        ,
                             $estado    ,
                             $titulo    ,
@@ -113,14 +114,14 @@
                     break;
                 case 'remove':
                         $id     = $_POST['id_usuario']  ;
-                        $uController->remove($id);
+                        $nc->remove($id);
                     break;
-                case 'login':
-                        $username = $_POST['username'];
-                        $password = $_POST['password'];
-                        $uController->login(
-                            $username,
-                            $password
+                case 'estado':
+                        $id = $_POST['id'];
+                        $estado = $_POST['estado'];
+                        $nc->estado(
+                            $id,
+                            $estado
                         );
                     break;
                 default:

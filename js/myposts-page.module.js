@@ -1,8 +1,8 @@
 import {createMyPostCard} from './imports/myposts-card.module.js';
 import {getStoredUser, clearStorage, storeUser} from './imports/cookie.module.js';
 import { getActive} from './services/secciones.service.js';
+import {getByReportero, search, cambiarEstado} from './services/noticias.service.js';
 
-import {getByReportero} from './services/noticias.service.js';
 function loadData(sr){
     let body = sr.find("tbody");
     const userInfo = getStoredUser();
@@ -22,7 +22,6 @@ function loadData(sr){
     .then(usuarios=>{
         $.each(usuarios, (key, user)=>{
             body.append(createMyPostCard(user));
-            alert(JSON.stringify(user));
         });
     })
     .catch(err=>{
@@ -37,7 +36,18 @@ function accionBotones(sr){
     });
 
     sr.on("click", ".button-send", function (){
-        //TODO: Abrir enviar la publicación para revisión
+
+        let fd = new FormData();
+        let ID = $(this).parents("tr").attr("post-id");
+        fd.append('id',ID);
+        fd.append('estado', 'terminada');
+        
+        cambiarEstado(fd)
+        .then(res=>res.text())
+        .then(res=>{
+            alert(res);
+        })
+        .catch(err=>console.log(err))
     });
 
     sr.on("click", ".button-delete", function (){
@@ -53,18 +63,33 @@ $(document).ready(function(){
         //Crear nueva publicación
     });
 
-    $("#post-filter").change(function(){
-        let filter = $(this).children("option:selected").val()
-        //0 = sin filtro
-        //1 = Usuarios
-        //2 = Reporteros
-        //3 = Editores
+    //Buscar cuando cambie el form de busqueda o sea enviado "submit", le agregue un ID -Parga
+    let $search = $('#search-noticia-form');
+    let $filter = $('#post-filter');
+    let $searchContent = $("#post-search-field");
 
-        //TODO: Logica de filtrado
-    });
+    const userInfo = getStoredUser();
 
-    $("#post-search-button").click(function(){
-        let query = $(this).parent().find("#post-search-field").val();
+    const makeSearch = ()=>{
+        search($searchContent.val(),$filter.val(),undefined, userInfo.userId)
+        .then(res=>res.json())
+        .then(res=>{
+            let $body = sr.find("tbody");
+            $body.empty();
+            $.each(res,(key,noticia)=>{
+                $body.append(createMyPostCard(noticia));
+            });
+        })
+        .catch(err=>console.log(err))
+    }
+
+    //Buscar cuando cambie el filtro, contenido del input text o de al boton de buscar explicitamente
+    $filter.change(makeSearch);
+    $searchContent.on('keypress',makeSearch);
+    //evitar default para no refrescar pagina
+    $search.submit(e=>{
+        e.preventDefault();
+        makeSearch();
     });
 
     accionBotones(sr);

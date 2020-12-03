@@ -23,7 +23,7 @@ const getRelatedD = (palabras,id) =>`${noticiasURL}?action=getRelatedD&palabras=
 const getRelatedDSL = (palabras,id) =>`${noticiasURL}?action=getRelatedDSL&palabras=${palabras}&id=${id}`;
 
 
-const search = (titulo, seccion, estado)=>{
+const search = (titulo, seccion, estado, reportero)=>{
     let b = `${noticiasURL}?action=search&busqueda=${titulo}`
     
     if(seccion){
@@ -31,6 +31,9 @@ const search = (titulo, seccion, estado)=>{
     }
     if(estado){
         b+=`&estado=${estado}`;
+    }
+    if(reportero){
+        b+=`&reportero=${reportero}`;
     }
     return b;
 };
