@@ -52,5 +52,6 @@ export{
     getRelated,
     getRelatedD,
     getRelatedDSL,
-    search
+    search,
+    popular
 }

@@ -9,26 +9,22 @@ const count = id=>{
 }
 
 const add = body=>{
+
+    body.append('action','add');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"add"
-        }
+        body:body
     }
 
     return fetch(LikesRoutes.post, params);
 }
 
 const remove = body=>{
+    body.append('action','remove');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"remove"
-        }
+        body:body
     }
-
     return fetch(LikesRoutes.post, params);
 }
 

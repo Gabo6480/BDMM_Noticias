@@ -1,5 +1,4 @@
 let createComment = function(comment, deletable){
-    debugger
     let div = document.createElement('div');
     div.classList.add('comment');
 
@@ -41,7 +40,6 @@ let createMainComment = function(comment, deleteable){
         comments.append(createComment(comment.respuestas[i], deleteable));
     }
 
-    debugger;
     let commenttext = document.createElement('div');
     commenttext.classList.add("comment-form");
     commenttext.setAttribute('comment-id', comment.id);

@@ -517,9 +517,6 @@ END //
 #####################
 #      me_gusta     #
 #####################
-
-use BDMM_DB;
-
 CREATE PROCEDURE sp_addLike(IN pNoticia INT, IN pUsuario INT)
 BEGIN
     INSERT INTO me_gusta(Noticia, Usuario) VALUES(pNoticia, pUsuario); 

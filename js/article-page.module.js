@@ -16,11 +16,11 @@ const userInfo = getStoredUser();
 
 $(document).ready(function(){
 
-    loadDataToWindow(id || 1);
+    loadDataToWindow(id);
 
     comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
         if(res.RESULT != "NOT"){
-            $(this).addClass("liked");
+            $("#like-button").addClass("liked");
         }
     });
 
@@ -31,6 +31,12 @@ $(document).ready(function(){
             likefd.append('id_usario', userInfo.userId);
             remove(likefd).then(() => {
                 $(this).removeClass("liked");
+                count(id)
+                .then(res=>res.json())
+                .then(data=>{
+                    $('#like-number').text(data.RESULT);
+                })
+                .catch(err=>console.log(err))
             })
             .catch(err=>console.log(err));
         }
@@ -40,10 +46,16 @@ $(document).ready(function(){
             likefd.append('id_usario', userInfo.userId);
             add(likefd).then(() => {
                 $(this).addClass("liked");
+                count(id)
+                .then(res=>res.json())
+                .then(data=>{
+                    $('#like-number').text(data.RESULT);
+                })
+                .catch(err=>console.log(err))
             })
             .catch(err=>console.log(err));
         }
-        //location.reload();
+        
     });
 });
 
@@ -133,7 +145,7 @@ $(document).on('click','.comment-button', e=>{
     commentfd.append("contenido", commentText);
     commentfd.append("usuario", userInfo.userId);
     commentfd.append("noticia", id);
-    debugger;
+
     if(commentID != undefined){
         commentfd.append("padre", commentID);
     }
