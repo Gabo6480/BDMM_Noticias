@@ -61,7 +61,7 @@ INSERT INTO Seccion(Nombre, Color)
 VALUES('Internacional', 'cc7f33');
 
 #noticias
-INSERT INTO noticia(Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Palabras, Escritor, Seccion, Foto)
+INSERT INTO noticia(Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Palabras, Escritor, Seccion)
 VALUES(
 	'en redaccion',
     'Cangrejos Chiapanecos',
@@ -71,11 +71,10 @@ VALUES(
     'Chiapas',
     'Chiapas,Cangrejo,Cangrejos,Ataque,Chiapaneco,Chiapanecos',
     2,
-    1,
     1
 );
 
-INSERT INTO noticia(Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Palabras, Escritor, Seccion, Foto)
+INSERT INTO noticia(Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Palabras, Escritor, Seccion)
 VALUES(
 	'en redaccion',
     'Otra noticia',
@@ -85,11 +84,10 @@ VALUES(
     'Meijiko',
     'Algo,algo2,Chiapas,Cangrejos',
     2,
-    2,
-    1
+    2
 );
 
-INSERT INTO noticia(Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Palabras, Escritor, Seccion, Foto)
+INSERT INTO noticia(Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Palabras, Escritor, Seccion)
 VALUES(
 	'publicada',
     'EXTRAAAAAAA EXTRAAAAAAAAAAAAA',
@@ -99,8 +97,7 @@ VALUES(
     'Ching chong, China',
     'Ching,chong,Ping,Pong,Rasista,ya sé',
     2,
-    4,
-    1
+    4
 );
 
 #SELECT N.titulo, U.nombre FROM usuario U INNER JOIN noticia N ON U.ID = N.escritor
