@@ -2,6 +2,7 @@ import {createItemCard} from './imports/index-item-card.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
 
 import {getAll, getByState, getBySeccion ,getByStateSeccion} from './services/noticias.service.js';
+import {byId} from './services/secciones.service.js';
 
 $(document).ready(function(){
 
@@ -47,7 +48,12 @@ $(document).ready(function(){
         
         })
         .catch(err=>console.log(err))
-    else    
+    else
+        
+        byId(seccionId)
+        .then((res) => res.json()).then((sectionInfo) =>{
+            $("#sections").css("background-color", "#" + sectionInfo.Color);
+
         getByStateSeccion(seccionId, 'publicada')
         .then(res=>res.json())
         .then(noticias=>{
@@ -83,5 +89,6 @@ $(document).ready(function(){
             });
             
             })
+        })
         .catch(err=>console.log(err))
 });
