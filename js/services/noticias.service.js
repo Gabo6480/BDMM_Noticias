@@ -49,7 +49,7 @@ const popular = ()=>{
 }
 
 const add = body=>{
-    body.set('action','add');
+    body.append('action','add');
     const params = {
         method:"POST",
         body:body
@@ -59,7 +59,7 @@ const add = body=>{
 }
 
 const edit = body=>{
-    body.set('action','edit');
+    body.append('action','edit');
     const params = {
         method:"POST",
         body:body
@@ -69,7 +69,7 @@ const edit = body=>{
 }
 
 const remove = body=>{
-    body.set('action','remove');
+    body.append('action','remove');
     const params = {
         method:"POST",
         body:body
@@ -79,7 +79,17 @@ const remove = body=>{
 }
 
 const cambiarEstado = body=>{
-    body.set('action','estado');
+    body.append('action','estado');
+    const params = {
+        method:"POST",
+        body:body
+    }
+
+    return fetch(NoticiasRoutes.post, params);
+}
+
+const publicar = id=>{
+    body.append('action','publicar');
     const params = {
         method:"POST",
         body:body
@@ -104,5 +114,6 @@ export{
     remove,
     search,
     popular,
-    cambiarEstado
+    cambiarEstado,
+    publicar
 }

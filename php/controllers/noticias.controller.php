@@ -484,4 +484,28 @@ class NoticiaController{
         }
         $conn->close();
     }
+    function publicar($id){
+        require './../dbconnect.php';
+        $query = "call sp_publicar($id);";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("Multimedia Estado: Fallo la preparacion del query");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("Multimedia Estado: Fallo la ejecucion del query");
+        }
+
+        if($result = $sentence->get_result()){
+            $row = $result->fetch_assoc();
+
+            header("Content-type:application/json");
+            echo json_encode($row);
+            $result->free();
+        }
+        $conn->close();
+    }
 }

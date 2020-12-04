@@ -288,8 +288,9 @@ BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
         START TRANSACTION;
             UPDATE noticia
-            SET Estado = pEstado, Contenido = IF( pEstado = 'publicada', REEMPLAZAR_COMENTARIOS(pSeccion), pSeccion)
+            SET Estado = pEstado
             WHERE ID = pID;
+            
     IF `_rollback` THEN
         SELECT 'FAILURE' `STATUS`;
         ROLLBACK;
@@ -297,6 +298,16 @@ BEGIN
         SELECT 'SUCCESS' `STATUS`;
         COMMIT;
     END IF;
+END //
+
+CREATE PROCEDURE sp_publicar(IN pID INT)
+BEGIN
+	UPDATE noticia
+	SET Estado = 'publicada',
+	Contenido = REEMPLAZAR_COMENTARIOS(Contenido)
+	WHERE ID = pID;
+    
+    SELECT 'SUCCESS' `STATUS`;
 END //
 
 CREATE PROCEDURE sp_eliminar_noticia
