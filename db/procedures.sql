@@ -307,11 +307,11 @@ BEGIN
 	Contenido = REEMPLAZAR_COMENTARIOS(Contenido)
 	WHERE ID = pID;
     
-    DELETE FROM
-    comentario
-    WHERE comentario.Noticia = pID;
-    
-    SELECT 'SUCCESS' `STATUS`;
+    IF EXISTS(SELECT ID FROM noticia WHERE ID = pID AND Foto IS NOT NULL) THEN
+		SELECT 'SUCCESS' `STATUS`;
+	ELSE
+		 SELECT 'FAILURE' `STATUS`,'SE TIENE QUE SUBIR UNA IMAGEN/VIDEO PRINCIPAL PARA PUBLICAR NOTICIA' `MESSAGE`;
+    END IF;
 END //
 
 CREATE PROCEDURE sp_eliminar_noticia
@@ -451,24 +451,13 @@ END //
 #####################
 #     multimedia    #
 #####################
-
 CREATE PROCEDURE sp_add_multimedia
-(IN pTipo VARCHAR(30), IN pContenido MEDIUMBLOB, IN pNoticia INT)
+(IN pTipo VARCHAR(30), IN pContenido MEDIUMBLOB)
 BEGIN
-    DECLARE `_rollback` BOOL DEFAULT 0;
-    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
-        START TRANSACTION;
-            INSERT INTO multimedia(Tipo, Contenido)
-            VALUES(pTipo, pContenido);
-            
-            
-    IF `_rollback` THEN
-        SELECT 'FAILURE' `STATUS`;
-        ROLLBACK;
-    ELSE
-        SELECT MAX(ID) FROM Multimedia;
-        COMMIT;
-    END IF;
+	INSERT INTO multimedia(Tipo, Contenido)
+	VALUES(pTipo, pContenido);
+    
+	SELECT MAX(ID) `id` FROM Multimedia;
 END //
 
 CREATE PROCEDURE sp_eliminar_multimedia
