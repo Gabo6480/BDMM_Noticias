@@ -308,12 +308,7 @@ class NoticiaController{
     }
     function search($titulo, $escritor, $seccion,$estado){
         require './../dbconnect.php';
-        if($estado == "NULL"){
-            $query = "call sp_get_nombre_similar('$titulo',$escritor, $seccion,$estado);";
-        }
-        else{
-            $query = "call sp_get_nombre_similar('$titulo',$escritor, $seccion,'$estado');";
-        }
+        $query = "call sp_get_nombre_similar('$titulo',$escritor, $seccion,$estado);";
         if (!($sentence = $conn->prepare($query)))
         {
             //$conn->close();

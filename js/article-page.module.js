@@ -22,17 +22,18 @@ var isOwner;
 var isPublished;
 
 $(document).ready(function(){
+    
+    
     usuarios.getOne(userInfo.userId)
     .then((res) => res.json())
     .then((user) => {
         isEditor = user.Rol == "editor";
         loadDataToWindow(id);
-
-        if((isOwner || isEditor) && !isPublished)
-            createEditorButton();
+        
     })
 
     comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
+        
         if(res.RESULT != "NOT"){
             $("#like-button").addClass("liked");
         }
@@ -117,6 +118,9 @@ function loadDataToWindow(id){
             data.forEach(element=>{
                 comments.append(comms.createMainComment(element, isOwner || isEditor)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
             });
+
+            if((isOwner || isEditor) && !isPublished)
+                createEditorButton();
         })
         .catch(err=>{
             console.error("No se pudieron traer los comentarios "+ err)
@@ -200,5 +204,4 @@ $(document).on('click','.comment-button', e=>{
 
 $(document).on('click', 'button.comment-button', function() {
     
-
 });

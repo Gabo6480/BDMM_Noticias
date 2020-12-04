@@ -61,6 +61,7 @@ let createEditorButton = ()=>{
         multifd.append("archivo", selectedFile);
         add(multifd).then(res => res.text()).then((multimedia) => {
             alert(multimedia);
+            debugger;
             let editfd = new FormData();
             editfd.append('id', id);
             editfd.append('estado', "en redaccion");

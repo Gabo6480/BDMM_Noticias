@@ -54,7 +54,7 @@
                         $search = $_GET['busqueda'];
                         $reportero = isset($_GET['reportero']) ? $_GET['reportero'] : "NULL";
                         $seccion = isset($_GET['seccion']) ? $_GET['seccion'] : "NULL";
-                        $estado = isset($_GET['estado']) ? $_GET['estado'] : "NULL";
+                        $estado = isset($_GET['estado']) ? "'".$_GET['estado']."'" : "NULL";
                         $nc->search($search,$reportero,$seccion,$estado);
                         break;
                 case 'popular':
