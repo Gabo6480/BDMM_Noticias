@@ -74,7 +74,7 @@ $(document).ready(function(){
         fd.append("ubicacion","Ubicación");
         fd.append("palabras","");
         fd.append("seccion",1);
-        fd.append("fecha",Date.now());
+        fd.append("fecha", new Date().toISOString());
         fd.append("escritor",userInfo.userId);
         add(fd)
         .then(res=>res.json())
