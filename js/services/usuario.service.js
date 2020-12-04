@@ -60,7 +60,6 @@ const remove = body=>{
         body:body
     }
 
-    console.log("REMOVER");
     return fetch(UserRoutes.post, params);
 }
 

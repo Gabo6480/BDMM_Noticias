@@ -74,6 +74,7 @@ BEGIN
     VALUES(pCorreo, pFoto, pNombre, pTelefono, pContra, pRol, pActivo);
 END //
 
+
 CREATE PROCEDURE sp_usuarios_editar
 (
     IN pID       INT,
@@ -88,13 +89,13 @@ CREATE PROCEDURE sp_usuarios_editar
 BEGIN
     UPDATE usuario
     SET 
-        Correo     =  pCorreo     ,
-        Foto       =  pFoto       ,   
-        Nombre     =  pNombre     ,   
-        Telefono   =  pTelefono   ,
-        Contrasena =  pContra	  ,   
-        Rol        =  pRol        ,   
-        Activo     =  pActivo    
+        Correo     =  COALESCE(pCorreo		,Correo		),
+        Foto       =  COALESCE(pFoto       	,Foto      	),
+        Nombre     =  COALESCE(pNombre     	,Nombre    	),
+        Telefono   =  COALESCE(pTelefono   	,Telefono  	),
+        Contrasena =  COALESCE(pContra	  	,Contrasena	),
+        Rol        =  COALESCE(pRol        	,Rol       	),
+        Activo     =  COALESCE(pActivo    	,Activo    	)
     WHERE pID = ID;
 END //
 
