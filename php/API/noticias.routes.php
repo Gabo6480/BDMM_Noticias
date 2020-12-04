@@ -131,7 +131,6 @@
                     break;
                 case 'publicar':
                         $id = $_POST['id'];
-                        $estado = $_POST['estado'];
                         $nc->publicar($id);
                 default:
                     break;

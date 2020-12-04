@@ -89,6 +89,8 @@ const cambiarEstado = body=>{
 }
 
 const publicar = id=>{
+    let body = new FormData();
+    body.append('id', id);
     body.append('action','publicar');
     const params = {
         method:"POST",

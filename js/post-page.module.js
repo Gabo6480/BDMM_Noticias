@@ -1,5 +1,5 @@
 import {createPostCard} from './imports/post-card.module.js';
-import { getAll, getBySeccion, getByState, edit, search , cambiarEstado} from './services/noticias.service.js';
+import { getAll, getBySeccion, getByState, edit, search , cambiarEstado, publicar} from './services/noticias.service.js';
 
 
 import { getActive} from './services/secciones.service.js';
@@ -31,17 +31,12 @@ function accionBotones(sr){
     sr.on("click", ".button-publish", function (){
         let ID = $(this).parents("tr").attr("post-id");
 
-        var formdata = new FormData();
-        formdata.append("id" , ID);
-        formdata.append("estado" , "publicada");
-
-        cambiarEstado(formdata)
-        .then(res=>res.json())
+        publicar(ID)
         .then(res=>{
-            if(res.STATUS == 'SUCCESS')
-                location.reload();
+            location.reload();
         })
         .catch(err=>console.log(err));
+        
     });
 
     sr.on("click", ".button-see", function (){
