@@ -38,10 +38,8 @@ function accionBotones(sr){
         cambiarEstado(formdata)
         .then(res=>res.json())
         .then(res=>{
-            if(res.RESULT == 'SUCCESS')
-                alert("Noticia Publicada Exitosamente");
-            if(res.RESULT == 'FAILURE')
-                alert("Fallo la publicacion de Noticia");
+            if(res.STATUS == 'SUCCESS')
+                location.reload();
         })
         .catch(err=>console.log(err));
     });
