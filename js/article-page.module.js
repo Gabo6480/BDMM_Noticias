@@ -31,8 +31,6 @@ $(document).ready(function(){
 
         $("#like-button").attr("disabled", false);
 
-        $(".comment-form").show();
-
         comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
         
             if(res.RESULT != "NOT"){
@@ -143,6 +141,9 @@ function loadDataToWindow(id){
 
             if((isOwner || isEditor) && !isPublished)
                 createEditorButton(sectionID);
+
+            if(userInfo.userId != null)
+                $(".comment-form").show();
         })
         .catch(err=>{
             console.error("No se pudieron traer los comentarios "+ err)
@@ -216,8 +217,10 @@ $(document).on('click','.comment-button', e=>{
             let $comments = $("#comments");
             $comments.empty();
             data.forEach(element=>{
-                $comments.append(comms.createMainComment(element));
+                $comments.append(comms.createMainComment(element, isOwner || isEditor, userInfo.userId != null));
             });
+
+            $(".comment-form").show();
         })
         .catch(err=>{
             console.error("No se pudieron traer los comentarios "+ err)

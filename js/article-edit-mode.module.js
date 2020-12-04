@@ -143,6 +143,15 @@ let createEditorButton = (sectionID)=>{
                     $(this).replaceWith(function () {
                         return $(NewElement).append(data.Contenido);
                     });
+
+                    $("#wmd-button-bar").show();
+                    $("#edit-buttons").show();
+                    $("#article-img-upload").show();
+
+                    var editor1 = new Markdown.Editor(parser.converter);
+                    editor1.run();
+
+                    $(".wmd-input").trigger("keyup");
                 });
                 
             });
@@ -160,18 +169,7 @@ let createEditorButton = (sectionID)=>{
             $select.change(e=>{
                 console.log($select.val());
             })
-
-
             $("#article-section").replaceWith($select);
-
-            $("#wmd-button-bar").show();
-            $("#edit-buttons").show();
-            $("#article-img-upload").show();
-
-            var editor1 = new Markdown.Editor(parser.converter);
-            editor1.run();
-
-            $(".wmd-input").trigger("keyup");
 
             $(".modo-reportero-editor").remove();
         }
