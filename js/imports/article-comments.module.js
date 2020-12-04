@@ -21,7 +21,7 @@ let createComment = function(comment, deletable){
     div.append(img, user,content);
 
     if(deletable == true){
-        div.append(`<button class='btn btn-outline-danger button-delete float-right'><i class='far fa-trash-alt'></i></button>`);
+        div.append($(`<button class='btn btn-outline-danger button-delete float-right'><i class='far fa-trash-alt'></i></button>`));
     }
 
     return div;
