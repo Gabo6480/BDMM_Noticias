@@ -1,5 +1,5 @@
 import {createUserCard} from './imports/user-card.module.js';
-import {getAllActive, getRolActive, search} from './services/usuario.service.js';
+import {getAllActive, search, remove, edit} from './services/usuario.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
@@ -22,18 +22,11 @@ function accionBotones(sr){
         let papa = $(this).closest("tr");
 
         if(confirm("¿Está seguro que desea eliminar al " + papa.find("td.user-type").text() + " " + papa.find("td.user-name").text() +"?")){
-            
-            //TODO: ELIMINAR USUARIOS
-            //alert("ded.");
-            /*$.get(
-                '...',
-                'data',
-                function(data){
-
-                }
-            ).error(function(err){
-
-            });*/
+            let fd = new FormData();
+            fd.append("id", papa.attr("user-id"))
+            remove(fd).then(() => {
+                location.reload();
+            });
         }
     });
 
@@ -49,9 +42,9 @@ function accionBotones(sr){
         let currUserType = userType.text();
 
         userType.html("<select class='browser-default custom-select'>" +
-        "<option value='1'>Usuario</option>" +
-        "<option value='2'>Reportero</option>" +
-        "<option value='3'>Editor</option>" +
+        "<option value='usuario'>Usuario</option>" +
+        "<option value='reportero'>Reportero</option>" +
+        "<option value='editor'>Editor</option>" +
         "</select>");
 
         userType.find("select").children().each(function(){
@@ -70,11 +63,15 @@ function accionBotones(sr){
         let select = userType.find("select").children("option:selected");
 
         let val = select.val();
-        let text = select.text();
 
-        //TODO: Logica de enviar el cambio a la base de datos
-
-        location.reload();
+        //TODO: Esta madre no jala
+        let fd = new FormData();
+        fd.append("id", papa.attr("user-id"));
+        fd.append("rol", val);
+        edit(fd)
+        .then((res) => {
+            location.reload();
+        })
     });
 }
 

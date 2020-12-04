@@ -61,15 +61,15 @@
                            $activo
                         );
                     break;
+                    
                 case 'edit':
-                        $id     = $_POST['id']  ;
-                        $correo = $_POST['correo']      ;
-                        $foto   = $_POST['foto']        ;
-                        $nombre = $_POST['nombre']      ;
-                        $telefono = $_POST['telefono']  ;
-                        $contra = $_POST['contra']      ;
-                        $rol    = $_POST['rol']         ;
-                        $activo = $_POST['activo']      ;
+                        $correo   = isset($_POST['correo'])   ? $_POST['correo']   : "NULL" ;
+                        $foto     = isset($_POST['foto'])     ? $_POST['foto']     : "NULL" ;
+                        $nombre   = isset($_POST['nombre'])   ? $_POST['nombre']   : "NULL" ;
+                        $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : "NULL"  ;
+                        $contra   = isset($_POST['contra'])   ? $_POST['contra']   : "NULL" ;
+                        $rol      = isset($_POST['rol'])      ? $_POST['rol']      : "NULL";
+                        $activo   = isset($_POST['activo'])   ? $_POST['activo']   : "NULL" ;
                         $uController->edit(
                             $id,
                             $correo,
