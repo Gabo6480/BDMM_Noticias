@@ -2,7 +2,10 @@ import * as comms from './imports/article-comments.module.js'
 import * as parser from './imports/article-content-parser.module.js'
 
 import {createCarousel} from './imports/carousel-creator.module.js'
+import {createEditorButton} from './article-edit-mode.module.js'
 
+
+import * as usuarios from './services/usuario.service.js';
 import {getOne, getRelatedD} from './services/noticias.service.js';
 import {getByArticle, addComment, removeComment} from './services/comentarios.service.js';
 import {getById} from './routes/multimedia.routes.js';
@@ -14,9 +17,19 @@ const url = new URL(window.location.href);
 const id = url.searchParams.get('id');
 const userInfo = getStoredUser();
 
-$(document).ready(function(){
+var isEditor;
+var isOwner;
 
-    loadDataToWindow(id);
+$(document).ready(function(){
+    usuarios.getOne(userInfo.userId)
+    .then((res) => res.json())
+    .then((user) => {
+        isEditor = user.Rol == "editor";
+        loadDataToWindow(id);
+
+        if(isOwner || isEditor)
+            createEditorButton();
+    })
 
     comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
         if(res.RESULT != "NOT"){
@@ -65,6 +78,9 @@ function loadDataToWindow(id){
     getOne(id)
     .then(res => res.json())
     .then(data=>{
+
+        isOwner = data.Escritor == userInfo.userId;
+
         $("#article-container").attr("articleID", id);
 
         $("#article-title").text(data.Titulo);
@@ -103,7 +119,7 @@ function loadDataToWindow(id){
     .then(data =>{
         let comments = document.querySelector('#comments');
         data.forEach(element=>{
-            comments.append(comms.createMainComment(element, true)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
+            comments.append(comms.createMainComment(element, isOwner || isEditor)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
         });
     })
     .catch(err=>{
