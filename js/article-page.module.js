@@ -81,7 +81,7 @@ function loadDataToWindow(id){
     .then(data=>{
 
         isOwner = data.Escritor == userInfo.userId;
-        isPublished = data.Estado == "publicada";
+        isPublished = data.Estado == "publicada"
 
         $("#article-container").attr("articleID", id);
 
@@ -109,23 +109,23 @@ function loadDataToWindow(id){
             $("#related-articles").append(createCarousel(carousel));
         })
         .catch(err=>console.log(err));
+    }).then(() => {
+        //traer comentarios
+        getByArticle(id)
+        .then(res => res.json())
+        .then(data =>{
+            let comments = document.querySelector('#comments');
+            data.forEach(element=>{
+                comments.append(comms.createMainComment(element, isOwner || isEditor)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
+            });
+        })
+        .catch(err=>{
+            console.error("No se pudieron traer los comentarios "+ err)
+        });
     })
     .catch(err=>{
         console.log("No se encontro el articulo");
         console.log(err);
-    });
-
-    //traer comentarios
-    getByArticle(id)
-    .then(res => res.json())
-    .then(data =>{
-        let comments = document.querySelector('#comments');
-        data.forEach(element=>{
-            comments.append(comms.createMainComment(element, isOwner || isEditor)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
-        });
-    })
-    .catch(err=>{
-        console.error("No se pudieron traer los comentarios "+ err)
     });
 
     count(id)
