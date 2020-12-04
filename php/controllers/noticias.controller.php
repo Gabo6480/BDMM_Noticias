@@ -337,7 +337,32 @@ class NoticiaController{
         }
         $conn->close();
     }
+    function popular(){
+        require './../dbconnect.php';
+        $query = "call sp_getPopular();";
+        if (!($sentence = $conn->prepare($query)))
+        {
+            //$conn->close();
+            die("Multimedia popular: Fallo la preparacion del query".mysqli_error($conn));
+        }
 
+        if(!$sentence->execute()){
+            $conn->close();
+            die("Multimedia popular: Fallo la ejecucion del query".mysqli_stmt_error($sentence));
+        }
+
+        if($result = $sentence->get_result()){
+            $arr = array();
+            while($row = $result->fetch_assoc()){
+                array_push($arr,$row);
+            }
+
+            header("Content-type:application/json");
+            echo json_encode($arr);
+            $result->free();
+        }
+        $conn->close();
+    }
     //////////////////
     // POST METHODS //
     //////////////////

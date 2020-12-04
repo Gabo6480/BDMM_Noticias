@@ -57,6 +57,9 @@
                         $estado = isset($_GET['estado']) ? $_GET['estado'] : "NULL";
                         $nc->search($search,$reportero,$seccion,$estado);
                         break;
+                case 'popular':
+                        $nc->popular();
+                    break;
                 default:
                     break;
             }

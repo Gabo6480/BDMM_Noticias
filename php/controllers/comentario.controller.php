@@ -40,6 +40,8 @@
                     $comment->contenido  = $row["Contenido"];
                     $comment->fecha      = $row["Fecha"];
                     $comment->usuario    = $row["Usuario"];
+                    $comment->nombre     = $row["Nombre"];
+                    $comment->foto       = $row['Foto'];
                     $comment->respuestas = $this->getChildrenComments($comment->id);
 
                     array_push($comments, $comment);
@@ -72,11 +74,12 @@
                 while($row = $result->fetch_assoc()){
                     $reply = new Respuesta();
 
-                    $reply->$id = $row["ID"];
-                    $reply->$contenido = $row["Contenido"];
-                    $reply->$fecha = $row["Fecha"];
-                    $reply->$usuario = $row["Usuario"];
-
+                    $reply->id          = $row["ID"];
+                    $reply->contenido   = $row["Contenido"];
+                    $reply->fecha       = $row["Fecha"];
+                    $reply->usuario     = $row["Usuario"];
+                    $reply->nombre      = $row["Nombre"];
+                    $reply->foto        = $row["Foto"];
                     array_push($replies,$reply);
                 }
                 $conn->close();

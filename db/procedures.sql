@@ -412,6 +412,14 @@ BEGIN
     WHERE Titulo LIKE CONCAT('%', pTitulo ,'%') AND Seccion = COALESCE(pSeccion, Seccion) AND Estado = COALESCE(pEstado,Estado) AND Escritor = COALESCE(pReportero, Escritor);
 END//
 
+CREATE PROCEDURE sp_getPopular()
+BEGIN
+	SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
+    FROM v_Articulo_Pagina 
+    WHERE Estado = 'publicada'
+    ORDER BY Visitas DESC;
+END //
+
 #####################
 #     multimedia    #
 #####################
@@ -469,16 +477,16 @@ END //
 CREATE PROCEDURE sp_comentarios_by_article
 (IN pID INT)
 BEGIN
-    SELECT ID, Contenido, Fecha, Padre, Noticia, Usuario
-    FROM comentario
-    WHERE Noticia = pID AND Noticia is not NULL;
+    SELECT ID, Contenido, Fecha, Padre, Noticia, Usuario, Nombre, Foto
+    FROM v_Comentarios_Articulos
+    WHERE Noticia = pID AND Padre is NULL;
 END //
 
 CREATE PROCEDURE sp_comentarios_respuestas
 (IN pID INT)
 BEGIN
-    SELECT ID, Contenido, Fecha, Padre, Noticia, Usuario
-	FROM comentario
+    SELECT ID, Contenido, Fecha, Padre, Noticia, Usuario, Nombre, Foto
+	FROM v_Comentarios_Articulos
     WHERE Padre = pID
     ORDER BY Fecha ASC;
 END //

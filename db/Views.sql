@@ -17,4 +17,5 @@ SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     WHERE Activo = 1;
     
 CREATE VIEW v_Comentarios_Articulos AS
-SELECT 
+ SELECT C.ID, Contenido, Fecha, Padre, Noticia, Usuario, U.Nombre, U.Foto
+    FROM comentario C INNER JOIN  usuario U ON U.ID = C.Usuario

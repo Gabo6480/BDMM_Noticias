@@ -138,4 +138,8 @@ call sp_get_nombre_similar('ex',NULL,NULL,NULL);
 SELECT*FROM comentario;
 delete from comentario;
 
-call sp_comentarios_by_article(3)
+call sp_comentarios_by_article(3);
+
+select * from noticia;
+
+call sp_getPopular();

@@ -38,6 +38,8 @@ const search = (titulo, seccion, estado, reportero)=>{
     return b;
 };
 
+const popular = ()=>`${noticiasURL}?action=popular`;
+
 export{
     noticiasURL as post,
     getOne,

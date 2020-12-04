@@ -1,4 +1,5 @@
 let createComment = function(comment, deletable){
+    debugger
     let div = document.createElement('div');
     div.classList.add('comment');
 
@@ -7,11 +8,11 @@ let createComment = function(comment, deletable){
     let img = document.createElement('img');
     img.classList.add('user-picture');
     img.classList.add('float-left');
-    img.setAttribute("src", comment.picture);
+    img.setAttribute("src", comment.foto);
 
     let user = document.createElement('h5');
     user.classList.add('comment-user');
-    user.innerText = comment.user;
+    user.innerText = comment.nombre;
 
     let content = document.createElement('p');
     content.classList.add('comment-content');

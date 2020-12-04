@@ -44,7 +44,9 @@ const search = (busqueda, seccion, estado, reportero)=>{
     return fetch(NoticiasRoutes.search(busqueda,seccion,estado,reportero));
 }
 
-
+const popular = ()=>{
+    return fetch(NoticiasRoutes.popular());
+}
 
 const add = body=>{
     body.set('action','add');
