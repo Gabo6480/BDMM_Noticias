@@ -139,5 +139,6 @@ delete from comentario;
 call sp_comentarios_by_article(3);
 
 select * from noticia;
-
+#DELETE FROM noticia WHERE ID > 3 ;
+select*from me_gusta;
 call sp_getPopular();

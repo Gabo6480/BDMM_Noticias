@@ -42,6 +42,7 @@
                     $color     = $_POST['color'] ;
                     $orden     = $_POST['orden'] ;
                     $sc->edit(
+                        $id,
                         $nombre,
                         $color,
                         $orden

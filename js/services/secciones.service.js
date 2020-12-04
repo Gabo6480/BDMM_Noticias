@@ -17,36 +17,31 @@ const byId = id=>{
 }
 
 const add = body=>{
+    body.append('action', 'add');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"add"
-        }
+        body:body
     }
 
     return fetch(SeccionesRoutes.post, params);
 }
 
 const edit = body=>{
+
+    body.append('action', 'edit');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"edit"
-        }
+        body:body
     }
 
     return fetch(SeccionesRoutes.post, params);
 }
 
 const remove = body=>{
+    body.append('action', 'remove');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            "action":"remove"
-        }
+        body:body
     }
 
     return fetch(SeccionesRoutes.post, params);

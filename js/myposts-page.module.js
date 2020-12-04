@@ -72,13 +72,17 @@ $(document).ready(function(){
         fd.append("resumen","Resumen de la noticia");
         fd.append("contenido","Contenido de la noticia");
         fd.append("ubicacion","Ubicación");
-        fd.append("palabras","palabras clave");
-        fd.append("seccion",0);
+        fd.append("palabras","");
+        fd.append("seccion",1);
         fd.append("fecha",Date.now());
         fd.append("escritor",userInfo.userId);
         add(fd)
+        .then(res=>res.json())
         .then((newPost) => {
-            alert(newPost);
+            debugger
+            if(newPost.STATUS == 'SUCCESS'){
+                window.location = `article.html?id=${newPost.id}`;
+            }
         });
     });
 

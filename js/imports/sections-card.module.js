@@ -1,5 +1,5 @@
 let createSectionCard = function(post){
-    return `<tr post-id='${post.ID}'>
+    return `<tr post-id='${post.ID}' orden-post='${post.Orden}'>
      <td class='section-title'>${post.Nombre}
      </td><td class='section-color' style='background-color :#${post.Color};'>
      </td><td class='section-order'>${post.Orden}
