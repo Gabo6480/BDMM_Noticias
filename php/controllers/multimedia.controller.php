@@ -66,9 +66,9 @@ class MultimediaController{
     //////////////////
     // POST METHODS //
     //////////////////
-    function add($tipo, $contenido, $noticia){
+    function add($tipo, $contenido){
         require './../dbconnect.php';
-        $query = "call sp_add_multimedia('$tipo', '$contenido', $noticia);";
+        $query = "call sp_add_multimedia('$tipo', '$contenido');";
 
         if (!($sentence = $conn->prepare($query)))
         {

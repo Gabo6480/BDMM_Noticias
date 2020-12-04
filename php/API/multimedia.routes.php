@@ -22,9 +22,8 @@ if($mmController = new MultimediaController()){
             case "add":
                     $fileType = $_FILES['archivo']['type'];
                     $fileData = addslashes(file_get_contents($_FILES['archivo']['tmp_name']));
-                    $noticia  = $_POST['id'];
 
-                    $mmController->add($fileType, $fileData, $noticia);
+                    $mmController->add($fileType, $fileData);
                 break;
             case "remove":
                     $id = $_POST['id'];

@@ -37,6 +37,5 @@
         } else{
             echo "Metodo no aceptado!";
         }
-    }
     
 ?>
