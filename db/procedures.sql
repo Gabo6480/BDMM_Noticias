@@ -307,6 +307,10 @@ BEGIN
 	Contenido = REEMPLAZAR_COMENTARIOS(Contenido)
 	WHERE ID = pID;
     
+    DELETE FROM
+    comentario
+    WHERE comentario.Noticia = pID;
+    
     SELECT 'SUCCESS' `STATUS`;
 END //
 
