@@ -136,7 +136,7 @@ call sp_get_nombre_similar('ex',NULL,NULL,NULL);
 SELECT*FROM comentario;
 delete from comentario;
 
-call sp_comentarios_by_article(3);
+#call sp_publicar(2);
 
 select * from noticia;
 #DELETE FROM noticia WHERE ID > 3 ;
