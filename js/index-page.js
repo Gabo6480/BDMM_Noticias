@@ -32,18 +32,23 @@ $(document).ready(function(){
                     j++;
 
                     if(j === 10 || index === (noticias.length-1) ){
-                        $("#carousel-holder").append(createCarousel({tile:"Mas Noticias",cards:[...carrousselBuffer]}));
+                        $("#carousel-holder").append(createCarousel({title:"Mas Noticias",cards:[...carrousselBuffer]}));
                         j = 0;
                         carrousselBuffer = [];
                     }
                 }
-        });
+            });
+
+            grid.masonry({
+                itemSelector: '.grid-item',
+                columnWidth: 210
+            });
 
         }).then(()=>{
             popular()
             .then(res=>res.json())
             .then(noticias=>{
-                $("#carousel-holder").append(createCarousel({tile:"Mas Populares",cards: noticias}));
+                $("#carousel-holder").append(createCarousel({title:"Mas Populares",cards: noticias}));
             })
         })
         .catch(err=>console.log(err))
@@ -53,40 +58,39 @@ $(document).ready(function(){
         .then((res) => res.json()).then((sectionInfo) =>{
             $("#sections").css("background-color", "#" + sectionInfo.Color);
 
-        getByStateSeccion(seccionId, 'publicada')
-        .then(res=>res.json())
-        .then(noticias=>{
-
-            let carrousselBuffer = [];
-            let organized = false;
-            let j = 0;
-            $.each(noticias, (index, noticia)=>{
-                if(index === 0){
-                    grid.append(createItemCard(noticia, "big-card"));
-                }
-                else if(index < 9)
-                {
-                    grid.append(createItemCard(noticia, "small-card"));
-                }
-                else{
-                    
-                    carrousselBuffer.push(noticia);
-                    j++;
-    
-                    if(j === 10 || index === (noticias.length-1) ){
-                        $("#carousel-holder").append(createCarousel({tile:"Mas Noticias",cards:[...carrousselBuffer]}));
-                        j = 0;
-                        carrousselBuffer = [];
+            getByStateSeccion(seccionId, 'publicada')
+            .then(res=>res.json())
+            .then(noticias=>{
+                let carrousselBuffer = [];
+                let organized = false;
+                let j = 0;
+                $.each(noticias, (index, noticia)=>{
+                    if(index === 0){
+                        grid.append(createItemCard(noticia, "big-card"));
                     }
-                }
-            });
-            
+                    else if(index < 9)
+                    {
+                        grid.append(createItemCard(noticia, "small-card"));
+                    }
+                    else{
+
+                        carrousselBuffer.push(noticia);
+                        j++;
+                    
+                        if(j === 10 || index === (noticias.length-1) ){
+                            $("#carousel-holder").append(createCarousel({tile:"Mas Noticias",cards:[...carrousselBuffer]}));
+                            j = 0;
+                            carrousselBuffer = [];
+                        }
+                    }
+                });
+
+                grid.masonry({
+                    itemSelector: '.grid-item',
+                    columnWidth: 210
+                });
             })
         })
         .catch(err=>console.log(err));
-
-        grid.masonry({
-            itemSelector: '.grid-item',
-            columnWidth: 210
-        });
+    
 });
