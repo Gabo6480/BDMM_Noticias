@@ -63,12 +63,13 @@
                     break;
                     
                 case 'edit':
-                        $correo   = isset($_POST['correo'])   ? $_POST['correo']   : "NULL" ;
-                        $foto     = isset($_POST['foto'])     ? $_POST['foto']     : "NULL" ;
-                        $nombre   = isset($_POST['nombre'])   ? $_POST['nombre']   : "NULL" ;
-                        $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : "NULL"  ;
-                        $contra   = isset($_POST['contra'])   ? $_POST['contra']   : "NULL" ;
-                        $rol      = isset($_POST['rol'])      ? $_POST['rol']      : "NULL";
+                        $id       = isset($_POST['id'])   ? $_POST['id']   : "NULL" ;
+                        $correo   = isset($_POST['correo'])   ? "'".$_POST['correo']."'"   : "NULL" ;
+                        $foto     = isset($_POST['foto'])     ? "'".$_POST['foto']."'"     : "NULL" ;
+                        $nombre   = isset($_POST['nombre'])   ? "'".$_POST['nombre']."'"   : "NULL" ;
+                        $telefono = isset($_POST['telefono']) ? "'".$_POST['telefono']."'" : "NULL"  ;
+                        $contra   = isset($_POST['contra'])   ? "'".$_POST['contra']."'"   : "NULL" ;
+                        $rol      = isset($_POST['rol'])      ? "'".$_POST['rol']."'"      : "NULL";
                         $activo   = isset($_POST['activo'])   ? $_POST['activo']   : "NULL" ;
                         $uController->edit(
                             $id,
