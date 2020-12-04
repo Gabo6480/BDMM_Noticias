@@ -9,7 +9,7 @@
             switch($action){
                 case "add":
                         $contenido = $_POST['contenido'];
-                        $padre = isset($_POST['padre'])? $POST['padre'] : "NULL";
+                        $padre = isset($_POST['padre'])? $_POST['padre'] : "NULL";
                         $noticia = $_POST['noticia'];
                         $usuario = $_POST['usuario'];
                         $commsController->add(
