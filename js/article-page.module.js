@@ -79,6 +79,7 @@ $(document).ready(function(){
 
 function loadDataToWindow(id){
 
+    let sectionID;
     //traer articulo
     getOne(id)
     .then(res => res.json())
@@ -89,6 +90,8 @@ function loadDataToWindow(id){
 
         $("#article-container").attr("articleID", id);
         $("#article-container").attr("visitas", data.Visitas);
+
+        sectionID = data.Seccion;
 
         $("#article-title").text(data.Titulo);
         $("#article-description").text(data.Resumen);
@@ -139,7 +142,7 @@ function loadDataToWindow(id){
             });
 
             if((isOwner || isEditor) && !isPublished)
-                createEditorButton();
+                createEditorButton(sectionID);
         })
         .catch(err=>{
             console.error("No se pudieron traer los comentarios "+ err)

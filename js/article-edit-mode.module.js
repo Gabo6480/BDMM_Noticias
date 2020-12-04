@@ -8,7 +8,7 @@ import * as noticias from './services/noticias.service.js';
 var editable = false;
 var selectedFile;
 
-let createEditorButton = ()=>{
+let createEditorButton = (sectionID)=>{
     
     //Agregamos los controles de edición
     $("body").prepend( `<div class="modo-reportero-editor">
@@ -121,7 +121,7 @@ let createEditorButton = ()=>{
             .then(res=>res.json())
             .then(secciones=>{
                 $.each(secciones, (i, seccion)=>{
-                    $select.append($(`<option value='${seccion.ID}'>${seccion.Nombre}</option>`))
+                    $select.append($(`<option value='${seccion.ID}' ${sectionID == seccion.ID ? 'selected' : ''}>${seccion.Nombre}</option>`))
                 });
             })
             .catch(err=>console.log(err));
