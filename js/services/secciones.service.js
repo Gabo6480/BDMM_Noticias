@@ -48,7 +48,7 @@ const remove = body=>{
 }
 
 const incrementar = body=>{
-    body.append('action', 'incrementar');
+    body.append('action', 'increment');
     const params = {
         method:"POST",
         body:body
@@ -57,7 +57,7 @@ const incrementar = body=>{
 }
 
 const decrementar = body=>{
-    body.append('action', 'decrementar');
+    body.append('action', 'decrement');
     const params = {
         method:"POST",
         body:body

@@ -1,5 +1,5 @@
 import {createSectionCard} from './imports/sections-card.module.js';
-import {getActive, search, remove, edit} from './services/secciones.service.js';
+import {getActive, search, remove, edit, decrementar, incrementar} from './services/secciones.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
@@ -38,11 +38,23 @@ $.cssHooks.backgroundColor = {
 function accionBotones(sr){
     
     sr.on("click", ".button-up", function (){
-        //TODO: Aumentar su prioridad
+        let fd = new FormData();
+        let papa = $(this).closest("tr");
+        let section = papa.attr("post-id");
+        fd.append("id", section);
+        incrementar(fd).then(() => {
+            location.reload();
+        });
     });
     
     sr.on("click", ".button-down", function (){
-        //TODO: Reducir su prioridad
+        let fd = new FormData();
+        let papa = $(this).closest("tr");
+        let section = papa.attr("post-id");
+        fd.append("id", section);
+        decrementar(fd).then(() => {
+            location.reload();
+        });
     });
 
     sr.on("click", ".button-edit", function (){
