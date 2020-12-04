@@ -1,7 +1,7 @@
 import {createItemCard} from './imports/index-item-card.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
 
-import {getAll, getByState, getBySeccion ,getByStateSeccion} from './services/noticias.service.js';
+import {getByState, getBySeccion ,getByStateSeccion, popular} from './services/noticias.service.js';
 import {byId} from './services/secciones.service.js';
 
 $(document).ready(function(){
@@ -28,7 +28,6 @@ $(document).ready(function(){
                     grid.append(createItemCard(noticia, "small-card"));
                 }
                 else{
-
                     carrousselBuffer.push(noticia);
                     j++;
 
@@ -40,12 +39,12 @@ $(document).ready(function(){
                 }
         });
 
-        
-        grid.masonry({
-            itemSelector: '.grid-item',
-            columnWidth: 210
-        });
-        
+        }).then(()=>{
+            popular()
+            .then(res=>res.json())
+            .then(noticias=>{
+                $("#carousel-holder").append(createCarousel({tile:"Mas Populares",cards: noticias}));
+            })
         })
         .catch(err=>console.log(err))
     else
@@ -81,14 +80,13 @@ $(document).ready(function(){
                     }
                 }
             });
-    
-            
-            grid.masonry({
-                itemSelector: '.grid-item',
-                columnWidth: 210
-            });
             
             })
         })
-        .catch(err=>console.log(err))
+        .catch(err=>console.log(err));
+
+        grid.masonry({
+            itemSelector: '.grid-item',
+            columnWidth: 210
+        });
 });

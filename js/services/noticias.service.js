@@ -103,6 +103,6 @@ export{
     edit,
     remove,
     search,
-    cambiarEstado,
-    popular
+    popular,
+    cambiarEstado
 }
