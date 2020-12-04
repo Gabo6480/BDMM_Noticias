@@ -23,54 +23,58 @@ var isPublished;
 
 $(document).ready(function(){
     
-    
+    if(userInfo.userId != null)
     usuarios.getOne(userInfo.userId)
     .then((res) => res.json())
     .then((user) => {
         isEditor = user.Rol == "editor";
-        loadDataToWindow(id);
-        
-    })
 
-    comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
+        $("#like-button").attr("disabled", false);
+
+        $(".comment-form").show();
+
+        comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
         
-        if(res.RESULT != "NOT"){
-            $("#like-button").addClass("liked");
-        }
+            if(res.RESULT != "NOT"){
+                $("#like-button").addClass("liked");
+            }
+        });
+    
+        $("#like-button").click(function(){
+            if($(this).hasClass("liked")){
+                let likefd = new FormData();
+                likefd.append('id_articulo', id);
+                likefd.append('id_usario', userInfo.userId);
+                remove(likefd).then(() => {
+                    $(this).removeClass("liked");
+                    count(id)
+                    .then(res=>res.json())
+                    .then(data=>{
+                        $('#like-number').text(data.RESULT);
+                    })
+                    .catch(err=>console.log(err))
+                })
+                .catch(err=>console.log(err));
+            }
+            else{
+                let likefd = new FormData();
+                likefd.append('id_articulo', id);
+                likefd.append('id_usario', userInfo.userId);
+                add(likefd).then(() => {
+                    $(this).addClass("liked");
+                    count(id)
+                    .then(res=>res.json())
+                    .then(data=>{
+                        $('#like-number').text(data.RESULT);
+                    })
+                    .catch(err=>console.log(err))
+                })
+                .catch(err=>console.log(err));
+            }
+        });
     });
 
-    $("#like-button").click(function(){
-        if($(this).hasClass("liked")){
-            let likefd = new FormData();
-            likefd.append('id_articulo', id);
-            likefd.append('id_usario', userInfo.userId);
-            remove(likefd).then(() => {
-                $(this).removeClass("liked");
-                count(id)
-                .then(res=>res.json())
-                .then(data=>{
-                    $('#like-number').text(data.RESULT);
-                })
-                .catch(err=>console.log(err))
-            })
-            .catch(err=>console.log(err));
-        }
-        else{
-            let likefd = new FormData();
-            likefd.append('id_articulo', id);
-            likefd.append('id_usario', userInfo.userId);
-            add(likefd).then(() => {
-                $(this).addClass("liked");
-                count(id)
-                .then(res=>res.json())
-                .then(data=>{
-                    $('#like-number').text(data.RESULT);
-                })
-                .catch(err=>console.log(err))
-            })
-            .catch(err=>console.log(err));
-        }
-    });
+    loadDataToWindow(id);
 });
 
 function loadDataToWindow(id){
@@ -117,7 +121,7 @@ function loadDataToWindow(id){
         .then(data =>{
             let comments = document.querySelector('#comments');
             data.forEach(element=>{
-                comments.append(comms.createMainComment(element, isOwner || isEditor)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
+                comments.append(comms.createMainComment(element, isOwner || isEditor, userInfo.userId != null)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
             });
 
             if((isOwner || isEditor) && !isPublished)
@@ -165,6 +169,7 @@ $(document).on('click', 'p.comment-answer', function() {
         comments.show();
 });
 
+if(userInfo.userId != null)
 $(document).on('click','.comment-button', e=>{
 
     let $papa = $(e.target).parent();
@@ -201,8 +206,4 @@ $(document).on('click','.comment-button', e=>{
             console.error("No se pudieron traer los comentarios "+ err)
         });
     });
-});
-
-$(document).on('click', 'button.comment-button', function() {
-    
 });
