@@ -52,6 +52,14 @@
                         $id     = $_POST['id']  ;
                         $sc->remove($id);
                     break;
+                case 'increment':
+                        $id = $_POST['id'];
+                        $sc->increment($id);
+                    break;
+                case 'decrement':
+                        $id = $_POST['id'];
+                        $sc->decrement($id);
+                    break;
                 default:
                     break;
             }

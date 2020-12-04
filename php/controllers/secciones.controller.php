@@ -12,6 +12,9 @@ class SeccionesController{
         'sp_getSeccionesActivas';
         'sp_search_secciones';
         'sp_seccionById';
+
+        'sp_seccion_orden_aumentar';
+        'sp_seccion_orden_disminuir';
     }
 
     //////////////////
@@ -68,6 +71,54 @@ class SeccionesController{
     function remove($id){
         require './../dbconnect.php';
         $query = "call sp_removeSeccion($id);";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("COUNT PREPARATION FAILED");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("QUERY EXECUTION FAILED");
+        }
+
+        if($result = $sentence->get_result()){
+            $row = $result->fetch_assoc();
+
+            header("Content-type:application/json");
+            echo json_encode($row);
+            $result->free();
+        }
+        $conn->close();
+    }
+    function increment($id){
+        require './../dbconnect.php';
+        $query = "call sp_seccion_orden_aumentar($id);";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("COUNT PREPARATION FAILED");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("QUERY EXECUTION FAILED");
+        }
+
+        if($result = $sentence->get_result()){
+            $row = $result->fetch_assoc();
+
+            header("Content-type:application/json");
+            echo json_encode($row);
+            $result->free();
+        }
+        $conn->close();
+    }
+    function decrement($id){
+        require './../dbconnect.php';
+        $query = "call sp_seccion_orden_disminuir($id);";
 
         if (!($sentence = $conn->prepare($query)))
         {

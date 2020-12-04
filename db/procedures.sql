@@ -205,6 +205,20 @@ BEGIN
     ORDER BY Orden DESC;
 END //
 
+CREATE PROCEDURE sp_seccion_orden_aumentar(IN pID INT)
+BEGIN 
+	UPDATE seccion
+    SET Orden = Orden +1
+    WHERE ID = pID;
+END //
+
+CREATE PROCEDURE sp_seccion_orden_disminuir(IN pID INT)
+BEGIN 
+	UPDATE seccion
+    SET Orden = Orden -1
+    WHERE ID = pID;
+END //
+
 #####################
 #     noticias      #
 #####################
@@ -274,7 +288,7 @@ BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
         START TRANSACTION;
             UPDATE noticia
-            SET Estado = pEstado
+            SET Estado = pEstado, Contenido = IF( pEstado = 'publicada', REEMPLAZAR_COMENTARIOS(pSeccion), pSeccion)
             WHERE ID = pID;
     IF `_rollback` THEN
         SELECT 'FAILURE' `STATUS`;
@@ -303,7 +317,6 @@ BEGIN
         COMMIT;
     END IF;
 END //
-
 
 CREATE PROCEDURE sp_noticia_by_seccion
 (IN pID INT)
