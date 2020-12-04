@@ -103,5 +103,6 @@ export{
     edit,
     remove,
     search,
+    popular,
     cambiarEstado
 }
