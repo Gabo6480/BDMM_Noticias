@@ -399,9 +399,9 @@ class NoticiaController{
         $id,
         $estado, 
         $titulo, 
+        $foto,
         $resumen, 
         $contenido, 
-        $fecha, 
         $ubicacion,
         $visitas, 
         $palabras, 
@@ -409,17 +409,15 @@ class NoticiaController{
     )
     {
         require './../dbconnect.php';
-        $query = "call sp_editar_noticia($id,'$estado','$titulo','$resumen', '$contenido','$fecha', '$ubicacion',$visitas, '$palabras', $escritor, $noticia);";
-
+        $query = "call sp_editar_noticia($id,'$estado','$titulo', $foto,'$resumen', '$contenido', '$ubicacion',$visitas, '$palabras', $seccion);";
+        echo $query;
         if (!($sentence = $conn->prepare($query)))
         {
-            $conn->close();
-            die("Multimedia Agregar: Fallo la preparacion del query");
+            die("Multimedia Agregar: Fallo la preparacion del query".mysqli_error($conn));
         }
 
         if(!$sentence->execute()){
-            $conn->close();
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia Agregar: Fallo la ejecucion del query".mysqli_error($conn));
         }
 
         if($result = $sentence->get_result()){

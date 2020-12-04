@@ -256,9 +256,9 @@ CREATE PROCEDURE sp_editar_noticia
  IN pID INT,
  IN pEstado ENUM('en redaccion','terminada','publicada'),
  IN pTitulo    TINYTEXT,
+ IN pFoto 	   INT,
  IN pResumen   TINYTEXT,
  IN pContenido TEXT,
- IN pFecha     DATETIME,
  IN pUbicacion TINYTEXT,
  IN pVisitas   INT,
  IN pPalabras  TEXT,
@@ -270,8 +270,8 @@ BEGIN
         START TRANSACTION;
             UPDATE noticia
             SET Estado = pEstado, Titulo = pTitulo,
-            Resumen = pResumen, Contenido = pContenido,
-            Fecha = pFecha, Ubicacion = pUbicacion,
+			Foto = pFoto, Resumen = pResumen,
+			Contenido = pContenido, Ubicacion = pUbicacion,
             Visitas = pVisitas, Palabras = pPalabras, Seccion = pSeccion
             WHERE ID = pID;
     IF `_rollback` THEN

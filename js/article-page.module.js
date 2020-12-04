@@ -84,6 +84,7 @@ function loadDataToWindow(id){
         isPublished = data.Estado == "publicada"
 
         $("#article-container").attr("articleID", id);
+        $("#article-container").attr("visitas", data.Visitas);
 
         $("#article-title").text(data.Titulo);
         $("#article-description").text(data.Resumen);
@@ -93,7 +94,7 @@ function loadDataToWindow(id){
 
         $("#article-info").append("<p id='article-section'>" + data.NombreSeccion + "</p>");
         $("#article-info").append("<p>" + data.Fecha + "</p>");
-        $("#article-info").append("<p class='editor-editable'>" + data.Ubicacion + "</p>");
+        $("#article-info").append("<p class='editor-editable' id='article-location'>" + data.Ubicacion + "</p>");
         $("#article-info").append("<p id='article-author'>" + data.NombreReportero + "</p>");
 
         $('[data-toggle="tooltip"]').tooltip();
