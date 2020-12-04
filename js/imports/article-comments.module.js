@@ -1,4 +1,5 @@
 let createComment = function(comment, deletable){
+    debugger
     let div = document.createElement('div');
     div.classList.add('comment');
 
@@ -20,7 +21,15 @@ let createComment = function(comment, deletable){
     div.append(img, user,content);
 
     if(deletable == true){
-        div.append($(`<button class='btn btn-outline-danger button-delete float-right'><i class='far fa-trash-alt'></i></button>`));
+        let deletBton = document.createElement('button');
+        deletBton.classList.add('btn');
+        deletBton.classList.add('btn-outline-danger');
+        deletBton.classList.add('button-delete');
+        let icon = document.createElement('i');
+        icon.classList.add('far');
+        icon.classList.add('fa-trash-alt');
+        deletBton.append(icon);
+        div.append(deletBton);
     }
 
     return div;
@@ -40,6 +49,7 @@ let createMainComment = function(comment, deleteable){
         comments.append(createComment(comment.respuestas[i], deleteable));
     }
 
+    debugger;
     let commenttext = document.createElement('div');
     commenttext.classList.add("comment-form");
     commenttext.setAttribute('comment-id', comment.id);

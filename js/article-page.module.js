@@ -1,10 +1,13 @@
 import * as comms from './imports/article-comments.module.js';
 import * as parser from './imports/article-content-parser.module.js';
 
-import {createCarousel} from './imports/carousel-creator.module.js';
+import {createCarousel} from './imports/carousel-creator.module.js'
+import {createEditorButton} from './article-edit-mode.module.js'
 
+
+import * as usuarios from './services/usuario.service.js';
 import {getOne, getRelatedD} from './services/noticias.service.js';
-import {getByArticle, addComment} from './services/comentarios.service.js';
+import {getByArticle, addComment, removeComment} from './services/comentarios.service.js';
 import {getById} from './routes/multimedia.routes.js';
 import {count, add, remove, comprobar} from './services/likes.service.js';
 
@@ -14,9 +17,20 @@ const url = new URL(window.location.href);
 const id = url.searchParams.get('id');
 const userInfo = getStoredUser();
 
-$(document).ready(function(){
+var isEditor;
+var isOwner;
+var isPublished;
 
-    loadDataToWindow(id);
+$(document).ready(function(){
+    usuarios.getOne(userInfo.userId)
+    .then((res) => res.json())
+    .then((user) => {
+        isEditor = user.Rol == "editor";
+        loadDataToWindow(id);
+
+        if((isOwner || isEditor) && !isPublished)
+            createEditorButton();
+    })
 
     comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
         if(res.RESULT != "NOT"){
@@ -64,6 +78,10 @@ function loadDataToWindow(id){
     getOne(id)
     .then(res => res.json())
     .then(data=>{
+
+        isOwner = data.Escritor == userInfo.userId;
+        isPublished = data.Estado == "publicada"
+
         $("#article-container").attr("articleID", id);
 
         $("#article-title").text(data.Titulo);
@@ -90,23 +108,23 @@ function loadDataToWindow(id){
             $("#related-articles").append(createCarousel(carousel));
         })
         .catch(err=>console.log(err));
+    }).then(() => {
+        //traer comentarios
+        getByArticle(id)
+        .then(res => res.json())
+        .then(data =>{
+            let comments = document.querySelector('#comments');
+            data.forEach(element=>{
+                comments.append(comms.createMainComment(element, isOwner || isEditor)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
+            });
+        })
+        .catch(err=>{
+            console.error("No se pudieron traer los comentarios "+ err)
+        });
     })
     .catch(err=>{
         console.log("No se encontro el articulo");
         console.log(err);
-    });
-
-    //traer comentarios
-    getByArticle(id)
-    .then(res => res.json())
-    .then(data =>{
-        let comments = document.querySelector('#comments');
-        data.forEach(element=>{
-            comments.append(comms.createMainComment(element, true)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
-        });
-    })
-    .catch(err=>{
-        console.error("No se pudieron traer los comentarios "+ err)
     });
 
     count(id)
@@ -120,6 +138,17 @@ function loadDataToWindow(id){
 $(document).on('keyup keypress', 'textarea.autoExpand', function() {
     $(this).height(0);
     $(this).height(this.scrollHeight);
+});
+
+$(document).on('click', '.button-delete', function() {
+    let papa = $(this).parent();
+    let commentId = papa.attr("comment-id");
+    let fd = new FormData();
+    fd.append("id", commentId);
+    if(confirm("¿Está seguro que desea eliminar este comentario?"))
+        removeComment(fd).then(()=>{
+            location.reload();
+        })
 });
 
 $(document).on('click', 'p.comment-answer', function() {

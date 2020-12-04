@@ -43,9 +43,10 @@ function accionBotones(sr){
         fd.append('estado', 'terminada');
         
         cambiarEstado(fd)
-        .then(res=>res.text())
+        .then(res=>res.json())
         .then(res=>{
-            alert(res);
+            if(res.STATUS == "SUCCESS")
+                location.reload();
         })
         .catch(err=>console.log(err))
     });
