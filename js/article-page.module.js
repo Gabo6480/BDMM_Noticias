@@ -92,7 +92,21 @@ function loadDataToWindow(id){
 
         $("#article-title").text(data.Titulo);
         $("#article-description").text(data.Resumen);
-        $("#article-img").attr("src", getById(data.Foto));
+
+        let mediaURL = getById(data.Foto);
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('HEAD', mediaURL);
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == this.DONE) {
+                if(this.getResponseHeader("Content-Type").includes("video")){
+                    $("#article-img").replaceWith(`<video id="article-img" controls></video>`);
+                }
+                $("#article-img").attr("src", mediaURL);
+            }
+        };
+        xhttp.send();
+
+        
         $("#article-content").html(parser.parseArticle(data.Contenido));
         $("#article-keywords").text(data.Palabras);
 
