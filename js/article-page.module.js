@@ -91,7 +91,7 @@ function loadDataToWindow(id){
     .then(data =>{
         let comments = document.querySelector('#comments');
         data.forEach(element=>{
-            comments.append(comms.createMainComment(element));
+            comments.append(comms.createMainComment(element, true)); //TODO: cambiar el true por una validacion que indique si tienes derecho de eliminar el comentario
         });
     })
     .catch(err=>{

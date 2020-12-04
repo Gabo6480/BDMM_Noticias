@@ -1,4 +1,4 @@
-let createComment = function(comment){
+let createComment = function(comment, deletable){
     let div = document.createElement('div');
     div.classList.add('comment');
 
@@ -20,11 +20,15 @@ let createComment = function(comment){
 
     div.append(img, user,content);
 
+    if(deletable == true){
+        div.append(`<button class='btn btn-outline-danger button-delete float-right'><i class='far fa-trash-alt'></i></button>`);
+    }
+
     return div;
 }
 
-let createMainComment = function(comment){
-    let div = createComment(comment);
+let createMainComment = function(comment, deleteable){
+    let div = createComment(comment, deleteable);
 
     let responses = document.createElement('p');
     responses.classList.add('comment-answer');
@@ -34,7 +38,7 @@ let createMainComment = function(comment){
     comments.classList.add('comment-comments');
 
     for(var i = 0; i < comment.answers.length; i++){
-        comments.append(createComment(comment.answers[i]));
+        comments.append(createComment(comment.answers[i], deleteable));
     }
 
     let commenttext = document.createElement('div');
