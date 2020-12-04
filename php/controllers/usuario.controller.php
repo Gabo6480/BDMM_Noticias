@@ -65,7 +65,7 @@
             $Activo
         ){
             require './../dbconnect.php';
-            $query = "call sp_usuarios_editar($id_usuario,'$Correo','$Foto','$Nombre','$Telefono','$Contrasena','$Rol',$Activo);";
+            $query = "call sp_usuarios_editar($id_usuario,$Correo,$Foto,$Nombre,$Telefono,$Contrasena,$Rol,$Activo);";
 
             if(!($sentence = $conn->prepare($query))){
                 $conn->close();
