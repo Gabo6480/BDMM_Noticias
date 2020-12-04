@@ -35,7 +35,7 @@ let createComment = function(comment, deletable){
     return div;
 }
 
-let createMainComment = function(comment, deleteable){
+let createMainComment = function(comment, deleteable, commentable){
     let div = createComment(comment, deleteable);
 
     let responses = document.createElement('p');
@@ -48,25 +48,25 @@ let createMainComment = function(comment, deleteable){
     for(var i = 0; i < comment.respuestas.length; i++){
         comments.append(createComment(comment.respuestas[i], deleteable));
     }
-
-    debugger;
-    let commenttext = document.createElement('div');
-    commenttext.classList.add("comment-form");
-    commenttext.setAttribute('comment-id', comment.id);
-    commenttext.setAttribute('user-id', comment.usuario);
-
-    let textarea = document.createElement('textarea');
-    textarea.classList.add("comment-text");
-    textarea.classList.add("autoExpand");
-    textarea.setAttribute("placeholder", "Escribe tu comentario aqui...")
-
-    let button = document.createElement('button');
-    button.classList.add("comment-button");
-    button.innerText = "Enviar";
-
-    commenttext.append(textarea, button);
-
-    comments.append(commenttext);
+    if(commentable){
+        let commenttext = document.createElement('div');
+        commenttext.classList.add("comment-form");
+        commenttext.setAttribute('comment-id', comment.id);
+        commenttext.setAttribute('user-id', comment.usuario);
+        
+        let textarea = document.createElement('textarea');
+        textarea.classList.add("comment-text");
+        textarea.classList.add("autoExpand");
+        textarea.setAttribute("placeholder", "Escribe tu comentario aqui...")
+        
+        let button = document.createElement('button');
+        button.classList.add("comment-button");
+        button.innerText = "Enviar";
+        
+        commenttext.append(textarea, button);
+        
+        comments.append(commenttext);
+    }
 
     div.append(responses, comments);
 
