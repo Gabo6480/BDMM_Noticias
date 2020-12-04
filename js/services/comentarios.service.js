@@ -41,7 +41,7 @@ const edit = body=>{
  * @function remove
  * @param {FormData} body
  */
-const remove = body=>{
+const removeComment = body=>{
     body.append("action", "remove");
     const params = {
         method:"POST",
@@ -55,5 +55,5 @@ export{
     getByArticle,
     addComment,
     edit,
-    remove
+    removeComment
 }

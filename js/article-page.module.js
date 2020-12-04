@@ -4,7 +4,7 @@ import * as parser from './imports/article-content-parser.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
 
 import {getOne, getRelatedD} from './services/noticias.service.js';
-import {getByArticle, addComment} from './services/comentarios.service.js';
+import {getByArticle, addComment, removeComment} from './services/comentarios.service.js';
 import {getById} from './routes/multimedia.routes.js';
 import {count, add, remove, comprobar} from './services/likes.service.js';
 
@@ -121,6 +121,17 @@ function loadDataToWindow(id){
 $(document).on('keyup keypress', 'textarea.autoExpand', function() {
     $(this).height(0);
     $(this).height(this.scrollHeight);
+});
+
+$(document).on('click', '.button-delete', function() {
+    let papa = $(this).parent();
+    let commentId = papa.attr("comment-id");
+    let fd = new FormData();
+    fd.append("id", commentId);
+    if(confirm("¿Está seguro que desea eliminar este comentario?"))
+        removeComment(fd).then(()=>{
+            location.reload();
+        })
 });
 
 $(document).on('click', 'p.comment-answer', function() {
