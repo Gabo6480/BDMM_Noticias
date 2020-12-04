@@ -28,6 +28,13 @@ let createEditorButton = (sectionID)=>{
             var reader = new FileReader();
 
             reader.onload = function (e) {
+                if(input.files[0].type.includes("video")){
+                    $("#article-img").replaceWith(`<video id="article-img" controls></video>`);
+                }
+                else{
+                    $("#article-img").replaceWith(`<img id="article-img"></img>`);
+                }
+
                 $('#article-img').attr('src', e.target.result);
             }
 
