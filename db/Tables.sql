@@ -26,7 +26,7 @@ CREATE TABLE seccion(
 CREATE TABLE multimedia(
 	ID				INT 							AUTO_INCREMENT PRIMARY KEY,
     Tipo			VARCHAR(30)                     NOT NULL,
-    Contenido		BLOB						    NOT NULL
+    Contenido		MEDIUMBLOB						NOT NULL
 );
 
 CREATE TABLE noticia(
