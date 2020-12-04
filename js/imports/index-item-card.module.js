@@ -19,23 +19,31 @@ let createItemCard = function(item, style){
         if (this.readyState == this.DONE) {
             if(this.getResponseHeader("Content-Type").includes("video")){
 
-                let video = $(`<video src="${mediaURL}" width=300px height=200px></video>`).get(0);
+                let video = $(`<video src="${mediaURL}" muted></video>`).get(0);
                 video.onloadedmetadata  = ()=>{
 
                     video.play();
-                    debugger;
 
-                    let canvas = document.createElement('canvas');
+                    video.onplay = ()=>{
 
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    
-                    canvas.getContext('2d')
-                        .drawImage(video,0,0, canvas.width, canvas.height);
-                    
-                    dataURL = canvas.toDataURL();
-                    container.style.backgroundImage = "url('" + dataURL + "')";
-                    video.stop();
+                        setTimeout(()=>{
+                            let canvas = document.createElement('canvas');
+
+                            canvas.width = video.videoWidth;
+                            canvas.height = video.videoHeight;
+                            
+                            canvas.getContext('2d')
+                                .drawImage(video,0,0, canvas.width, canvas.height);
+                            
+                            dataURL = canvas.toDataURL();
+                            container.style.backgroundImage = "url('" + dataURL + "')";
+
+                            setTimeout(()=>{
+                                video.pause();
+                                video.currentTime = 0;
+                            },200);
+                        },300);
+                    }
                 }
             }
             else{

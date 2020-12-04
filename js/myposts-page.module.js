@@ -80,7 +80,6 @@ $(document).ready(function(){
         add(fd)
         .then(res=>res.json())
         .then((newPost) => {
-            debugger
             if(newPost.STATUS == 'SUCCESS'){
                 window.location = `article.html?id=${newPost.id}`;
             }
