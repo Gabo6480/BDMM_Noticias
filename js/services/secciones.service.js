@@ -12,6 +12,10 @@ const search = search=>{
     return fetch(SeccionesRoutes.search(search));
 }
 
+const byId = id=>{
+    return fetch(SeccionesRoutes.getById(id));
+}
+
 const add = body=>{
     const params = {
         method:"POST",
@@ -51,6 +55,7 @@ const remove = body=>{
 export{
     get,
     getActive,
+    byId,
     search,
     add,
     edit,

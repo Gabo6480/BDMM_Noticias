@@ -15,8 +15,7 @@ let createComment = function(comment){
 
     let content = document.createElement('p');
     content.classList.add('comment-content');
-    content.innerText = comment.content;
-
+    content.innerText = comment.contenido;
 
     div.append(img, user,content);
 
@@ -28,19 +27,20 @@ let createMainComment = function(comment){
 
     let responses = document.createElement('p');
     responses.classList.add('comment-answer');
-    responses.innerText = comment.answers.length > 0 ? comment.answers.length + " respuestas" : "Responder";
+    responses.innerText = comment.respuestas.length > 0 ? comment.respuestas.length + " respuestas" : "Responder";
 
     let comments = document.createElement('div');
     comments.classList.add('comment-comments');
 
-    for(var i = 0; i < comment.answers.length; i++){
-        comments.append(createComment(comment.answers[i]));
+    for(var i = 0; i < comment.respuestas.length; i++){
+        comments.append(createComment(comment.respuestas[i]));
     }
 
+    debugger;
     let commenttext = document.createElement('div');
     commenttext.classList.add("comment-form");
     commenttext.setAttribute('comment-id', comment.id);
-    commenttext.setAttribute('user-id', comment.userId);
+    commenttext.setAttribute('user-id', comment.usuario);
 
     let textarea = document.createElement('textarea');
     textarea.classList.add("comment-text");

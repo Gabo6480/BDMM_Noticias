@@ -134,3 +134,8 @@ call sp_get_similar_distintos_a_sl(1,'Chiapas,cHING');
 call sp_noticia_get_estado('en redaccion');
 
 call sp_get_nombre_similar('ex',NULL,NULL,NULL);
+
+SELECT*FROM comentario;
+delete from comentario;
+
+call sp_comentarios_by_article(3)

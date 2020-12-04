@@ -76,7 +76,7 @@ class MultimediaController{
         }
 
         if(!$sentence->execute()){
-            die("Multimedia Agregar: Fallo la ejecucion del query");
+            die("Multimedia Agregar: Fallo la ejecucion del query".mysqli_error($conn));
         }
 
         if($result = $sentence->get_result()){

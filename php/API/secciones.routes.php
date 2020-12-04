@@ -15,6 +15,10 @@
                 $search = $_GET['search'];
                 $sc->search($search);
             }
+            else if($action === 'byid'){
+                $id = $_GET['id'];
+                $sc->byId($id);
+            }
            
         }
         else if($_SERVER["REQUEST_METHOD"] == "POST"){

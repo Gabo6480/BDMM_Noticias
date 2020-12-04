@@ -120,25 +120,45 @@ $(document).on('click', 'p.comment-answer', function() {
         comments.show();
 });
 
-$(document).on('click', 'button.comment-button', function() {
-    let papa = $(this).parent();
+$(document).on('click','.comment-button', e=>{
+
+    let $papa = $(e.target).parent();
 
     //Si estos atributos regresan "undefined" entonces no tienen comentario padre así que es un comentario principal
-    let commentID = papa.attr("comment-id");
+    let commentID = $papa.attr("comment-id");
     //let userID = papa.attr("user-id");  //Usuario dueño del comentario; Este no se usa aquí pero está como ejemplo
 
-    let commentText = papa.find(".comment-text").val();
+    let commentText = $papa.find(".comment-text").val();
     let commentfd = new FormData();
     commentfd.append("contenido", commentText);
     commentfd.append("usuario", userInfo.userId);
     commentfd.append("noticia", id);
+    debugger;
     if(commentID != undefined){
         commentfd.append("padre", commentID);
     }
 
-    addComment(commentfd).then(()=>{
-        papa.find(".comment-text").val("");
-        location.reload();
+    addComment(commentfd)
+    .then(()=>{
+        $papa.find(".comment-text").val("");
+        //traer comentarios
+        
+        getByArticle(id)
+        .then(res => res.json())
+        .then(data =>{
+            let $comments = $("#comments");
+            $comments.empty();
+            data.forEach(element=>{
+                $comments.append(comms.createMainComment(element));
+            });
+        })
+        .catch(err=>{
+            console.error("No se pudieron traer los comentarios "+ err)
+        });
     });
+});
+
+$(document).on('click', 'button.comment-button', function() {
+    
 
 });

@@ -15,3 +15,6 @@ CREATE VIEW v_Usuarios_Activos AS
 SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     FROM  Usuario
     WHERE Activo = 1;
+    
+CREATE VIEW v_Comentarios_Articulos AS
+SELECT 

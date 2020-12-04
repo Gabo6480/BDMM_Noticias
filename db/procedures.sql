@@ -181,6 +181,13 @@ BEGIN
     ORDER BY Orden DESC;
 END //
 
+CREATE PROCEDURE sp_seccionById(IN pID INT)
+BEGIN
+	SELECT ID,Nombre,Color,Activa,Orden
+    FROM seccion
+    WHERE ID = pID;
+END//
+
 CREATE PROCEDURE sp_getSeccionesActivas()
 BEGIN
     SELECT ID,Nombre,Color,Activa,Orden
@@ -459,14 +466,12 @@ END //
 #####################
 #    comentarios    #
 #####################
-
 CREATE PROCEDURE sp_comentarios_by_article
 (IN pID INT)
 BEGIN
     SELECT ID, Contenido, Fecha, Padre, Noticia, Usuario
     FROM comentario
-    WHERE Noticia = pID AND Padre = NULL
-    ORDER BY Fecha ASC;
+    WHERE Noticia = pID AND Noticia is not NULL;
 END //
 
 CREATE PROCEDURE sp_comentarios_respuestas
@@ -506,10 +511,7 @@ END //
 #####################
 
 use BDMM_DB;
-DROP PROCEDURE sp_addLike;
-DROP PROCEDURE sp_removeLike;
-DROP PROCEDURE sp_countLikes;
-DELIMITER //
+
 CREATE PROCEDURE sp_addLike(IN pNoticia INT, IN pUsuario INT)
 BEGIN
     INSERT INTO me_gusta(Noticia, Usuario) VALUES(pNoticia, pUsuario); 

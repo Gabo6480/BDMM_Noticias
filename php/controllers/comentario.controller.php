@@ -36,11 +36,11 @@
                 while($row = $result->fetch_assoc()){
                     $comment = new Comentario();
 
-                    $comment->$id         = $row["ID"];
-                    $comment->$contenido  = $row["Contenido"];
-                    $comment->$fecha      = $row["Fecha"];
-                    $comment->$usuario    = $row["Usuario"];
-                    $comment->$respuestas = $this->getChildrenComments($comment->$id);
+                    $comment->id         = $row["ID"];
+                    $comment->contenido  = $row["Contenido"];
+                    $comment->fecha      = $row["Fecha"];
+                    $comment->usuario    = $row["Usuario"];
+                    $comment->respuestas = $this->getChildrenComments($comment->id);
 
                     array_push($comments, $comment);
                 }

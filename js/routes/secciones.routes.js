@@ -8,9 +8,12 @@ const getActive  = id => `${seccionesURL}?action=getActive`;
 
 const search = search =>`${seccionesURL}?action=search&search=${search}`;
 
+const getById  = id => `${seccionesURL}?action=byid&id=${id}`;
+
 export{
     seccionesURL as post,
     get,
     getActive,
+    getById,
     search
 }

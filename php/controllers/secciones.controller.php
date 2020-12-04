@@ -11,6 +11,7 @@ class SeccionesController{
         'sp_getSecciones' ;
         'sp_getSeccionesActivas';
         'sp_search_secciones';
+        'sp_seccionById';
     }
 
     //////////////////
@@ -173,6 +174,31 @@ class SeccionesController{
             }
             header("Content-type:application/json");
             echo json_encode($arr);
+            $result->free();
+        }else{
+            echo 0;
+        }
+        $conn->close();
+    }
+    function byId($id){
+        require './../dbconnect.php';
+        $query = "call sp_seccionById($id)";
+
+        if (!($sentence = $conn->prepare($query)))
+        {
+            $conn->close();
+            die("COUNT PREPARATION FAILED");
+        }
+
+        if(!$sentence->execute()){
+            $conn->close();
+            die("QUERY EXECUTION FAILED");
+        }
+
+        
+        if($result = $sentence->get_result()){
+            header("Content-type:application/json");
+            echo json_encode($result->fetch_assoc());
             $result->free();
         }else{
             echo 0;
