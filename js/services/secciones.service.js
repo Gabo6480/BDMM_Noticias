@@ -47,6 +47,25 @@ const remove = body=>{
     return fetch(SeccionesRoutes.post, params);
 }
 
+const incrementar = body=>{
+    body.append('action', 'incrementar');
+    const params = {
+        method:"POST",
+        body:body
+    }
+    return fetch(SeccionesRoutes.post, params);
+}
+
+const decrementar = body=>{
+    body.append('action', 'decrementar');
+    const params = {
+        method:"POST",
+        body:body
+    }
+    return fetch(SeccionesRoutes.post, params);
+}
+
+
 export{
     get,
     getActive,
@@ -54,5 +73,7 @@ export{
     search,
     add,
     edit,
-    remove
+    remove,
+    incrementar,
+    decrementar
 }
