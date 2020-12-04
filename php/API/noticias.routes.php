@@ -92,16 +92,16 @@
                         );
                     break;
                 case 'edit':
-                        $id        = $_POST['id']        ;
-                        $estado    = $_POST['estado']    ;
-                        $titulo    = $_POST['titulo']    ;
-                        $foto      = $_POST['foto']      ;
-                        $resumen   = $_POST['resumen']   ;
-                        $contenido = $_POST['contenido'] ;
-                        $ubicacion = $_POST['ubicacion'] ;
-                        $visitas   = $_POST['visitas']   ;
-                        $palabras  = $_POST['palabras']  ;
-                        $seccion   = $_POST['seccion']   ;
+                        $id        = isset($_POST['id']        ) ? $_POST['id']        : "NULL";
+                        $estado    = isset($_POST['estado']    ) ? "'".$_POST['estado']."'"    : "NULL";
+                        $titulo    = isset($_POST['titulo']    ) ? "'".$_POST['titulo']."'"    : "NULL";
+                        $foto      = isset($_POST['foto']      ) ? $_POST['foto']      : "NULL";
+                        $resumen   = isset($_POST['resumen']   ) ? "'".$_POST['resumen']."'"   : "NULL";
+                        $contenido = isset($_POST['contenido'] ) ? "'".$_POST['contenido']."'" : "NULL";
+                        $ubicacion = isset($_POST['ubicacion'] ) ? "'".$_POST['ubicacion']."'" : "NULL";
+                        $visitas   = isset($_POST['visitas']   ) ? $_POST['visitas']   : "NULL";
+                        $palabras  = isset($_POST['palabras']  ) ? "'".$_POST['palabras']."'"  : "NULL";
+                        $seccion   = isset($_POST['seccion']   ) ? $_POST['seccion']   : "NULL";
                         $nc->edit(
                             $id        ,
                             $estado    ,

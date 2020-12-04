@@ -260,10 +260,16 @@ BEGIN
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
         START TRANSACTION;
             UPDATE noticia
-            SET Estado = pEstado, Titulo = pTitulo,
-			Foto = pFoto, Resumen = pResumen,
-			Contenido = pContenido, Ubicacion = pUbicacion,
-            Visitas = pVisitas, Palabras = pPalabras, Seccion = pSeccion
+            SET 
+            Estado = 	COALESCE(pEstado, Estado),
+            Titulo = 	COALESCE(pTitulo, Titulo),
+			Foto = 		COALESCE(pFoto, Foto),
+            Resumen = 	COALESCE(pResumen,Resumen),
+			Contenido = COALESCE(pContenido, Contenido),
+            Ubicacion = COALESCE(pUbicacion,Ubicacion),
+            Visitas = 	COALESCE(pVisitas, Visitas),
+            Palabras = 	COALESCE(pPalabras, Palabras),
+            Seccion = 	COALESCE(pSeccion,Seccion)
             WHERE ID = pID;
     IF `_rollback` THEN
         SELECT 'FAILURE' `STATUS`;

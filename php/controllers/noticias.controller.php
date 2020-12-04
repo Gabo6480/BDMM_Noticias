@@ -409,7 +409,7 @@ class NoticiaController{
     )
     {
         require './../dbconnect.php';
-        $query = "call sp_editar_noticia($id,'$estado','$titulo', $foto,'$resumen', '$contenido', '$ubicacion',$visitas, '$palabras', $seccion);";
+        $query = "call sp_editar_noticia($id,$estado,$titulo, $foto,$resumen, $contenido, $ubicacion,$visitas, $palabras, $seccion);";
         echo $query;
         if (!($sentence = $conn->prepare($query)))
         {

@@ -62,31 +62,55 @@ let createEditorButton = (sectionID)=>{
         let descripcion = $("#article-description").text();
         let seccionValor = $("#article-section").val();
         let lugar = $("#article-location").text();
-        //let imagen = $("#article-img").attr("file");
-        let contenido = $("#article-content").text();
+
+        let contenido = $("#article-content").val();
         let palabras = $("#article-keywords").text();
         let multifd = new FormData();
-        multifd.append("archivo", selectedFile);
-        add(multifd).then(res => res.json()).then((multimedia) => {
+        if(selectedFile != undefined){
+            multifd.append("archivo", selectedFile);
+            add(multifd).then(res => res.json()).then((multimedia) => {
+                let editfd = new FormData();
+                editfd.append('id', id);
+                editfd.append('estado', "en redaccion");
+                editfd.append('titulo', titulo);
+                editfd.append('resumen', descripcion);
+                editfd.append('contenido', contenido);
+                editfd.append('foto', multimedia.id);
+                editfd.append('ubicacion', lugar);
+                editfd.append('visitas', visitas);
+                editfd.append('palabras', palabras);
+                editfd.append('seccion', seccionValor);
+
+                edit(editfd)
+                .then(res=>res.text())
+                .then(res=>{
+                    location.reload();
+                })
+                .catch(err=>console.log(err))
+            }).catch(err=>console.log(err));
+        
+        }    
+        else
+        {
             let editfd = new FormData();
-            editfd.append('id', id);
-            editfd.append('estado', "en redaccion");
-            editfd.append('titulo', titulo);
-            editfd.append('resumen', descripcion);
-            editfd.append('contenido', contenido);
-            editfd.append('foto', multimedia.id);
-            editfd.append('ubicacion', lugar);
-            editfd.append('visitas', visitas);
-            editfd.append('palabras', palabras);
-            editfd.append('seccion', seccionValor);
-            debugger;
-            edit(editfd)
-            .then(res=>res.text())
-            .then(res=>{
-                location.reload();
-            })
-            .catch(err=>console.log(err))
-        }).catch(err=>console.log(err));
+                editfd.append('id', id);
+                editfd.append('estado', "en redaccion");
+                editfd.append('titulo', titulo);
+                editfd.append('resumen', descripcion);
+                editfd.append('contenido', contenido);
+                editfd.append('ubicacion', lugar);
+                editfd.append('visitas', visitas);
+                editfd.append('palabras', palabras);
+                editfd.append('seccion', seccionValor);
+
+                edit(editfd)
+                .then(res=>res.text())
+                .then(res=>{
+                    location.reload();
+                })
+                .catch(err=>console.log(err))
+        }
+
     });
     
 
