@@ -18,4 +18,14 @@ SELECT ID, Correo, Foto, Nombre, Telefono, Contrasena, Rol, Activo
     
 CREATE VIEW v_Comentarios_Articulos AS
  SELECT C.ID, Contenido, Fecha, Padre, Noticia, Usuario, U.Nombre, U.Foto
-    FROM comentario C INNER JOIN  usuario U ON U.ID = C.Usuario
+    FROM comentario C INNER JOIN  usuario U ON U.ID = C.Usuario;
+    
+CREATE VIEW v_Articulo_Imagen_Default AS 
+SELECT 
+	ID, Estado, Titulo, Resumen, Contenido, Fecha, 
+	Ubicacion, Visitas, Palabras, Escritor, Seccion,
+	Prioridad, IF(ISNULL(Foto), FIRST_NON_NULL_IMAGE(), Foto) `Foto`, `NombreReportero`,  `NombreSeccion`
+FROM v_Articulo_Pagina
+ORDER BY Prioridad DESC;
+
+SELECT * FROM v_Articulo_Imagen_Default;

@@ -48,7 +48,7 @@ CREATE TABLE noticia(
     Seccion			INT				NOT NULL,
     CONSTRAINT FK_SECCION FOREIGN KEY (Seccion)
     REFERENCES seccion(ID),
-    Foto            INT             default 1,
+    Foto            INT             NULL,
     CONSTRAINT FK_FOTO_NOTICIA FOREIGN KEY(Foto) 
     REFERENCES multimedia(ID)
     

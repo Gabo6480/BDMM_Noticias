@@ -223,7 +223,6 @@ END //
 #####################
 #     noticias      #
 #####################
-
 CREATE PROCEDURE sp_add_noticia
 (
  IN pEstado ENUM('en redaccion','terminada','publicada'),
@@ -237,18 +236,10 @@ CREATE PROCEDURE sp_add_noticia
  IN pSeccion   INT 
 )
 BEGIN
-    DECLARE `_rollback` BOOL DEFAULT 0;
-    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
-        START TRANSACTION;
-            INSERT INTO noticia(Estado, Titulo, Resumen,Contenido,Fecha, Ubicacion,Palabras,Escritor,Seccion)
-            VALUES (pEstado, pTitulo, pResumen,pContenido,pFecha, pUbicacion,pPalabras,pEscritor,pSeccion);
-    IF `_rollback` THEN
-        SELECT 'FAILURE' `STATUS`;
-        ROLLBACK;
-    ELSE
+		INSERT INTO noticia(Estado, Titulo, Resumen,Contenido,Fecha, Ubicacion,Palabras,Escritor,Seccion)
+		VALUES (pEstado, pTitulo, pResumen,pContenido,pFecha, pUbicacion,pPalabras,pEscritor,pSeccion);
+
         SELECT 'SUCCESS' `STATUS`, MAX(ID) `id` FROM noticia;
-        COMMIT;
-    END IF;
 END //
 
 CREATE PROCEDURE sp_editar_noticia
@@ -339,7 +330,7 @@ CREATE PROCEDURE sp_noticia_by_seccion
 (IN pID INT)
 BEGIN 
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Prioridad, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE Seccion = pID
     ORDER BY Prioridad DESC;
 END //
@@ -348,7 +339,7 @@ CREATE PROCEDURE sp_noticia_by_reportero
 (IN pID INT)
 BEGIN 
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Prioridad, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE Escritor = pID
     ORDER BY Prioridad DESC;
 END //
@@ -362,14 +353,14 @@ BEGIN
     WHERE ID = pID;
 
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE ID = pID;
 END //
 
 CREATE PROCEDURE sp_noticia_get()
 BEGIN 
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Prioridad, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     ORDER BY Prioridad DESC;
 END //
 
@@ -377,7 +368,7 @@ CREATE PROCEDURE sp_noticia_get_estado
 (IN pEstado ENUM('en redaccion', 'terminada', 'publicada'))
 BEGIN 
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE Estado = pEstado;
 END //
 
@@ -386,7 +377,7 @@ CREATE PROCEDURE sp_noticia_get_estado_reportero
  IN pEscritor INT)
 BEGIN 
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE Estado = pEstado and Escritor = pEscritor;
 END //
 
@@ -395,7 +386,7 @@ CREATE PROCEDURE sp_noticia_get_estado_seccion
  IN pSeccion INT)
 BEGIN 
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE Estado = pEstado and Seccion = pSeccion;
 END //
 
@@ -407,7 +398,7 @@ BEGIN
 	SET m_regex = REGEX_FROM_CSV(pPalabras);
 		
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE Estado = 'publicada' AND  LOWER(Palabras) RLIKE LOWER(m_regex);
 END//
 
@@ -419,7 +410,7 @@ BEGIN
 	SET m_regex = REGEX_FROM_CSV(pPalabras);
 		
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE Estado = 'publicada' AND  LOWER(Palabras) RLIKE LOWER(m_regex) AND pID <> ID;
 END//
 
@@ -431,21 +422,21 @@ BEGIN
 	SET m_regex = REGEX_FROM_CSV(pPalabras);
 		
     SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina
+    FROM v_Articulo_Imagen_Default
     WHERE LOWER(Palabras) RLIKE LOWER(m_regex) AND pID <> ID;
 END//
 
 CREATE PROCEDURE sp_get_nombre_similar(IN pTitulo TINYTEXT, IN pReportero INT, IN pSeccion INT, IN pEstado ENUM('en redaccion', 'terminada', 'publicada'))
 BEGIN
 	SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina 
+    FROM v_Articulo_Imagen_Default 
     WHERE Titulo LIKE CONCAT('%', pTitulo ,'%') AND Seccion = COALESCE(pSeccion, Seccion) AND Estado = COALESCE(pEstado,Estado) AND Escritor = COALESCE(pReportero, Escritor);
 END//
 
 CREATE PROCEDURE sp_getPopular()
 BEGIN
 	SELECT ID, Estado, Titulo, Resumen, Contenido, Fecha, Ubicacion, Visitas, Palabras, Escritor, Seccion, Foto, `NombreReportero`, `NombreSeccion`
-    FROM v_Articulo_Pagina 
+    FROM v_Articulo_Imagen_Default 
     WHERE Estado = 'publicada'
     ORDER BY Visitas DESC;
 END //

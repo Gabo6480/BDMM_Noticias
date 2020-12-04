@@ -38,3 +38,6 @@ RETURN (SELECT COUNT(ID) from me_gusta WHERE Noticia = pNoticia );
 CREATE FUNCTION REEMPLAZAR_COMENTARIOS( pContenido LONGTEXT)
 RETURNS LONGTEXT
 RETURN(SELECT regexp_replace(pContenido, '\\$\\[\(\[\\S\\s\]+?\)\\]\\("\[\\S\\s\]+?"\\)','\\1'));
+
+CREATE FUNCTION FIRST_NON_NULL_IMAGE() RETURNS INT 
+RETURN (SELECT COALESCE((SELECT Foto FROM Noticia WHERE Foto is not null limit 1), 0))
