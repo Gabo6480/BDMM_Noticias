@@ -1,5 +1,5 @@
 import {createSectionCard} from './imports/sections-card.module.js';
-import {getActive, search, remove} from './services/secciones.service.js';
+import {getActive, search, remove, edit} from './services/secciones.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
@@ -7,6 +7,7 @@ function loadData(sr){
     getActive()
     .then(res=>res.json())
     .then(data=>{
+        body.empty();
         $.each(data,(index, seccion)=>{
             body.append(createSectionCard(seccion));
         })
@@ -42,7 +43,7 @@ function accionBotones(sr){
     
     sr.on("click", ".button-down", function (){
         //TODO: Reducir su prioridad
-    });;
+    });
 
     sr.on("click", ".button-edit", function (){
         let papa = $(this).closest("tr");
@@ -65,7 +66,7 @@ function accionBotones(sr){
         let fd = new FormData();
         fd.append("id", section);
         remove(fd).then(()=>{
-            location.reload();
+            loadData(sr)
         })
     });
 
@@ -75,12 +76,28 @@ function accionBotones(sr){
         let sectionColor = papa.find("td.section-color");
 
         let colorValue = sectionColor.find("#colorpicker").val();
+        debugger;
 
         let sectionTitle = papa.find("td.section-title").text();
+        let id           = papa.attr('post-id');
+        let orden        = papa.attr('orden-post');
+
+        let fd = new FormData();
+        
+        fd.append('id',id);
+        fd.append('nombre',sectionTitle);
+        fd.append('color',colorValue.substring(1,7));
+        fd.append('orden',orden);
+
+        edit(fd)
+        .then(res=>res.text())
+        .then(res=>{
+            alert(res);
+            loadData(sr)
+        })
+        .catch(err=>console.log(err));
 
         //TODO: Logica de enviar el cambio a la base de datos
-
-        location.reload();
     })
 }
 

@@ -1,7 +1,7 @@
-import * as comms from './imports/article-comments.module.js'
-import * as parser from './imports/article-content-parser.module.js'
+import * as comms from './imports/article-comments.module.js';
+import * as parser from './imports/article-content-parser.module.js';
 
-import {createCarousel} from './imports/carousel-creator.module.js'
+import {createCarousel} from './imports/carousel-creator.module.js';
 
 import {getOne, getRelatedD} from './services/noticias.service.js';
 import {getByArticle, addComment} from './services/comentarios.service.js';
@@ -55,7 +55,6 @@ $(document).ready(function(){
             })
             .catch(err=>console.log(err));
         }
-        
     });
 });
 

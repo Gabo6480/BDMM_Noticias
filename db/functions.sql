@@ -37,4 +37,4 @@ RETURN (SELECT COUNT(ID) from me_gusta WHERE Noticia = pNoticia );
 
 CREATE FUNCTION REEMPLAZAR_COMENTARIOS( pContenido LONGTEXT)
 RETURNS LONGTEXT
-RETURN(SELECT regexp_replace(Contenido, '\$\[([\S\s]+?)\]\("([\S\s]+?)"\)/g',"$1"));
+RETURN(SELECT regexp_replace(pContenido, '\$\[([\S\s]+?)\]\("([\S\s]+?)"\)/g',"$1"));

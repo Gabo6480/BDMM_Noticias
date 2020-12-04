@@ -378,7 +378,7 @@ class NoticiaController{
         $seccion 
     ){
         require './../dbconnect.php';
-        $query = "call sp_add_noticia('$estado','$titulo','$resumen', '$contenido','$fecha', '$ubicacion', '$palabras', $escritor, $noticia);";
+        $query = "call sp_add_noticia('$estado','$titulo','$resumen', '$contenido','$fecha', '$ubicacion', '$palabras', $escritor, $seccion);";
 
         if (!($sentence = $conn->prepare($query)))
         {

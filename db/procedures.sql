@@ -231,7 +231,7 @@ BEGIN
         SELECT 'FAILURE' `STATUS`;
         ROLLBACK;
     ELSE
-        SELECT 'SUCCESS' `STATUS`;
+        SELECT 'SUCCESS' `STATUS`, MAX(ID) `id` FROM noticia;
         COMMIT;
     END IF;
 END //
