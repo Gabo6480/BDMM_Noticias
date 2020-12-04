@@ -123,6 +123,7 @@ SELECT*FROM usuario;
 SELECT*FROM Seccion;
 SELECT*FROM Noticia;
 SELECT*FROM multimedia;
+DELETE FROM MULTIMEDIA;
 SELECT count(id) from me_gusta;
 
 call sp_noticia_get();

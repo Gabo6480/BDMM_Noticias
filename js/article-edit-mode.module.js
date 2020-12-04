@@ -50,32 +50,35 @@ let createEditorButton = ()=>{
         //La manera para que cambie a "terminada" es que el reportero le de al botón de enviar en "Mis Articulos"
         //Y para que cambie a "publicada", el editor tiene que picarle al botón publicar
         let id = $("#article-container").attr("articleID");
-        let titulo = $("#atricle-title").text();
-        let descripcion = $("#atricle-description").text();
-        let seccionValor = $("#atricle-section").val();
+        let visitas = $("#article-container").attr("visitas");
+        let titulo = $("#article-title").text();
+        let descripcion = $("#article-description").text();
+        let seccionValor = $("#article-section").val();
         let lugar = $("#article-location").text();
         //let imagen = $("#article-img").attr("file");
         let contenido = $("#article-content").text();
         let palabras = $("#article-keywords").text();
         let multifd = new FormData();
         multifd.append("archivo", selectedFile);
-        add(multifd).then(res => res.text()).then((multimedia) => {
-            alert(multimedia);
-            debugger;
+        add(multifd).then(res => res.json()).then((multimedia) => {
             let editfd = new FormData();
             editfd.append('id', id);
             editfd.append('estado', "en redaccion");
             editfd.append('titulo', titulo);
             editfd.append('resumen', descripcion);
             editfd.append('contenido', contenido);
-            editfd.append('foto', multimedia);
+            editfd.append('foto', multimedia.id);
             editfd.append('ubicacion', lugar);
+            editfd.append('visitas', visitas);
             editfd.append('palabras', palabras);
             editfd.append('seccion', seccionValor);
-            edit(editfd).then(()=>{
-                //location.reload();
-                alert("done");
-            });
+            debugger;
+            edit(editfd)
+            .then(res=>res.text())
+            .then(res=>{
+                location.reload();
+            })
+            .catch(err=>console.log(err))
         }).catch(err=>console.log(err));
     });
     
@@ -113,12 +116,12 @@ let createEditorButton = ()=>{
                 
             });
 
-            let $select = $(`<select id='#article-section' class='browser-default custom-select col-2'><option selected>Seccion</option></select>`);
+            let $select = $(`<select id='article-section' class='browser-default custom-select col-2'><option selected>Seccion</option></select>`);
             getActive()
             .then(res=>res.json())
             .then(secciones=>{
                 $.each(secciones, (i, seccion)=>{
-                    $select.append($(`<option value='"${seccion.ID}"'>${seccion.Nombre}</option>`))
+                    $select.append($(`<option value='${seccion.ID}'>${seccion.Nombre}</option>`))
                 });
             })
             .catch(err=>console.log(err));

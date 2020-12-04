@@ -98,7 +98,6 @@
                         $foto      = $_POST['foto']      ;
                         $resumen   = $_POST['resumen']   ;
                         $contenido = $_POST['contenido'] ;
-                        $fecha     = $_POST['fecha']     ;
                         $ubicacion = $_POST['ubicacion'] ;
                         $visitas   = $_POST['visitas']   ;
                         $palabras  = $_POST['palabras']  ;
@@ -110,7 +109,6 @@
                             $foto      ,
                             $resumen   ,
                             $contenido ,
-                            $fecha     ,
                             $ubicacion ,
                             $visitas   ,
                             $palabras  ,
