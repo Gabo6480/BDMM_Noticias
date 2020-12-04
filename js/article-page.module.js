@@ -19,6 +19,7 @@ const userInfo = getStoredUser();
 
 var isEditor;
 var isOwner;
+var isPublished;
 
 $(document).ready(function(){
     usuarios.getOne(userInfo.userId)
@@ -27,7 +28,7 @@ $(document).ready(function(){
         isEditor = user.Rol == "editor";
         loadDataToWindow(id);
 
-        if(isOwner || isEditor)
+        if((isOwner || isEditor) && !isPublished)
             createEditorButton();
     })
 
@@ -80,6 +81,7 @@ function loadDataToWindow(id){
     .then(data=>{
 
         isOwner = data.Escritor == userInfo.userId;
+        isPublished = data.Estado == "publicada";
 
         $("#article-container").attr("articleID", id);
 
