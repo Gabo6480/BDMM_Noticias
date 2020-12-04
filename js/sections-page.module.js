@@ -1,5 +1,5 @@
 import {createSectionCard} from './imports/sections-card.module.js';
-import {getActive, search, remove, edit, decrementar, incrementar} from './services/secciones.service.js';
+import {getActive, search, remove, edit, decrementar, incrementar, add} from './services/secciones.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
@@ -43,7 +43,7 @@ function accionBotones(sr){
         let section = papa.attr("post-id");
         fd.append("id", section);
         incrementar(fd).then(() => {
-            location.reload();
+            loadData(sr);
         });
     });
     
@@ -53,7 +53,7 @@ function accionBotones(sr){
         let section = papa.attr("post-id");
         fd.append("id", section);
         decrementar(fd).then(() => {
-            location.reload();
+            loadData(sr);
         });
     });
 
@@ -88,7 +88,6 @@ function accionBotones(sr){
         let sectionColor = papa.find("td.section-color");
 
         let colorValue = sectionColor.find("#colorpicker").val();
-        debugger;
 
         let sectionTitle = papa.find("td.section-title").text();
         let id           = papa.attr('post-id');
@@ -104,7 +103,6 @@ function accionBotones(sr){
         edit(fd)
         .then(res=>res.text())
         .then(res=>{
-            alert(res);
             loadData(sr)
         })
         .catch(err=>console.log(err));
@@ -117,7 +115,6 @@ $(document).ready(function(){
 
     let sr = $("#result-table");
 
-    console.log("SECTION PAGE MODULE")
     //Buscar cuando cambie el form de busqueda o sea enviado "submit", le agregue un ID -Parga
     let $search = $('#search-seccion-form');
     let $searchContent = $("#post-search-field");
@@ -144,7 +141,19 @@ $(document).ready(function(){
     });
 
     $("#new-post").click(function(){
-        //Crear nueva seccion
+
+        let fd = new FormData();
+
+        fd.append('nombre', 'Nueva Seccion');
+        fd.append('color', '000000');
+        fd.append('orden','0');
+
+        add(fd)
+        .then(res=>res.text())
+        .then(res=>{
+            loadData(sr);
+        })
+        .catch(err=>console.log(err));
     });
 
 
