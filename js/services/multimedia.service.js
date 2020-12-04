@@ -10,12 +10,10 @@ const getByArticleId = id=>{
 
 const add = body=>{
 
+    body.append('action','add');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            action:'add'
-        }
+        body:body
     }
 
     return fetch(MultimediaRoutes.post, params);
@@ -23,12 +21,10 @@ const add = body=>{
 
 const remove = body=>{
 
+    body.append('action','remove');
     const params = {
         method:"POST",
-        body:{
-            ...body,
-            action:'remove'
-        }
+        body:body
     }
     
     return fetch(MultimediaRoutes.post, params);
