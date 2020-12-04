@@ -56,7 +56,8 @@ function accionBotones(sr){
         let fd = new FormData();
         fd.append("id", ID);
         if(confirm("¿Está seguro que desea eliminar esta publicación?"))
-            remove(fd).then(()=> location.reload());
+            remove(fd).then(()=> location.reload())
+            .catch(err=>console.log(err));
     });
 }
 
@@ -72,7 +73,7 @@ $(document).ready(function(){
         fd.append("resumen","Resumen de la noticia");
         fd.append("contenido","Contenido de la noticia");
         fd.append("ubicacion","Ubicación");
-        fd.append("palabras","");
+        fd.append("palabras","Palabras clave");
         fd.append("seccion",1);
         fd.append("fecha", new Date().toISOString());
         fd.append("escritor",userInfo.userId);

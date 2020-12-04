@@ -305,7 +305,8 @@ CREATE PROCEDURE sp_publicar(IN pID INT)
 BEGIN
 	UPDATE noticia
 	SET Estado = 'publicada',
-	Contenido = REEMPLAZAR_COMENTARIOS(Contenido)
+	Contenido = REEMPLAZAR_COMENTARIOS(Contenido),
+    Fecha = NOW()
 	WHERE ID = pID;
     
     IF EXISTS(SELECT ID FROM noticia WHERE ID = pID AND Foto IS NOT NULL) THEN

@@ -50,7 +50,7 @@ CREATE TABLE noticia(
     REFERENCES seccion(ID),
     Foto            INT             default 1,
     CONSTRAINT FK_FOTO_NOTICIA FOREIGN KEY(Foto) 
-    REFERENCES multimedia(ID) ON DELETE CASCADE
+    REFERENCES multimedia(ID)
     
 );
 
@@ -61,11 +61,11 @@ CREATE TABLE comentario(
     Padre           INT             NULL,
     Noticia			INT				NOT NULL,
     CONSTRAINT FK_NOTICIA FOREIGN KEY (Noticia)
-    REFERENCES noticia(ID),
+    REFERENCES noticia(ID) ON DELETE CASCADE,
     
     Usuario			INT				NOT NULL,
     CONSTRAINT FK_USUARIO FOREIGN KEY (Usuario)
-    REFERENCES usuario(ID)
+    REFERENCES usuario(ID) 
 );
 CREATE TABLE me_gusta(	
 	ID				INT				AUTO_INCREMENT PRIMARY KEY,

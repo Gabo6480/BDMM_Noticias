@@ -178,10 +178,10 @@ $(document).on('click','.comment-button', e=>{
     commentfd.append("usuario", userInfo.userId);
     commentfd.append("noticia", id);
 
-    if(commentID != undefined){
+    if(commentID != undefined)
         commentfd.append("padre", commentID);
-    }
-
+    
+    if(commentText != "")
     addComment(commentfd)
     .then(()=>{
         $papa.find(".comment-text").val("");
