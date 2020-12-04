@@ -9,7 +9,42 @@ let createItemCard = function(item, style){
     let container = document.createElement('div');
     container.classList.add('post-container');
     container.classList.add("rounded");
-    container.style.backgroundImage = "url('" + getById(item.Foto) + "')";
+
+    let dataURL;
+
+    let mediaURL = getById(item.Foto);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('HEAD', mediaURL);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == this.DONE) {
+            if(this.getResponseHeader("Content-Type").includes("video")){
+
+                let video = $(`<video src="${mediaURL}" width=300px height=200px></video>`).get(0);
+                video.onloadedmetadata  = ()=>{
+
+                    video.play();
+                    debugger;
+
+                    let canvas = document.createElement('canvas');
+
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    
+                    canvas.getContext('2d')
+                        .drawImage(video,0,0, canvas.width, canvas.height);
+                    
+                    dataURL = canvas.toDataURL();
+                    container.style.backgroundImage = "url('" + dataURL + "')";
+                    video.stop();
+                }
+            }
+            else{
+                dataURL = mediaURL;
+                container.style.backgroundImage = "url('" + dataURL + "')";
+            }
+        }
+    };
+    xhttp.send();
 
     let titleCard = document.createElement('div');
     titleCard.classList.add('post-title-card');
