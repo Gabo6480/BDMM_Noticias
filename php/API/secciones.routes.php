@@ -44,7 +44,7 @@
                     );
                     break;
                 case 'remove':
-                        $id     = $_POST['id_usuario']  ;
+                        $id     = $_POST['id']  ;
                         $sc->remove($id);
                     break;
                 default:

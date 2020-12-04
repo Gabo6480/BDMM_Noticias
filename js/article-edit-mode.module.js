@@ -1,16 +1,16 @@
 import * as parser from './imports/article-content-parser.module.js'
 import {getActive} from './services/secciones.service.js';
+import {edit} from './services/noticias.service.js';
+import {add} from './services/multimedia.service.js';
 
 import {getStoredUser, clearStorage} from './imports/cookie.module.js';
 import {getOne} from './services/usuario.service.js';
+import * as noticias from './services/noticias.service.js';
 
 var editable = false;
+var selectedFile;
 
 $(document).ready(()=>{
-
-
-   
-
     const userInfo = getStoredUser();
 
     if(userInfo.userId !== null && userInfo.userName !== null){
@@ -32,6 +32,24 @@ $(document).ready(()=>{
                         </div>
                     </div>`);
 
+
+                    var readURL = function (input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+                
+                            reader.onload = function (e) {
+                                $('#article-img').attr('src', e.target.result);
+                            }
+                
+                            selectedFile = input.files[0];
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                
+                    $(".file-upload").on('change', function () {
+                        readURL(this);
+                    });
+
                 $("#restoreChanges").click(() =>{
                     location.reload();
                 });
@@ -42,17 +60,35 @@ $(document).ready(()=>{
                     //Esto es para que cuando el editor o reportero le hagan cambios, entonces va a regresar a "en redacción"
                     //La manera para que cambie a "terminada" es que el reportero le de al botón de enviar en "Mis Articulos"
                     //Y para que cambie a "publicada", el editor tiene que picarle al botón publicar
-
-                    //Falta el obtener la imagen
+                    let id = $("#article-container").attr("articleID");
                     let titulo = $("#atricle-title").text();
                     let descripcion = $("#atricle-description").text();
-                    let seccionTexto = $("#atricle-section").text();
                     let seccionValor = $("#atricle-section").val();
                     let lugar = $("#article-location").text();
+                    //let imagen = $("#article-img").attr("file");
                     let contenido = $("#article-content").text();
                     let palabras = $("#article-keywords").text();
 
-                    location.reload();
+                    let multifd = new FormData();
+                    multifd.append("archivo", selectedFile);
+                    add(multifd).then(res => res.text()).then((multimedia) => {
+                        alert(multimedia);
+                        let editfd = new FormData();
+                        editfd.append('id', id);
+                        editfd.append('estado', "en redaccion");
+                        editfd.append('titulo', titulo);
+                        editfd.append('resumen', descripcion);
+                        editfd.append('contenido', contenido);
+                        editfd.append('foto', multimedia);
+                        editfd.append('ubicacion', lugar);
+                        editfd.append('palabras', palabras);
+                        editfd.append('seccion', seccionValor);
+
+                        edit(editfd).then(()=>{
+                            //location.reload();
+                            alert("done");
+                        });
+                    }).catch(err=>console.log(err));
                 });
             }
         })
@@ -80,9 +116,16 @@ $(document).ready(()=>{
                 });
                 NewElement.addClass("autoExpand");          
                 // Replace the current element with the new one and carry over the contents
-                $(this).replaceWith(function () {
-                  return $(NewElement).append($(this).contents());
+                
+                
+                noticias.getOne($("#article-container").attr("articleID"))
+                .then(res => res.json())
+                .then(data=>{
+                    $(this).replaceWith(function () {
+                        return $(NewElement).append(data.Contenido);
+                    });
                 });
+                
             });
 
             let $select = $(`<select id='#article-section' class='browser-default custom-select col-2'><option selected>Seccion</option></select>`);
@@ -110,12 +153,8 @@ $(document).ready(()=>{
             editor1.run();
 
             $(".wmd-input").trigger("keyup");
-        }
-        else{
-            //TODO: Agregar el enviar la nueva información a la base de datos
 
-
-            location.reload();
+            $(".modo-reportero-editor").remove();
         }
     });
 });

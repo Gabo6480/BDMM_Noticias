@@ -4,37 +4,46 @@ import * as parser from './imports/article-content-parser.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
 
 import {getOne, getRelatedD} from './services/noticias.service.js';
-import {getByArticle} from './services/comentarios.service.js';
+import {getByArticle, addComment} from './services/comentarios.service.js';
 import {getById} from './routes/multimedia.routes.js';
-import {count, add, remove} from './services/likes.service.js';
+import {count, add, remove, comprobar} from './services/likes.service.js';
+
+import {getStoredUser} from './imports/cookie.module.js';
+
+const url = new URL(window.location.href);
+const id = url.searchParams.get('id');
+const userInfo = getStoredUser();
 
 $(document).ready(function(){
 
-    const url = new URL(window.location.href);
-    const id = url.searchParams.get('id');
     loadDataToWindow(id || 1);
 
-    var readURL = function (input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('.article-img').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
+    comprobar(id, userInfo.userId).then(res => res.json()).then((res) => {
+        if(res.RESULT != "NOT"){
+            $(this).addClass("liked");
         }
-    }
-
-    $(".file-upload").on('change', function () {
-        readURL(this);
     });
 
     $("#like-button").click(function(){
-        if($(this).hasClass("liked"))
-            $(this).removeClass("liked");
-        else
-            $(this).addClass("liked")
+        if($(this).hasClass("liked")){
+            let likefd = new FormData();
+            likefd.append('id_articulo', id);
+            likefd.append('id_usario', userInfo.userId);
+            remove(likefd).then(() => {
+                $(this).removeClass("liked");
+            })
+            .catch(err=>console.log(err));
+        }
+        else{
+            let likefd = new FormData();
+            likefd.append('id_articulo', id);
+            likefd.append('id_usario', userInfo.userId);
+            add(likefd).then(() => {
+                $(this).addClass("liked");
+            })
+            .catch(err=>console.log(err));
+        }
+        //location.reload();
     });
 });
 
@@ -44,6 +53,8 @@ function loadDataToWindow(id){
     getOne(id)
     .then(res => res.json())
     .then(data=>{
+        $("#article-container").attr("articleID", id);
+
         $("#article-title").text(data.Titulo);
         $("#article-description").text(data.Resumen);
         $("#article-img").attr("src", getById(data.Foto));
@@ -84,7 +95,7 @@ function loadDataToWindow(id){
         });
     })
     .catch(err=>{
-        console.error("No se pudieron traer los comentarios "+err)
+        console.error("No se pudieron traer los comentarios "+ err)
     });
 
     count(id)
@@ -117,12 +128,17 @@ $(document).on('click', 'button.comment-button', function() {
     //let userID = papa.attr("user-id");  //Usuario dueño del comentario; Este no se usa aquí pero está como ejemplo
 
     let commentText = papa.find(".comment-text").val();
-
+    let commentfd = new FormData();
+    commentfd.append("contenido", commentText);
+    commentfd.append("usuario", userInfo.userId);
+    commentfd.append("noticia", id);
     if(commentID != undefined){
-        //TODO: Comentario Principal
+        commentfd.append("padre", commentID);
     }
-    else{
-        //TODO: Comentario de comentario
-    }
+
+    addComment(commentfd).then(()=>{
+        papa.find(".comment-text").val("");
+        location.reload();
+    });
 
 });

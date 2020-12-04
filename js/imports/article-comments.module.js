@@ -9,7 +9,6 @@ let createComment = function(comment){
     img.classList.add('float-left');
     img.setAttribute("src", comment.picture);
 
-    //TODO ADD USER PROFILE PICTURE
     let user = document.createElement('h5');
     user.classList.add('comment-user');
     user.innerText = comment.user;

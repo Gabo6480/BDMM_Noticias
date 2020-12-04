@@ -42,12 +42,7 @@ $(document).ready(function () {
     $("body").on("click", "#button-reset", function(){
         location.reload();
     });
-
-    /*$("body").on("click", "#button-submit", function(){
-        //TODO: Logica para guardar los cambios
-        location.reload();
-    });*/
-
+    
     $("body").on("submit",".edit-form-floating", e=>{
         e.preventDefault();
         let fd = new FormData(e.target);

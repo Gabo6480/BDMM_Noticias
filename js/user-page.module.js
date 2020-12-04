@@ -22,6 +22,8 @@ function accionBotones(sr){
         let papa = $(this).closest("tr");
 
         if(confirm("¿Está seguro que desea eliminar al " + papa.find("td.user-type").text() + " " + papa.find("td.user-name").text() +"?")){
+            
+            //TODO: ELIMINAR USUARIOS
             //alert("ded.");
             /*$.get(
                 '...',
@@ -79,40 +81,7 @@ function accionBotones(sr){
 $(document).ready(function(){
 
     let sr = $("#result-table");
-    /*
-    $("#user-filter").change(function(){
-        let filter = $(this).children("option:selected").val()
-        let $body = sr.find("tbody");
 
-        $body.empty();
-        if(filter == 0){
-            getAllActive()
-            .then(res=>res.json())
-            .then(usuarios=>{
-                $.each(usuarios,(key,usuario)=>{
-                    $body.append(createUserCard(usuario));
-                });
-            })
-            .catch(err=>console.log(err));
-        }
-        else{
-            getRolActive(filter)
-            .then(res=>res.json())
-            .then(usuarios=>{
-                $.each(usuarios,(key,usuario)=>{
-                    $body.append(createUserCard(usuario));
-                });
-            })
-            .catch(err=>console.log(err));
-        }        
-    });
-
-    $("#user-search-button").click(function(){
-        let query = $(this).parent().find("#user-search-field").val();
-
-        alert(query)
-    });
-    */
     let $search = $('#search-usuario-form');
     let $filter = $('#user-filter');
     let $searchContent = $("#user-search-field");

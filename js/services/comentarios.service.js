@@ -4,7 +4,7 @@ const getByArticle = id=>{
     return fetch(CommRoutes.getByArticle(id));
 }
 
-const add = body=>{
+const addComment = body=>{
     const params = {
         method:"POST",
         body:{
@@ -42,7 +42,7 @@ const remove = body=>{
 
 export{
     getByArticle,
-    add,
+    addComment,
     edit,
     remove
 }

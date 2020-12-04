@@ -23,8 +23,7 @@ $(document).ready(()=>{
             .then(res=>res.json())
             .then(data=>{
                 if(data){
-                    alert("Todo piola mi pana, bienvenido");
-                    storeUser({userId:data.ID, userName:data.Correo});
+                    storeUser({userId:data.ID, userName:data.Nombre});
                     window.location.href = './../';
                 }
             })

@@ -115,7 +115,7 @@
                         );
                     break;
                 case 'remove':
-                        $id     = $_POST['id_usuario']  ;
+                        $id     = $_POST['id']  ;
                         $nc->remove($id);
                     break;
                 case 'estado':

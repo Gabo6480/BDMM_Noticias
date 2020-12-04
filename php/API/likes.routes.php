@@ -28,14 +28,14 @@
             else if($action == "remove"){
                 $likesController->remove($id_articulo, $id_usuario);
             }
-            
             else{
                 echo "Opcion no valida!";
             }
             
         }
-        } else{
+        else{
             echo "Metodo no aceptado!";
         }
+    }
     
 ?>

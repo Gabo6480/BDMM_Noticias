@@ -10,6 +10,8 @@ $(document).ready(function() {
             }
     
             reader.readAsDataURL(input.files[0]);
+
+            //TODO: Subir imagen a la base de datos
         }
     }
     

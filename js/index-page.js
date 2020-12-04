@@ -1,7 +1,7 @@
 import {createItemCard} from './imports/index-item-card.module.js'
 import {createCarousel} from './imports/carousel-creator.module.js'
 
-import {getAll, getByState, getBySeccion,getByStateSeccion} from './services/noticias.service.js';
+import {getAll, getByState, getBySeccion ,getByStateSeccion} from './services/noticias.service.js';
 
 $(document).ready(function(){
 
@@ -9,34 +9,34 @@ $(document).ready(function(){
 
     let url = new URL(window.location);
     
-    let seccionId = url.searchParams.get('id');
+    let seccionId = url.searchParams.get('section');
 
     if(!seccionId)
         getByState('publicada')
         .then(res=>res.json())
         .then(noticias=>{
-        let carrousselBuffer = [];
-        let organized = false;
-        let j = 0;
-        $.each(noticias, (index, noticia)=>{
-            if(index === 0){
-                grid.append(createItemCard(noticia, "big-card"));
-            }
-            else if(index < 9)
-            {
-                grid.append(createItemCard(noticia, "small-card"));
-            }
-            else{
-                
-                carrousselBuffer.push(noticia);
-                j++;
-
-                if(j === 10 || index === (noticias.length-1) ){
-                    $("#carousel-holder").append(createCarousel({tile:"Mas Noticias",cards:[...carrousselBuffer]}));
-                    j = 0;
-                    carrousselBuffer = [];
+            let carrousselBuffer = [];
+            let organized = false;
+            let j = 0;
+            $.each(noticias, (index, noticia)=>{
+                if(index === 0){
+                    grid.append(createItemCard(noticia, "big-card"));
                 }
-            }
+                else if(index < 9)
+                {
+                    grid.append(createItemCard(noticia, "small-card"));
+                }
+                else{
+
+                    carrousselBuffer.push(noticia);
+                    j++;
+
+                    if(j === 10 || index === (noticias.length-1) ){
+                        $("#carousel-holder").append(createCarousel({tile:"Mas Noticias",cards:[...carrousselBuffer]}));
+                        j = 0;
+                        carrousselBuffer = [];
+                    }
+                }
         });
 
         

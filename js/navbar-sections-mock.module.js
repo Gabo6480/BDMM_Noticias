@@ -3,7 +3,7 @@ import {getStoredUser, clearStorage} from './imports/cookie.module.js';
 import {getAvatar, getOne} from './services/usuario.service.js';
 
 import { createSection } from './imports/navbar-sections.js';
-import { getActive} from './services/secciones.service.js';
+import { getActive } from './services/secciones.service.js';
 
 $(document).ready(()=>{
 
@@ -19,16 +19,19 @@ $(document).ready(()=>{
 
     const userInfo = getStoredUser();
     if(userInfo.userId !== null && userInfo.userName !== null){
-        const $img = $('<img id="profilePic" alt="pp" class="profile-picture" style="max-height:40px">');
+        const $img = $('<div><a id="profileLink"></a><img id="profilePic" alt="pp" class="profile-picture" style="max-height:40px"></img></div>');
         
         getAvatar(userInfo.userId)
         .then(res=>res.text())
         .then(src=>{
-            $img.attr('src',src);
             $("#login-button").replaceWith($img);
             $("#profilePic").click(() =>{
                 location.href = "http://localhost:8081/BDMM_Noticias/pages/profile.html";
             });
+            $("#profilePic").attr('src',src);
+            $("#profileLink").attr("href", "http://localhost:8081/BDMM_Noticias/pages/profile.html");
+            $("#profileLink").text(userInfo.userName);
+            $("#profileLink").css("color", "white")
         })
         .catch(err=>console.log(err));
 

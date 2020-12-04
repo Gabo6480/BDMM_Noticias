@@ -1,11 +1,11 @@
 import {createMyPostCard} from './imports/myposts-card.module.js';
-import {getStoredUser, clearStorage, storeUser} from './imports/cookie.module.js';
+import {getStoredUser} from './imports/cookie.module.js';
 import { getActive} from './services/secciones.service.js';
-import {getByReportero, search, cambiarEstado} from './services/noticias.service.js';
+import {getByReportero, search, cambiarEstado, remove, add} from './services/noticias.service.js';
 
+const userInfo = getStoredUser();
 function loadData(sr){
     let body = sr.find("tbody");
-    const userInfo = getStoredUser();
 
     getActive()
     .then(res => res.json())
@@ -51,7 +51,11 @@ function accionBotones(sr){
     });
 
     sr.on("click", ".button-delete", function (){
-        //TODO: Deshacerse de la publicación
+        let ID = $(this).parents("tr").attr("post-id");
+        let fd = new FormData();
+        fd.append("id", ID);
+        if(confirm("¿Está seguro que desea eliminar esta publicación?"))
+            remove(fd).then(()=> location.reload());
     });
 }
 
@@ -60,7 +64,21 @@ $(document).ready(function(){
     let sr = $("#result-table");
 
     $("#new-post").click(function(){
-        //Crear nueva publicación
+        //TODO: Crear nueva publicación
+        let fd = new FormData();
+        fd.append("estado","en redaccion");
+        fd.append("titulo","Titulo de la noticia");
+        fd.append("resumen","Resumen de la noticia");
+        fd.append("contenido","Contenido de la noticia");
+        fd.append("ubicacion","Ubicación");
+        fd.append("palabras","palabras clave");
+        fd.append("seccion",0);
+        fd.append("fecha",Date.now());
+        fd.append("escritor",userInfo.userId);
+        add(fd)
+        .then((newPost) => {
+            alert(newPost);
+        });
     });
 
     //Buscar cuando cambie el form de busqueda o sea enviado "submit", le agregue un ID -Parga

@@ -1,8 +1,6 @@
 import {getById} from '../routes/multimedia.routes.js';
 
 let createPostCard = function(post){
-
-    //TODO: cambiar las los nombres de las propiedades
     return "<tr post-id='" + post.ID
     + "'> <th scope='row'><img class='user-picture' src='" + getById(post.Foto)
     + "' /></th><td class='post-title'>" + post.Titulo 

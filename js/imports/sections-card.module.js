@@ -1,6 +1,4 @@
 let createSectionCard = function(post){
-
-    //TODO: cambiar las los nombres de las propiedades
     return `<tr post-id='${post.ID}'>
      <td class='section-title'>${post.Nombre}
      </td><td class='section-color' style='background-color :#${post.Color};'>

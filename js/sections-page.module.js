@@ -1,5 +1,5 @@
 import {createSectionCard} from './imports/sections-card.module.js';
-import {getActive, search} from './services/secciones.service.js';
+import {getActive, search, remove} from './services/secciones.service.js';
 
 function loadData(sr){
     let body = sr.find("tbody");
@@ -59,6 +59,14 @@ function accionBotones(sr){
 
     sr.on("click", ".button-delete", function (){
         //TODO: Deshacerse de la seccion
+        let papa = $(this).closest("tr");
+        let section = papa.attr("post-id");
+
+        let fd = new FormData();
+        fd.append("id", section);
+        remove(fd).then(()=>{
+            location.reload();
+        })
     });
 
     sr.on("click", ".button-save", function (){

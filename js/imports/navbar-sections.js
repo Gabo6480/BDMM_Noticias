@@ -1,8 +1,5 @@
 const eventHandler = e=>{
     e.preventDefault();
-
-    //TODO redirigir a link de seccion
-
 };
 
 const createSection = function(seccion){
@@ -18,7 +15,7 @@ const createSection = function(seccion){
     div.onmouseleave = () =>div.style.backgroundColor = "rgba(0,0,0,0)";
 
     div.onclick = e=>{
-        location.href = `http://localhost:8081/BDMM_Noticias/index.html?id=${seccion.ID}`;
+        location.href = `http://localhost:8081/BDMM_Noticias/index.html?section=${seccion.ID}`;
     }
 
     return div;
