@@ -2,7 +2,7 @@
 require './../controllers/multimedia.controller.php';
 
 if($mmController = new MultimediaController()){
-    if($_SERVER["REQUEST_METHOD"] == "GET"){
+    if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "HEAD"){
 
         $action = $_GET['action'];
         $id     = $_GET['id'];
