@@ -101,6 +101,7 @@ function loadDataToWindow(id){
             if (this.readyState == this.DONE) {
                 if(this.getResponseHeader("Content-Type").includes("video")){
                     $("#article-img").replaceWith(`<video id="article-img" controls></video>`);
+                    alert(mediaURL);
                 }
                 $("#article-img").attr("src", mediaURL);
             }
